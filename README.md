@@ -20,6 +20,19 @@ Tower defense:
 
     - Stock énergie (eau) pour toutes les tours. Plus d'énergie = s'endore.
 
+
+Le jeu :
+    - Solde de base : (a derterminer)
+
+Fruits et légumes:
+    1 - Pomme & Patate
+    2 - Poire & Poivron
+    3 - Banane & Salade
+    4 - Tomate & Carotte
+    5 - Pèche & Courge
+    6 - Orange & Aubergine
+    7 - Cerise & Brocoli
+=======
 Monnaie:  
     - Gagne des sous lorsqu'on tue les attaquants  
     - Gain passif lorsque la tour dort et n'est pas réveillée par le joueur.  
