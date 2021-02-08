@@ -4,6 +4,8 @@ import sys
 import copy
 import pygame
 import traceback
+import math as m
+from Tower import Tower
 
 #Set the default position of the pygame window
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (50, 50)
@@ -32,6 +34,10 @@ class View:
                     elif event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
                             self.__crashed = True
+                        elif event.key == pygame.K_SPACE:
+                            for elem in self.__graphic_elements:
+                                if isinstance(elem, Tower):
+                                    self.__graphic_elements.append(elem.attack(m.pi/2))
 
                 mouse_pos = pygame.mouse.get_pos()
                 
