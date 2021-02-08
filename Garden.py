@@ -20,28 +20,48 @@ class Garden:
             count = 1
             pos = [0, 1]
             tiles[0][1] = 1
-            olddir = [0, 0]
-            r = 0
+            oldr = 0
 
             while not (pos[1] == width - 3 and pos[0] == height - 1):
+                allowed_dirs = directions[:]
+                allowed_dirs.remove(allowed_dirs[(oldr + 2) % 4])
 
-                r = randint(0, 3)
+                if [1, 0] in allowed_dirs:
+                    if not (pos[0] + 1 < height - 1 or (pos[0] + 1 < height and pos[1] == width - 3)):
+                        allowed_dirs.remove([1, 0])
+                if [0, 1] in allowed_dirs:
+                    if pos[1] + 1 >= width - 1 or not pos[0]:
+                        allowed_dirs.remove([0, 1])
+                if [-1, 0] in allowed_dirs:
+                    if pos[0] - 1 <= 0:
+                        allowed_dirs.remove([-1, 0])
+                if [0, -1] in allowed_dirs:
+                    if pos[1] - 1 <= 0:
+                        allowed_dirs.remove([0, -1])
+
+                if pos == [22, 1]:
+                    allowed_dirs.append([-1, 0])
+
+                r  = randint(0, len(allowed_dirs) - 1)
+                direction = allowed_dirs[r]
+                oldr = r
                 
-                if pos[0] + directions[r][0] > 0 and pos[1] + directions[r][1] > 0 and (pos[0] + directions[r][0] < height - 1 or (pos[0] + directions[r][0] < height and pos[1] == width - 3)) and pos[1] + directions[r][1] < width - 1:
-                    if (pos[0] + directions[r][0]) % 3 == 0 or (pos[1] + directions[r][1] - 1) % 3 == 0:
-                        if tiles[pos[0] + directions[r][0]][pos[1] + directions[r][1]] == 0:
-                            pos[0] += directions[r][0]
-                            pos[1] += directions[r][1]
-                            count += 1
-                            tiles[pos[0]][pos[1]] = count
-                        else:
-                            count = tiles[pos[0] + directions[r][0]][pos[1] + directions[r][1]]
-                            for i in range(len(tiles)):
-                                for j in range(len(tiles[i])):
-                                    if tiles[i][j] > count:
-                                        tiles[i][j] = 0
-                            pos[0] += directions[r][0]
-                            pos[1] += directions[r][1]
+                next_pos = [pos[0] + direction[0], pos[1] + direction[1]]
+                
+                if (next_pos[0]) % 3 == 0 or (next_pos[1] - 1) % 3 == 0:
+                    if tiles[next_pos[0]][next_pos[1]] == 0:
+                        pos[0] += direction[0]
+                        pos[1] += direction[1]
+                        count += 1
+                        tiles[pos[0]][pos[1]] = count
+                    else:
+                        count = tiles[next_pos[0]][next_pos[1]]
+                        for i in range(len(tiles)):
+                            for j in range(len(tiles[i])):
+                                if tiles[i][j] > count:
+                                    tiles[i][j] = 0
+                        pos[0] += direction[0]
+                        pos[1] += direction[1]
                             
         self.__tiles = tiles
         self.__enemies = []
@@ -123,9 +143,6 @@ class Garden:
                     else:
                         self.__background.blit(tile1, (32 * j, 32 * i))
 
-                pygame.font.init()
-                self.__background.blit(pygame.font.Font('assets/font/comic_book.otf', 16).render(str(self.__tiles[i][j]) if self.__tiles[i][j] else '', True, (255,255,255)), (j * 32, i * 32))
-
     def update(self):
         if self.__tick > self.__tickMax:
             self.spawnEnemy()
@@ -140,12 +157,6 @@ class Garden:
             onTile = self.__tiles[y][x]
 
             possibleMoves = []
-
-            """
-                0
-              3 X 1
-                2
-            """
 
             if y > 0 and self.__tiles[y - 1][x] > onTile:
                 possibleMoves.append(0)
