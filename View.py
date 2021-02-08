@@ -5,6 +5,7 @@ import copy
 import pygame
 import traceback
 import math as m
+from Pip import Pip
 from Tower import Tower
 import time
 
@@ -15,6 +16,8 @@ class View:
     __clock = None
     __screen = None
     __crashed = False
+
+    __hover = False
     
     __graphic_elements = []
 
@@ -33,12 +36,28 @@ class View:
                         self.__crashed = True
                     elif event.type == pygame.MOUSEBUTTONDOWN:
                         self.__graphic_elements.append(Tower(pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 6, 1, (event.pos[0], event.pos[1])))
+                        self.__hover = True
+                    elif event.type == pygame.MOUSEBUTTONDOWN and self.__hover:
+                        for g in graphic_elements:
+                            if isinstance(g, Pip) and g.get_name() == "hover":
+                                graphic_elements.remove(g)
+                                del g
+                        self.__hover = False
                     elif event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
                             self.__crashed = True
                         elif event.key == pygame.K_SPACE:
+                            self.__graphic_elements.append(Tower(
+                                pygame.image.load("assets/fruits-veggies/Acorn.png"),
+                                "Acorn",
+                                1,
+                                1,
+                                (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
+                                 pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)
+                            ))
+                        elif event.key == pygame.K_a:
                             for elem in self.__graphic_elements:
-                                if isinstance(elem, Tower):
+                                if isinstance(elem, Tower) and elem.get_name() != "hover":
                                     self.__graphic_elements.append(elem.attack(m.pi/2))
 
                 mouse_pos = pygame.mouse.get_pos()

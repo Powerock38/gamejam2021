@@ -5,6 +5,7 @@ from Pip import Pip
 from HUD import HUD
 from Enemy import Enemy
 import math
+import pygame
 
 def update(graphic_elements):
     for g in graphic_elements:
@@ -31,7 +32,10 @@ def update(graphic_elements):
                         g.tick = 0
                     else:
                         g.tick += 1
-                
+            if g.get_name() == "hover":
+                g.set_coordinates(
+                    (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
+                     pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32))
     return graphic_elements
 
 #Main
