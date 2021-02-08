@@ -57,7 +57,7 @@ class View:
                     element.draw(self.__screen)
 
                 pygame.display.update()
-                print(1/(time.time() - t1))
+                #print(1/(time.time() - t1))
 
             pygame.quit()
         except:

@@ -11,20 +11,6 @@ class HUD:
         self.__surface = pygame.Surface((128,768))
         self.__surface.fill(Utils.GRAY)
 
-        pygame.font.init()
-
-        # Initialise font with the font available in assets/font
-        self.__font = self.get_font(25)
-
-        # Create the text level
-        self.__level_text = self.__font.render('Level ' + str(self.get_level()), False, Utils.WHITE)
-        # Create the text level
-        self.__tower_text = self.__font.render('Towers ', True, Utils.WHITE)
-
-        font = self.get_font(15)
-        # Create the text water
-        self.__water_text = font.render('Water ' + str(self.get_water()), False, Utils.BLUE)
-
     def get_life(self):
         return self.__life
 
@@ -55,22 +41,37 @@ class HUD:
     # Draw the element
     def draw(self, screen):
 
-        # Render top text
-        self.__surface.blit(self.__level_text, (15, 25))
-        self.__surface.blit(self.__tower_text, (18, 87))
 
-        # Render Water text
-        self.__surface.blit(self.__water_text, (10, 730))
-
-
-        # Display waterdrop
-        dim = self.__font.size("Water : " + str(self.get_water()))
-        image = pygame.image.load("assets/waterdrop.png")
-        self.__surface.blit(image, (dim[0]-5, 730))
-
+        pygame.font.init()
 
         # Initialise font with the font available in assets/font
-        self.__font = self.get_font(12)
+        font = self.get_font(25)
+
+        # x, y cords
+        x = int(self.get_surface().get_width() / 2)
+        y = 25
+
+        # Create the level text
+        level_text = font.render('Level ' + str(self.get_level()), False, Utils.WHITE)
+        dim = font.size("Level " + str(self.get_level()))
+        self.__surface.blit(level_text, (x-(int(dim[0]/2)), y))
+
+        # Create the tower text
+        tower_text = font.render('Towers ', False, Utils.WHITE)
+        
+        self.__surface.blit(tower_text, (18, 87))
+
+        font = self.get_font(20)
+        # Create the text water
+        water_text = font.render('Water ' + str(self.get_water()), False, Utils.BLUE)
+
+        dim = font.size("Water : " + str(self.get_water()))
+        image = pygame.image.load("assets/waterdrop.png")
+        self.__surface.blit(water_text, (x-(int((dim[0])/2)), 730))
+        self.__surface.blit(image, (dim[0]-10, 730))
+
+
+        font = self.get_font(12)
 
         # Display towers items col by col by taking the first half part of array and the second after
         for col in range(2):
@@ -81,7 +82,7 @@ class HUD:
                 image = pygame.image.load(Utils.TOWERS[elem_number]["path"]) # à opti
                 
                 x = 20 + (55*col)
-                y = 130 + (80*elem)
+                y = 130 + (85*elem)
                 self.__surface.blit(image, (x, y))
 
                 # Display item name
@@ -91,17 +92,18 @@ class HUD:
                 y += 32
 
                 # Get the size wich will be occupated by the text
-                dim = self.__font.size(Utils.TOWERS[elem_number]["name"])
+                dim = font.size(Utils.TOWERS[elem_number]["name"])
 
                 # Display name
-                item_text = self.__font.render(Utils.TOWERS[elem_number]["name"], False, Utils.WHITE)
+                item_text = font.render(Utils.TOWERS[elem_number]["name"], False, Utils.WHITE)
                 self.__surface.blit(item_text, (x-(int(dim[0]/2)), y+5))
 
-                # # Display price
-                # dim = font.size("Price : " + str(Utils.TOWERS[elem_number]["name"]))
-
-                # item_text = font.render("Price : " + str(Utils.TOWERS[elem_number]["price"]), False, Utils.WHITE)
-                # self.__surface.blit(item_text, (x-(int(dim[0]/2)), (y+5+(int(dim[1]/2)))))
+                # Display price
+                image = pygame.image.load("assets/waterdrop.png")
+                item_text = font.render(str(Utils.TOWERS[elem_number]["price"]), False, Utils.WHITE)
+                x -= 10
+                self.__surface.blit(image, (x-dim[0]/2, y+dim[1]))
+                self.__surface.blit(item_text, ((x-dim[0]/2) + 32, y+dim[1] + 8))
 
 
 
