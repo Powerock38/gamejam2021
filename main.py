@@ -1,4 +1,5 @@
 from View import View
+from Garden import Garden
 
 def calculations(args):
 
@@ -8,4 +9,7 @@ def update(args, graphic_elements):
 
     return args, graphic_elements
 
-view = View([], [], calculations, update)
+#Main
+
+garden = Garden()
+view = View([garden], [garden], calculations, update)
