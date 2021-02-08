@@ -20,7 +20,7 @@ class Pip:
         Return :\n
         None
         """
-        self.__coordinates = coordinates
+        self.coordinates = coordinates
         self.__direction = direction
         self.__size = size
         self.__damage = damage
@@ -30,25 +30,9 @@ class Pip:
         Move the pip with the direction given in the constructor
         """
         return (
-            int(self.__coordinates[0] + self.__coordinates[0] * math.cos(self.__direction) / 32),
-            int(self.__coordinates[1] + self.__coordinates[1] * math.sin(self.__direction) / 32)
+            int(self.coordinates[0] + self.coordinates[0] * math.cos(self.__direction) / 32),
+            int(self.coordinates[1] + self.coordinates[1] * math.sin(self.__direction) / 32)
         )
-        
-    def get_coordinates(self):
-        """
-        Return the coordinates of the pip
-        """
-        return self.__coordinates
-
-    def set_coordinates(self, new_coordinates):
-        """
-        Set or Update the coordinates of the pip\n
-        Parameters :\n
-        x and y coordinate
-        Return : \n
-        None
-        """
-        self.__coordinates = new_coordinates
 
     def draw(self, screen):
         """
@@ -61,4 +45,4 @@ class Pip:
         image = pygame.image.load('assets/tilesets/bullet.png')
         tile = image.subsurface(((0, 0), (32, 32)))
 
-        screen.blit(tile,self.__coordinates)
+        screen.blit(tile,self.coordinates)

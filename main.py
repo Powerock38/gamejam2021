@@ -14,7 +14,7 @@ def update(graphic_elements):
         
         elif isinstance(g, Pip):
             if g.move()[0] > 0 and g.move()[0] < 1024 and g.move()[1] > 0 and g.move()[1] < 768:
-                g.set_coordinates(g.move())
+                g.coordinates = g.move()
             else :
                 graphic_elements.remove(g)
                 del g
