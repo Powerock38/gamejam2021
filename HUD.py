@@ -1,27 +1,7 @@
 import pygame
+from Utils import Utils
 
 class HUD:
-
-    __GRAY = (89,89,89)
-    __BLACK = (0,0,0)
-    __WHITE = (255,255,255)
-    __BLUE = (0,120,255)
-
-    __TOWERS = ["apple_red",
-                "pear",
-                "banana", 
-                "tomato",
-                "peach",
-                "orange",
-                "cherry",
-                # second col
-                "potatoe",
-                "pepper_green",
-                "lettuce",
-                "carrot",
-                "squash",
-                "aubergine",
-                "broccoli"]
 
     def __init__(self, life = 0, water = 0, level = 1):
         self.__life = life
@@ -31,21 +11,20 @@ class HUD:
 
     def initialise_surface(self):
         self.__surface = pygame.Surface((128,768))
-        self.__surface.fill(self.__GRAY)
+        self.__surface.fill(Utils.GRAY)
 
         pygame.font.init()
 
-        # Initialise font with the default font
-        font = pygame.font.Font('assets/font/hey_comic.ttf', 27)
+        # Initialise font with the font available in assets/font
+        font = self.get_font(27)
 
         # Create the text level
-        self.__levelText = font.render('Level ' + str(self.__level), True, self.__WHITE)
+        self.__level_text = font.render('Level ' + str(self.__level), True, Utils.WHITE)
         # Create the text level
-        self.__towerText = font.render('Towers ', True, self.__WHITE)
-
+        self.__tower_text = font.render('Towers ', True, Utils.WHITE)
 
         # Create the text water
-        self.__waterText = font.render('Water ' + str(self.__water), True, self.__BLUE)
+        self.__water_text = font.render('Water ' + str(self.__water), True, Utils.BLUE)
 
     def get_life(self):
         return self.__life
@@ -68,25 +47,48 @@ class HUD:
     def get_surface(self):
         return self.__surface
     
+    def get_towers(self):
+        return self.__TOWERS
+
+    def get_font(self, size):
+        return pygame.font.Font('assets/font/hey_comic.ttf', size)
+
     # Draw the element
     def draw(self, screen):
 
         # Render text
-        self.__surface.blit(self.__levelText, (15, 25))
-        self.__surface.blit(self.__towerText, (18, 87))
+        self.__surface.blit(self.__level_text, (15, 25))
+        self.__surface.blit(self.__tower_text, (18, 87))
 
-        self.__surface.blit(self.__waterText, (15, 730))
+        self.__surface.blit(self.__water_text, (15, 730))
 
-        # Render towers item
-        
-        image_path = "assets/fruits-veggies/"
+        # Initialise font with the font available in assets/font
+        font = self.get_font(12)
 
         # Display towers items col by col by taking the first half part of array and the second after
-        for y in range(2):
-            for elem in range(int(len(self.__TOWERS)/2)):
-                image = pygame.image.load(image_path + self.__TOWERS[elem + (y*int(len(self.__TOWERS)/2))] + ".png")
+        for col in range(2):
+            for elem in range(int(len(Utils.TOWERS)/2)):
+
+                # Display item
+                elem_number = elem + (col*int(len(Utils.TOWERS)/2))
+                image = pygame.image.load(Utils.TOWERS[elem_number]["path"]) # à opti
                 
-                self.__surface.blit(image, (20 + (55*y), 130 + (70*elem)))
+                x = 20 + (55*col)
+                y = 130 + (70*elem)
+                self.__surface.blit(image, (x, y))
+
+                # Display item name
+
+                # Position x at mid of item width and y at the bottom of item
+                x += 16
+                y += 32
+                # Get the size wich will be occupated by the text
+                dim = font.size(Utils.TOWERS[elem_number]["name"])
+
+                # Create text surface
+                item_text = font.render(Utils.TOWERS[elem_number]["name"], False, Utils.WHITE)
+                # Render text
+                self.__surface.blit(item_text, (x-(int(dim[0]/2)), y+5))
 
 
 
