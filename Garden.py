@@ -1,10 +1,41 @@
 import pygame
 import random
 from Enemy import Enemy
-
+from random import randint
 
 class Garden:
     def __init__(self, tiles):
+        directions = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+
+        width = 28
+        height = 24
+
+        tiles = [[0 for _ in range(width)] for _ in range(height)]
+
+        count = 1
+        pos = [0, 1]
+        tiles[0][1] = 1
+
+        while pos[1] != width - 1 and pos[0] != height - 1:
+
+            r = randint(0, 3)
+            
+            for i in range(3):
+                if pos[0] + directions[r][0] >= 0 and pos[1] + directions[r][1] >= 0 and pos[0] + directions[r][0] < height and pos[1] + directions[r][1] < width:
+                    if tiles[pos[0] + directions[r][0]][pos[1] + directions[r][1]] == 0:
+                        pos[0] += directions[r][0]
+                        pos[1] += directions[r][1]
+                        count += 1
+                        tiles[pos[0]][pos[1]] = count
+                    else:
+                        pos[0] += directions[r][0]
+                        pos[1] += directions[r][1]
+                        count = tiles[pos[0]][pos[1]]
+                        for i in range(len(tiles)):
+                            for j in range(len(tiles[i])):
+                                if tiles[i][j] > count:
+                                    tiles[i][j] = 0
+                            
         self.__tiles = tiles
         self.__enemies = []
 
