@@ -1,5 +1,6 @@
 from View import View
 from Garden import Garden
+from Tower import Tower
 
 def calculations(args):
 
@@ -36,4 +37,5 @@ garden = Garden([[0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
                  [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 61, 62, 63],
                  [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]])
 
-view = View([garden], [garden], calculations, update)
+towertest = Tower("assets/fruits-veggies/Acorn.png","Acorn",1,1,(5*32,10*32))
+view = View([garden], [garden,towertest], calculations, update)
