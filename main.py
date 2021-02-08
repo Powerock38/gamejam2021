@@ -22,8 +22,6 @@ def update(graphic_elements):
 
 garden = Garden()
 
-garden.spawnEnemy()
-
 # Create HUD
 hud = HUD(100,10)
 
