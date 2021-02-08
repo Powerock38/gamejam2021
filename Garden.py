@@ -4,7 +4,7 @@ from Enemy import Enemy
 from random import randint
 
 class Garden:
-    def __init__(self, tiles):
+    def __init__(self, tiles = []):
         directions = [[1, 0], [0, 1], [-1, 0], [0, -1]]
 
         width = 28
