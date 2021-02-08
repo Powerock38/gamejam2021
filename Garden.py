@@ -117,7 +117,7 @@ class Garden:
                         self.__background.blit(tile1, (32 * j, 32 * i))
 
                 pygame.font.init()
-                self.__background.blit(pygame.font.Font('assets/font/hey_comic.ttf', 27).render(str(self.__tiles[i][j]), True, (255,255,255)), (j * 32, i * 32))
+                self.__background.blit(pygame.font.Font('assets/font/comic_book.otf', 27).render(str(self.__tiles[i][j]) if self.__tiles[i][j] else '', True, (255,255,255)), (j * 32, i * 32))
 
     def update(self):
         for en in self.__enemies:
