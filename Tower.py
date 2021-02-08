@@ -51,6 +51,9 @@ class Tower:
             )
 
     def get_coordinates(self):
+        """
+        Return the coordinates of the tower
+        """
         return self.__coordinates
 
     def draw(self, screen):
