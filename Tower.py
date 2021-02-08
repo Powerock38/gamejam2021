@@ -80,7 +80,6 @@ class Tower:
         Return :\n
         None
         """
-        image = pygame.image.load(self.__sprite)
-        tile = image.subsurface(((0, 0), (32, 32)))
+        tile = self.__sprite.subsurface(((0, 0), (32, 32)))
 
-        screen.blit(tile,self.get_coordinates())
+        screen.blit(tile, self.get_coordinates())
