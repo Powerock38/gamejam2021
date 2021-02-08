@@ -1,0 +1,14 @@
+Thème : S'endormir et se reveiler & les fruits et légumes
+
+Jeu solo
+
+Tower defensse
+
+    - Tours : fruits et légumes.
+    - Attaquants :Jardiniers
+
+    - Stock énergie pour toutes les tours. Plus d'énergie = s'endore.
+
+Monnaie:
+    - Gagne des sous lorsqu'on tue les attaquants
+    - Gain passif lorsque la tour dort et n'est pas réveillée par le joueur.
