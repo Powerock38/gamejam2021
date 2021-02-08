@@ -17,7 +17,7 @@ class View:
 
     def __init__(self, args, graphic_elements, calculations, update):
         self._clock = pygame.time.Clock()
-        self._screen = pygame.display.set_mode(size = (1920, 1080))
+        self._screen = pygame.display.set_mode(size = (1024, 768))
         self._args = args
         self._graphic_elements = graphic_elements
 
