@@ -5,14 +5,17 @@ from Pip import Pip
 from HUD import HUD
 
 def update(graphic_elements):
-    for elem in graphic_elements:
-        if isinstance(elem, Pip):
-            if elem.move()[0] > 0 and elem.move()[0] < 1024 and elem.move()[1] > 0 and elem.move()[1] < 768:
-                elem.set_coordinates(elem.move())
+    for g in graphic_elements:
+        if isinstance(g, Garden):
+            g.update()
+        
+        elif isinstance(g, Pip):
+            if g.move()[0] > 0 and g.move()[0] < 1024 and g.move()[1] > 0 and g.move()[1] < 768:
+                g.set_coordinates(g.move())
             else :
-                graphic_elements.remove(elem)
-                del elem
-
+                graphic_elements.remove(g)
+                del g
+                
     return graphic_elements
 
 #Main
@@ -22,6 +25,6 @@ garden = Garden()
 garden.spawnEnemy()
 
 # Create HUD
-hud = HUD(100,10,10)
+hud = HUD(100,10)
 
 view = View([garden,hud], update)
