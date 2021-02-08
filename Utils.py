@@ -14,7 +14,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":1,
                 "damage":1,
-                "range":5},
+                "range":5,
+                "energy_consomation":1,
+                "sleeping_time": 2},
 
                 {"id":"pear",
                 "path":"assets/fruits-veggies/pear.png",
@@ -23,7 +25,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":1.5,
                 "damage":1,
-                "range":5},
+                "range":5,
+                "energy_consomation":1,
+                "sleeping_time": 2},
 
                 {"id":"banana",
                 "path":"assets/fruits-veggies/banana.png",
@@ -32,7 +36,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":1.5,
                 "damage":1.5,
-                "range":5},
+                "range":5,
+                "energy_consomation":1.5,
+                "sleeping_time": 2},
 
                 {"id":"tomato",
                 "path":"assets/fruits-veggies/tomato.png",
@@ -41,7 +47,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":2,
                 "damage":1,
-                "range":5},
+                "range":5,
+                "energy_consomation":2,
+                "sleeping_time": 2},
 
                 {"id":"peach",
                 "path":"assets/fruits-veggies/peach.png",
@@ -50,7 +58,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":1.5,
                 "damage":2,
-                "range":5},
+                "range":5,
+                "energy_consomation":1.5,
+                "sleeping_time": 2},
 
                 {"id":"orange",
                 "path":"assets/fruits-veggies/orange.png",
@@ -59,7 +69,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":2,
                 "damage":2,
-                "range":3},
+                "range":3,
+                "energy_consomation":2,
+                "sleeping_time": 2},
 
                 {"id":"cherry",
                 "path":"assets/fruits-veggies/cherry.png",
@@ -68,7 +80,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":0.5,
                 "damage":3,
-                "range":10},
+                "range":10,
+                "energy_consomation":2,
+                "sleeping_time": 2},
 
                 {"id":"potatoe",
                 "path":"assets/fruits-veggies/potatoe.png",
@@ -77,7 +91,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":1,
                 "damage":3,
-                "range":5},
+                "range":5,
+                "energy_consomation":1,
+                "sleeping_time": 2},
 
                 {"id":"pepper",
                 "path":"assets/fruits-veggies/pepper_green.png",
@@ -86,7 +102,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":4,
                 "damage":0.5,
-                "range":5},
+                "range":5,
+                "energy_consomation":2.5,
+                "sleeping_time": 2},
 
                 {"id":"lettuce",
                 "path":"assets/fruits-veggies/lettuce.png",
@@ -95,7 +113,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":2,
                 "damage":5,
-                "range":3},
+                "range":3,
+                "energy_consomation":2.5,
+                "sleeping_time": 2},
 
                 {"id":"carrot",
                 "path":"assets/fruits-veggies/carrot.png",
@@ -104,7 +124,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":0.3,
                 "damage":10,
-                "range":10},
+                "range":10,
+                "energy_consomation":1.8,
+                "sleeping_time": 2},
 
                 {"id":"squash",
                 "path":"assets/fruits-veggies/squash.png",
@@ -113,7 +135,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":4,
                 "damage":0.6,
-                "range":7},
+                "range":7,
+                "energy_consomation":3.5,
+                "sleeping_time": 2},
 
                 {"id":"aubergine",
                 "path":"assets/fruits-veggies/aubergine.png",
@@ -122,7 +146,9 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":4,
                 "damage":0.6,
-                "range":7},
+                "range":7,
+                "energy_consomation":2,
+                "sleeping_time": 2},
 
                 {"id":"broccoli",
                 "path":"assets/fruits-veggies/broccoli.png",
@@ -131,5 +157,7 @@ class Utils:
                 "description":"blablabla",
                 "fire_rate":0.1,
                 "damage":15,
-                "range":20}
+                "range":20,
+                "energy_consomation":3.5,
+                "sleeping_time": 2}
                 ]
