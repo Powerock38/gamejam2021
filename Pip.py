@@ -25,12 +25,31 @@ class Pip:
         self.__size = size
         self.__damage = damage
     
-    def __move(self):
+    def move(self):
+        """
+        Move the pip with the direction given in the constructor
+        """
         return (
-            self.__coordinates[0] + self.__coordinates[0] * math.cos(self.__direction),
-            self.__coordinates[1] + self.__coordinates[1] * math.sin(self.__direction)
-            )
-    
+            int(self.__coordinates[0] + self.__coordinates[0] * math.cos(self.__direction) / 32),
+            int(self.__coordinates[1] + self.__coordinates[1] * math.sin(self.__direction) / 32)
+        )
+
+    def get_coordinates(self):
+        """
+        Return the coordinates of the pip
+        """
+        return self.__coordinates
+
+    def set_coordinates(self, new_coordinates):
+        """
+        Set or Update the coordinates of the pip\n
+        Parameters :\n
+        x and y coordinate
+        Return : \n
+        None
+        """
+        self.__coordinates = new_coordinates
+
     def draw(self, screen):
         """
         Attack a position\n
@@ -43,4 +62,3 @@ class Pip:
         tile = image.subsurface(((0, 0), (32, 32)))
 
         screen.blit(tile,self.__coordinates)
-        self.__coordinates = self.__move()

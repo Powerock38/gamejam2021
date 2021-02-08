@@ -8,7 +8,15 @@ def calculations(args):
 
     return args
 
+
 def update(args, graphic_elements):
+    for elem in graphic_elements:
+        if isinstance(elem, Pip):
+            if elem.move()[0] > 0 and elem.move()[0] < 1024 and elem.move()[1] > 0 and elem.move()[1] < 768:
+                elem.set_coordinates(elem.move())
+            else :
+                graphic_elements.remove(elem)
+                del elem
 
     return args, graphic_elements
 
