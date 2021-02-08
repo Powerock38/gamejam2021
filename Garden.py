@@ -161,13 +161,13 @@ class Garden:
             if y > 0 and self.__tiles[y - 1][x] > onTile:
                 possibleMoves.append(0)
 
-            if x > 0 and self.__tiles[y][x - 1] > onTile:
+            if x + 1 < len(self.__tiles[y]) and self.__tiles[y][x + 1] > onTile:
                 possibleMoves.append(1)
 
             if y + 1 < len(self.__tiles) and self.__tiles[y + 1][x] > onTile:
                 possibleMoves.append(2)
 
-            if x + 1 < len(self.__tiles[y]) and self.__tiles[y][x + 1] > onTile:
+            if x > 0 and self.__tiles[y][x - 1] > onTile:
                 possibleMoves.append(3)
 
             if len(possibleMoves):
@@ -177,10 +177,6 @@ class Garden:
 
 
     def draw(self, screen):
-        # for y in range(len(self.__background)):
-        #     for x in range(len(self.__background[y])):
-        #         screen.blit(self.__background[y][x], (x * 32, y * 32))
-
         screen.blit(self.__background, (0,0))
 
         for en in self.__enemies:
@@ -189,4 +185,4 @@ class Garden:
 
     def spawnEnemy(self):
         sprite = pygame.image.load("assets/farmer.png")
-        self.__enemies.append(Enemy(sprite, pos = [0, 1]))
+        self.__enemies.append(Enemy(sprite, pos = [1, 0]))
