@@ -48,13 +48,29 @@ class Tower:
                 (self.__coordinates[0],
                 self.__coordinates[1]),
                 direction
-            )
+        )
+
+    def get_name(self):
+        """
+        Return the name of the tower
+        """
+        return self.__name
 
     def get_coordinates(self):
         """
         Return the coordinates of the tower
         """
         return self.__coordinates
+
+    def set_coordinates(self, new_coordinates):
+        """
+        Set or Update the coordinates of the pip\n
+        Parameters :\n
+        x and y coordinate
+        Return : \n
+        None
+        """
+        self.__coordinates = new_coordinates
 
     def draw(self, screen):
         """

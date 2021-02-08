@@ -33,7 +33,7 @@ class Pip:
             int(self.__coordinates[0] + self.__coordinates[0] * math.cos(self.__direction) / 32),
             int(self.__coordinates[1] + self.__coordinates[1] * math.sin(self.__direction) / 32)
         )
-
+        
     def get_coordinates(self):
         """
         Return the coordinates of the pip
