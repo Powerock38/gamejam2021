@@ -5,6 +5,9 @@ from random import randint
 
 class Garden:
     def __init__(self, tiles = []):
+        self.__tick = 0
+        self.__tickMax = 200
+
         directions = [[1, 0], [0, 1], [-1, 0], [0, -1]]
 
         width = 28
@@ -121,9 +124,16 @@ class Garden:
                         self.__background.blit(tile1, (32 * j, 32 * i))
 
                 pygame.font.init()
-                self.__background.blit(pygame.font.Font('assets/font/comic_book.otf', 27).render(str(self.__tiles[i][j]) if self.__tiles[i][j] else '', True, (255,255,255)), (j * 32, i * 32))
+                self.__background.blit(pygame.font.Font('assets/font/comic_book.otf', 16).render(str(self.__tiles[i][j]) if self.__tiles[i][j] else '', True, (255,255,255)), (j * 32, i * 32))
 
     def update(self):
+        if self.__tick > self.__tickMax:
+            self.spawnEnemy()
+            self.__tick = 0
+            self.__tickMax = max(30, self.__tickMax - 1)
+        else:
+            self.__tick += 1
+
         for en in self.__enemies:
             x = en.pos[0]
             y = en.pos[1]
@@ -152,7 +162,6 @@ class Garden:
             if len(possibleMoves):
                 en.move(random.choice(possibleMoves))
             else:
-                print('fermier arrivé au bout')
                 self.__enemies.remove(en)
 
 

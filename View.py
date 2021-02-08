@@ -36,7 +36,7 @@ class View:
                         self.__crashed = True
                     elif event.type == pygame.MOUSEBUTTONDOWN and not self.__hover:
                         self.__graphic_elements.append(Tower(
-                            "assets/fruits-veggies/Acorn.png",
+                            pygame.image.load("assets/fruits-veggies/Acorn.png"),
                             "hover",
                             1,
                             1,
