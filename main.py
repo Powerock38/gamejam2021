@@ -43,11 +43,7 @@ garden.spawnEnemy()
 
 towertest = Tower("assets/fruits-veggies/Acorn.png","Acorn",1,1,(5*32,10*32))
 
-<<<<<<< HEAD
 # Create HUD
 hud = HUD(100,10)
-=======
-hud = HUD(100,100)
->>>>>>> c5a79713f9c3d63efe69d5722cc17b69fae22013
 
 view = View([garden], [garden,hud,towertest], calculations, update)
