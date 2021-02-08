@@ -9,7 +9,7 @@ class Pip:
     \tdamage : damage of the pip (int) (default 1)
     """
 
-    def __init__(self, coordinates = (10,10), size = 1, damage = 1):
+    def __init__(self, coordinates = (20,20), size = 1, damage = 1):
         """
         Constructor of the pips\n
         Arguments :\n
@@ -22,3 +22,13 @@ class Pip:
         self.__coordinates = coordinates
         self.__size = size
         self.__damage = damage
+    
+    def draw(self, screen):
+        """
+        Attack a position\n
+        Parameters :\n
+        \tscreen : the pygame screen\n
+        Return :\n
+        None
+        """
+        screen.fill(self.__coordinates (0,0,0))
