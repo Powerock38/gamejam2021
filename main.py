@@ -26,6 +26,7 @@ def update(graphic_elements):
                 delta2 = pos1[1] - pos2[1]
                 distance = math.sqrt((delta1)**2 + (delta2)**2)
                 angle = math.atan2(-delta2, -delta1)
+                print(angle)
                 if distance < 100:
                     if g.tick == g.rate:
                         graphic_elements.append(g.attack(angle))
