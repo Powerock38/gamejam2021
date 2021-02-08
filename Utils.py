@@ -70,9 +70,9 @@ class Utils:
                 "damage":3,
                 "range":10},
 
-                {"id":"potatoe",
-                "path":"assets/fruits-veggies/potatoe.png",
-                "name":"Potatoe",
+                {"id":"potato",
+                "path":"assets/fruits-veggies/potato.png",
+                "name":"Potato",
                 "price":56,
                 "description":"blablabla",
                 "fire_rate":1,
