@@ -1,6 +1,7 @@
 from View import View
 from Garden import Garden
 from Tower import Tower
+from HUD import HUD
 
 def calculations(args):
 
@@ -38,4 +39,8 @@ garden = Garden([[0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
                  [0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]])
 
 towertest = Tower("assets/fruits-veggies/Acorn.png","Acorn",1,1,(5*32,10*32))
-view = View([garden], [garden,towertest], calculations, update)
+
+# Create HUD
+hud = HUD(100,100)
+
+view = View([garden], [garden,hud,towertest], calculations, update)
