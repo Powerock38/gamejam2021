@@ -24,6 +24,7 @@ class Pip:
         self.__direction = direction
         self.__size = size
         self.__damage = damage
+        self.__surface = pygame.image.load('assets/tilesets/bullet.png')
     
     def move(self):
         """
@@ -39,7 +40,6 @@ class Pip:
         Return :\n
         None
         """
-        image = pygame.image.load('assets/tilesets/bullet.png')
-        tile = image.subsurface(((0, 0), (32, 32)))
+        tile = self.__surface.subsurface(((14, 14), (4, 4)))
 
         screen.blit(tile,self.coordinates)

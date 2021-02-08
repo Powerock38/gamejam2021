@@ -13,7 +13,7 @@ def update(graphic_elements):
             g.update()
         
         elif isinstance(g, Pip):
-            if g.move()[0] > 0 and g.move()[0] < 1024 and g.move()[1] > 0 and g.move()[1] < 768:
+            if g.move()[0] > 0 and g.move()[0] < 896 and g.move()[1] > 0 and g.move()[1] < 768:
                 g.coordinates = g.move()
             else :
                 graphic_elements.remove(g)
@@ -26,7 +26,6 @@ def update(graphic_elements):
                 delta2 = pos1[1] - pos2[1]
                 distance = math.sqrt((delta1)**2 + (delta2)**2)
                 angle = math.atan2(-delta2, -delta1)
-                print(angle)
                 if distance < 100:
                     if g.tick == g.rate:
                         graphic_elements.append(g.attack(angle))

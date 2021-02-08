@@ -10,6 +10,15 @@ class HUD:
 
         self.__surface = pygame.Surface((128,768))
         self.__surface.fill(Utils.GRAY)
+        
+        for col in range(2):
+            for elem in range(int(len(Utils.TOWERS)/2)):
+                elem_number = elem + (col*int(len(Utils.TOWERS)/2))
+                image = pygame.image.load(Utils.TOWERS[elem_number]["path"])
+                
+                x = 20 + (55 * col)
+                y = 130 + (85 * elem)
+                self.__surface.blit(image, (x, y))
 
     def get_life(self):
         return self.__life
@@ -54,7 +63,7 @@ class HUD:
         # Create the level text
         level_text = font.render('Level ' + str(self.get_level()), False, Utils.WHITE)
         dim = font.size("Level " + str(self.get_level()))
-        self.__surface.blit(level_text, (x-(int(dim[0]/2)), y))
+        self.__surface.blit(level_text, (x - (int(dim[0] / 2)), y))
 
         # Create the tower text
         tower_text = font.render('Towers ', False, Utils.WHITE)
@@ -67,8 +76,8 @@ class HUD:
 
         dim = font.size("Water : " + str(self.get_water()))
         image = pygame.image.load("assets/waterdrop.png")
-        self.__surface.blit(water_text, (x-(int((dim[0])/2)), 730))
-        self.__surface.blit(image, (dim[0]-10, 730))
+        self.__surface.blit(water_text, (x - (int((dim[0]) / 2)), 730))
+        self.__surface.blit(image, (dim[0] - 10, 730))
 
 
         font = self.get_font(12)
@@ -77,19 +86,14 @@ class HUD:
         for col in range(2):
             for elem in range(int(len(Utils.TOWERS)/2)):
 
-                # Display item
-                elem_number = elem + (col*int(len(Utils.TOWERS)/2))
-                image = pygame.image.load(Utils.TOWERS[elem_number]["path"]) # à opti
-                
-                x = 20 + (55*col)
-                y = 130 + (85*elem)
-                self.__surface.blit(image, (x, y))
-
                 # Display item name
 
                 # Position x at mid of item width and y at the bottom of item
-                x += 16
-                y += 32
+                
+                elem_number = elem + (col*int(len(Utils.TOWERS)/2))
+                
+                x = 36 + (55 * col)
+                y = 162 + (85 * elem)
 
                 # Get the size wich will be occupated by the text
                 dim = font.size(Utils.TOWERS[elem_number]["name"])
@@ -99,7 +103,6 @@ class HUD:
                 self.__surface.blit(item_text, (x-(int(dim[0]/2)), y+5))
 
                 # Display price
-                image = pygame.image.load("assets/waterdrop.png")
                 item_text = font.render(str(Utils.TOWERS[elem_number]["price"]), False, Utils.WHITE)
                 x -= 10
                 self.__surface.blit(image, (x-dim[0]/2, y+dim[1]))
