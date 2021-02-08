@@ -11,5 +11,5 @@ def update(args, graphic_elements):
 
 #Main
 
-garden = Garden()
+garden = Garden([])
 view = View([garden], [garden], calculations, update)
