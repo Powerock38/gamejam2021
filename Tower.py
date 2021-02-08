@@ -1,4 +1,5 @@
 import pygame
+from Pip import Pip
 
 class Tower:
     """
@@ -35,16 +36,22 @@ class Tower:
         self.__towerRange = towerRange
         self.__energy = 1 #100%
     
-    def attack(self, screen, direction):
+    def attack(self, direction):
         """
         Attack a position\n
         Parameters :\n
-        \tscreen : the pygame screen
-        \tdirection : the direction to attack\n
+        \tdirection : the direction to attack in radian (int)\n
         Return :\n
-        None
+        The new pip that attack
         """
-        pass
+        return Pip(
+                (self.__coordinates[0],
+                self.__coordinates[1]),
+                direction
+            )
+
+    def get_coordinates(self):
+        return self.__coordinates
 
     def draw(self, screen):
         """
@@ -57,4 +64,4 @@ class Tower:
         image = pygame.image.load(self.__sprite)
         tile = image.subsurface(((0, 0), (32, 32)))
 
-        screen.blit(tile,self.__coordinates)
+        screen.blit(tile,self.get_coordinates())
