@@ -1,7 +1,10 @@
 import pygame
 from Utils import Utils
 
+pygame.font.init()
+
 class HUD:
+
 
     def __init__(self, life = 100, water = 1, level = 1):
         self.__life = life
@@ -11,14 +14,34 @@ class HUD:
         self.__surface = pygame.Surface((128,768))
         self.__surface.fill(Utils.GRAY)
         
+        self.__water_image = pygame.image.load("assets/waterdrop.png")
+        
         for col in range(2):
             for elem in range(int(len(Utils.TOWERS)/2)):
                 elem_number = elem + (col*int(len(Utils.TOWERS)/2))
                 image = pygame.image.load(Utils.TOWERS[elem_number]["path"])
                 
+                # Displau item sprite
                 x = 20 + (55 * col)
                 y = 130 + (85 * elem)
+                
                 self.__surface.blit(image, (x, y))
+
+                # Display name
+                x = 36 + (55 * col)
+                y = 162 + (85 * elem)
+                # Get the size wich will be occupated by the text
+                font = self.get_font(12)
+                dim = font.size(Utils.TOWERS[elem_number]["name"])
+
+                item_text = font.render(Utils.TOWERS[elem_number]["name"], False, Utils.WHITE)
+                self.__surface.blit(item_text, (x-(int(dim[0]/2)), y+5))
+
+                # Display price
+                item_text = font.render(str(Utils.TOWERS[elem_number]["price"]), False, Utils.WHITE)
+                x -= 10
+                self.__surface.blit(self.__water_image, (x-dim[0]/2, y+dim[1]))
+                self.__surface.blit(item_text, ((x-dim[0]/2) + 32, y+dim[1] + 8))
 
     def get_life(self):
         return self.__life
@@ -51,8 +74,6 @@ class HUD:
     def draw(self, screen):
 
 
-        pygame.font.init()
-
         # Initialise font with the font available in assets/font
         font = self.get_font(25)
 
@@ -75,39 +96,8 @@ class HUD:
         water_text = font.render('Water ' + str(self.get_water()), False, Utils.BLUE)
 
         dim = font.size("Water : " + str(self.get_water()))
-        image = pygame.image.load("assets/waterdrop.png")
         self.__surface.blit(water_text, (x - (int((dim[0]) / 2)), 730))
-        self.__surface.blit(image, (dim[0] - 10, 730))
-
-
-        font = self.get_font(12)
-
-        # Display towers items col by col by taking the first half part of array and the second after
-        for col in range(2):
-            for elem in range(int(len(Utils.TOWERS)/2)):
-
-                # Display item name
-
-                # Position x at mid of item width and y at the bottom of item
-                
-                elem_number = elem + (col*int(len(Utils.TOWERS)/2))
-                
-                x = 36 + (55 * col)
-                y = 162 + (85 * elem)
-
-                # Get the size wich will be occupated by the text
-                dim = font.size(Utils.TOWERS[elem_number]["name"])
-
-                # Display name
-                item_text = font.render(Utils.TOWERS[elem_number]["name"], False, Utils.WHITE)
-                self.__surface.blit(item_text, (x-(int(dim[0]/2)), y+5))
-
-                # Display price
-                item_text = font.render(str(Utils.TOWERS[elem_number]["price"]), False, Utils.WHITE)
-                x -= 10
-                self.__surface.blit(image, (x-dim[0]/2, y+dim[1]))
-                self.__surface.blit(item_text, ((x-dim[0]/2) + 32, y+dim[1] + 8))
-
+        self.__surface.blit(self.__water_image, (dim[0] - 10, 730))
 
 
         screen.blit(self.__surface, (896,0))
