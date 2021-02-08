@@ -29,7 +29,7 @@ class Tower:
         None
         """
         self.__sprite = sprite
-        self.__name = name
+        self.name = name
         self.rate = rate
         self.__damage = damage
         self.__coordinates = coordinates

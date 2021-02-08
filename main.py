@@ -32,7 +32,7 @@ def update(graphic_elements):
                         g.tick = 0
                     else:
                         g.tick += 1
-            if g.get_name() == "hover":
+            if g.name == "hover":
                 g.set_coordinates(
                     (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
                      pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32))
