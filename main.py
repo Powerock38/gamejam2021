@@ -3,6 +3,8 @@ from Garden import Garden
 from Tower import Tower
 from Pip import Pip
 from HUD import HUD
+from Enemy import Enemy
+import math
 
 def update(graphic_elements):
     for g in graphic_elements:
@@ -15,6 +17,20 @@ def update(graphic_elements):
             else :
                 graphic_elements.remove(g)
                 del g
+        elif isinstance(g, Tower):
+            for enemy in graphic_elements[0].get_ennemies():
+                pos1 = g.get_coordinates()
+                pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0], enemy.pos[1] * 32 + enemy.pos_in_tile[1])
+                delta1 = pos1[0] - pos2[0]
+                delta2 = pos1[1] - pos2[1]
+                distance = math.sqrt((delta1)**2 + (delta2)**2)
+                angle = math.atan2(-delta2, -delta1)
+                if distance < 100:
+                    if g.tick == g.rate:
+                        graphic_elements.append(g.attack(angle))
+                        g.tick = 0
+                    else:
+                        g.tick += 1
                 
     return graphic_elements
 

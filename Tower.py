@@ -30,11 +30,12 @@ class Tower:
         """
         self.__sprite = sprite
         self.__name = name
-        self.__rate = rate
+        self.rate = rate
         self.__damage = damage
         self.__coordinates = coordinates
         self.__towerRange = towerRange
         self.__energy = 1 #100%
+        self.tick = 0
     
     def attack(self, direction):
         """
@@ -44,11 +45,7 @@ class Tower:
         Return :\n
         The new pip that attack
         """
-        return Pip(
-                (self.__coordinates[0],
-                self.__coordinates[1]),
-                direction
-            )
+        return Pip((self.__coordinates[0], self.__coordinates[1]), direction)
 
     def get_coordinates(self):
         """

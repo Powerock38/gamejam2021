@@ -32,13 +32,7 @@ class View:
                     if event.type == pygame.QUIT:
                         self.__crashed = True
                     elif event.type == pygame.MOUSEBUTTONDOWN:
-                        self.__graphic_elements.append(Tower(
-                            pygame.image.load("assets/fruits-veggies/Acorn.png"),
-                            "Acorn",
-                            1,
-                            1,
-                            (event.pos[0], event.pos[1])
-                            ))
+                        self.__graphic_elements.append(Tower(pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 6, 1, (event.pos[0], event.pos[1])))
                     elif event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
                             self.__crashed = True
