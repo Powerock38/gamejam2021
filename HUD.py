@@ -71,6 +71,7 @@ class HUD:
 
                 # Display item
                 elem_number = elem + (col*int(len(Utils.TOWERS)/2))
+                print(Utils.TOWERS[elem_number]["path"])
                 image = pygame.image.load(Utils.TOWERS[elem_number]["path"])
                 
                 x = 20 + (55*col)

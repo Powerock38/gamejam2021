@@ -84,9 +84,9 @@ class Utils:
                 "energy_consomation":2,
                 "sleeping_time": 2},
 
-                {"id":"potatoe",
-                "path":"assets/fruits-veggies/potatoe.png",
-                "name":"Potatoe",
+                {"id":"potato",
+                "path":"assets/fruits-veggies/potato.png",
+                "name":"Potato",
                 "price":56,
                 "description":"blablabla",
                 "fire_rate":1,
