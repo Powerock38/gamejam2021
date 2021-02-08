@@ -2,7 +2,7 @@ import pygame
 
 
 class Enemy:
-    def __init__(self, sprite, hp = 100, speed = 2, pos = [0, 0]):
+    def __init__(self, sprite, hp = 100, speed = 0.5, pos = [0, 0]):
         self.__sprite = sprite
         self.__hp = hp
         self.__speed = speed

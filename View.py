@@ -33,7 +33,7 @@ class View:
                         self.__crashed = True
                     elif event.type == pygame.MOUSEBUTTONDOWN:
                         self.__graphic_elements.append(Tower(
-                            "assets/fruits-veggies/Acorn.png",
+                            pygame.image.load("assets/fruits-veggies/Acorn.png"),
                             "Acorn",
                             1,
                             1,
