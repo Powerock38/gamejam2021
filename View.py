@@ -5,7 +5,7 @@ import copy
 import pygame
 
 #Set the default position of the pygame window
-os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (0, 0)
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (50, 50)
 
 class View:
     _clock = None
