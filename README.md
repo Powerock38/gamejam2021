@@ -31,7 +31,7 @@ Bonus:
 =================================
 
 Le jeu :
-    - Solde de base : 
+    - Solde de base : (a derterminer)
 
 Fruits et légumes:
     1 - Pomme & Patate

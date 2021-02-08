@@ -1,5 +1,6 @@
 from View import View
 from Garden import Garden
+from HUD import HUD
 
 def calculations(args):
 
@@ -12,4 +13,7 @@ def update(args, graphic_elements):
 #Main
 
 garden = Garden([])
-view = View([garden], [garden], calculations, update)
+# Initilase HUD with 100% life and 100 water money
+hud = HUD(100, 100)
+
+view = View([garden], [garden, hud], calculations, update)
