@@ -14,7 +14,8 @@ class Garden:
         height = 24
 
         count = 1
-        while count < 90:
+        while count < 100:
+            
             tiles = [[0 for _ in range(width)] for _ in range(height)]
 
             count = 1
@@ -25,43 +26,50 @@ class Garden:
             while not (pos[1] == width - 3 and pos[0] == height - 1):
                 allowed_dirs = directions[:]
                 allowed_dirs.remove(allowed_dirs[(oldr + 2) % 4])
-
+                
                 if [1, 0] in allowed_dirs:
                     if not (pos[0] + 1 < height - 1 or (pos[0] + 1 < height and pos[1] == width - 3)):
+                        allowed_dirs.remove([1, 0])
+                    elif pos[0] % 3 != 0 and (pos[1] - 1) % 3 != 0:
                         allowed_dirs.remove([1, 0])
                 if [0, 1] in allowed_dirs:
                     if pos[1] + 1 >= width - 1 or not pos[0]:
                         allowed_dirs.remove([0, 1])
+                    elif (pos[0] - 1) % 3 != 0 and pos[1] % 3 != 0:
+                        allowed_dirs.remove([0, 1])
                 if [-1, 0] in allowed_dirs:
                     if pos[0] - 1 <= 0:
+                        allowed_dirs.remove([-1, 0])
+                    elif (pos[0] - 2) % 3 != 0 and (pos[1] - 1) % 3 != 0:
                         allowed_dirs.remove([-1, 0])
                 if [0, -1] in allowed_dirs:
                     if pos[1] - 1 <= 0:
                         allowed_dirs.remove([0, -1])
+                    elif (pos[0] - 1) % 3 != 0 and (pos[1] - 2) % 3 != 0:
+                        allowed_dirs.remove([0, -1])
 
-                if pos == [22, 1]:
-                    allowed_dirs.append([-1, 0])
+                if pos[1] == 26:
+                    allowed_dirs = [[0, -1]]
 
                 r  = randint(0, len(allowed_dirs) - 1)
                 direction = allowed_dirs[r]
-                oldr = r
+                oldr = directions.index(direction)
                 
                 next_pos = [pos[0] + direction[0], pos[1] + direction[1]]
                 
-                if (next_pos[0]) % 3 == 0 or (next_pos[1] - 1) % 3 == 0:
-                    if tiles[next_pos[0]][next_pos[1]] == 0:
-                        pos[0] += direction[0]
-                        pos[1] += direction[1]
-                        count += 1
-                        tiles[pos[0]][pos[1]] = count
-                    else:
-                        count = tiles[next_pos[0]][next_pos[1]]
-                        for i in range(len(tiles)):
-                            for j in range(len(tiles[i])):
-                                if tiles[i][j] > count:
-                                    tiles[i][j] = 0
-                        pos[0] += direction[0]
-                        pos[1] += direction[1]
+                if tiles[next_pos[0]][next_pos[1]] == 0:
+                    pos[0] += direction[0]
+                    pos[1] += direction[1]
+                    count += 1
+                    tiles[pos[0]][pos[1]] = count
+                else:
+                    count = tiles[next_pos[0]][next_pos[1]]
+                    for i in range(len(tiles)):
+                        for j in range(len(tiles[i])):
+                            if tiles[i][j] > count:
+                                tiles[i][j] = 0
+                    pos[0] += direction[0]
+                    pos[1] += direction[1]
                             
         self.__tiles = tiles
         self.__enemies = []

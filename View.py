@@ -35,7 +35,7 @@ class View:
                     if event.type == pygame.QUIT:
                         self.__crashed = True
                     elif event.type == pygame.MOUSEBUTTONDOWN:
-                        self.__graphic_elements.append(Tower(pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 6, 1, (event.pos[0], event.pos[1])))
+                        self.__graphic_elements.append(Tower(pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 20, 1, (event.pos[0], event.pos[1])))
                         self.__hover = True
                     elif event.type == pygame.MOUSEBUTTONDOWN and self.__hover:
                         for g in graphic_elements:
@@ -47,7 +47,7 @@ class View:
                         if event.key == pygame.K_ESCAPE:
                             self.__crashed = True
                         elif event.key == pygame.K_SPACE:
-                            self.__graphic_elements.append(Tower(pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 6, 1,
+                            self.__graphic_elements.append(Tower(pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 20, 1,
                                 (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
                                  pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
                         elif event.key == pygame.K_a:

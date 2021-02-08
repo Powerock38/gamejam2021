@@ -29,7 +29,7 @@ class Pip:
         """
         Move the pip with the direction given in the constructor
         """
-        return (self.coordinates[0] + math.cos(self.__direction) * 3, self.coordinates[1] + math.sin(self.__direction) * 3)
+        return (self.coordinates[0] + math.cos(self.__direction) * 10, self.coordinates[1] + math.sin(self.__direction) * 10)
 
     def draw(self, screen):
         """
