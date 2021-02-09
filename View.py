@@ -21,7 +21,7 @@ class View:
 
         try:
             while not self.__crashed:
-                t1 = time.time()
+                #t1 = time.time()
                 self.__clock.tick(60)
 
                 for event in pygame.event.get():
@@ -29,7 +29,7 @@ class View:
                         self.__crashed = True
                     else:
                         # self.__graphic_elements = eventListener(event, self.__graphic_elements)
-                        eventListener(event, self.__graphic_elements)
+                        self.__graphic_elements = eventListener(event, self.__graphic_elements)
 
                 self.__graphic_elements = update(self.__graphic_elements)
                 
