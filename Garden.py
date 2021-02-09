@@ -202,4 +202,4 @@ class Garden:
 
     def spawnEnemy(self):
         sprite = pygame.image.load("assets/farmer.png")
-        self.enemies.append(Enemy(sprite, pos = [1, 0]))
+        self.enemies = [Enemy(sprite, pos = [1, 0])] + self.enemies

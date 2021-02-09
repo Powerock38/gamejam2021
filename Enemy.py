@@ -26,10 +26,10 @@ class Enemy:
         x, y = (32 * self.pos[0] + self.pos_in_tile[0], 32 * self.pos[1] + self.pos_in_tile[1])
         screen.blit(self.__sprite, (x, y))
         if self.hp != self.__hpMax:
-            width = max(1, int((self.hp / self.__hpMax) * 32))
-            pygame.draw.rect(screen, (20,10,10), (x - 1, y - 9, 32, 6))
-            pygame.draw.rect(screen, (237,28,36), (x, y - 8, width, 2))
-            pygame.draw.rect(screen, (200,20,25), (x, y - 6, width, 2))
+            width = max(1, int((self.hp / self.__hpMax) * 28))
+            pygame.draw.rect(screen, (20,10,10), (x + 1, y - 9, 32, 6))
+            pygame.draw.rect(screen, (237,28,36), (x + 2, y - 8, width, 2))
+            pygame.draw.rect(screen, (200,20,25), (x + 2, y - 6, width, 2))
 
     def move(self, direction):
         if direction == 0:
