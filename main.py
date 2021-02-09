@@ -17,6 +17,7 @@ def update(graphic_elements):
             else :
                 graphic_elements.remove(g)
                 del g
+
         elif isinstance(g, Tower):
             g.tick += 1
             if g.tick == g.rate:
@@ -31,7 +32,7 @@ def update(graphic_elements):
                             graphic_elements.append(pip)
                             attack += 1
             if g.name == "hover":
-                g.set_coordinates(
+                g.coordinates = (
                     (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
                      pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32))
     return graphic_elements

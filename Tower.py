@@ -21,10 +21,9 @@ class Tower:
         Arguments :\n
         \tsprite : sprite of the Tower (path png)
         \tname : name of the fruit or vegetable (not given in the constructor)  (string)
-        \tcoordinates : coordinates of the tower (tupple of int)
         \trate : fire rate of the tower (int)
         \tdamage : the level of damage of the tower (int)
-        \tcoordinates : the coordinates of the tower (tupple of int) (default (0,0))
+        \tcoordinates : the coordinates of the tower (tupple of int) (default (10,10))
         \ttowerRange : the range of fire of the fower (int) (default 5)\n
         Return :\n
         None
@@ -47,6 +46,7 @@ class Tower:
         Return :\n
         The new pip that attack
         """
+        
         pip = None
         pos1 = self.coordinates
         pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0], enemy.pos[1] * 32 + enemy.pos_in_tile[1])
