@@ -5,6 +5,7 @@ from Pip import Pip
 from HUD import HUD
 from Enemy import Enemy
 import pygame
+import math
 
 def update(graphic_elements):
 
@@ -88,10 +89,7 @@ def eventListener(event, graphic_elements, hover):
                 del g
 
     elif event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_ESCAPE:
-            self.__crashed = True
-
-        elif event.key == pygame.K_SPACE and hover:
+        if event.key == pygame.K_SPACE and hover:
             graphic_elements.append(Tower(
                 pygame.image.load("assets/fruits-veggies/Acorn.png"),
                 "Acorn",
@@ -110,7 +108,7 @@ def eventListener(event, graphic_elements, hover):
         elif event.key == pygame.K_a:
             for elem in graphic_elements:
                 if isinstance(elem, Tower) and elem.name != "hover":
-                    graphic_elements.append(elem.attack(m.pi/2))
+                    graphic_elements.append(elem.attack(math.pi/2))
     
     return (graphic_elements, hover)
 
