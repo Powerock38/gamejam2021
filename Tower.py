@@ -31,7 +31,7 @@ class Tower:
         self.__sprite = sprite
         self.name = name
         self.rate = rate
-        self.__damage = damage
+        self.damage = damage
         self.coordinates = coordinates
         self.__towerRange = towerRange
         self.__energy = 1 #100%

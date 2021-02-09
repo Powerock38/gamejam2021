@@ -72,7 +72,7 @@ class Garden:
                     pos[1] += direction[1]
                             
         self.__tiles = tiles
-        self.__enemies = []
+        self.enemies = []
 
         image = pygame.image.load("assets/tilesets/plowed_soil.png")
 
@@ -159,7 +159,7 @@ class Garden:
         else:
             self.__tick += 1
 
-        for en in self.__enemies:
+        for en in self.enemies:
             x = en.pos[0]
             y = en.pos[1]
             onTile = self.__tiles[y][x]
@@ -181,20 +181,16 @@ class Garden:
             if len(possibleMoves):
                 en.move(random.choice(possibleMoves))
             else:
-                self.__enemies.remove(en)
+                self.enemies.remove(en)
 
 
     def draw(self, screen):
         screen.blit(self.__background, (0,0))
 
-        for en in self.__enemies:
+        for en in self.enemies:
             en.draw(screen)
 
 
     def spawnEnemy(self):
         sprite = pygame.image.load("assets/farmer.png")
-        self.__enemies.append(Enemy(sprite, pos = [1, 0]))
-
-    def get_ennemies(self):
-
-        return self.__enemies
+        self.enemies.append(Enemy(sprite, pos = [1, 0]))
