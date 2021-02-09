@@ -63,16 +63,30 @@ def update(graphic_elements):
     return graphic_elements
 
 def eventListener(event, elements):
-    garden = elements[0]
-    hud = elements[1]
+    if isinstance(elements[0], Garden):
+        garden = elements[0]
+        hud = elements[1]
 
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        mx, my = pygame.mouse.get_pos()
-        if event.button == 1:
-            if mx >= 896:
-                hud.buy(mx, my)
-            elif mx < 896:
-                garden.putTower()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mx, my = pygame.mouse.get_pos()
+            if event.button == 1:
+                if mx >= 896:
+                    hud.buy(mx, my)
+                elif mx < 896:
+                    garden.putTower()
+    else:
+        m_pos = pygame.mouse.get_pos()
+        if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 350 and m_pos[1] <= 672:
+            garden = Garden()
+
+            # Create HUD
+            hud = HUD(garden, 100, 10)
+
+            garden.HUD = hud
+
+            elements = [garden, hud]
+
+    return elements
 
     # if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and not hover:
     #     if (graphic_elements[1].get_water() - vegetable['price']) >= 0:
@@ -116,12 +130,6 @@ def eventListener(event, elements):
 
 #Main
 
-garden = Garden()
 menu = Menu()
 
-# Create HUD
-hud = HUD(garden, 100,10)
-
-garden.HUD = hud
-
-view = View([garden, hud], update, eventListener)
+view = View([menu], update, eventListener)

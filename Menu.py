@@ -11,5 +11,4 @@ class Menu:
         self.__surface.blit(pygame.image.load("assets/credits.png"), (341, 608))
         
     def draw(self, screen):
-        
         screen.blit(self.__surface, (0, 0))
