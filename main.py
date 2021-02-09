@@ -65,7 +65,7 @@ def eventListener(event, graphic_elements, hover):
     vegetable = [t for t in Utils.TOWERS if t.get('name') == 'Apple'][0]
     mouse_pos = pygame.mouse.get_pos()
 
-    if event.type == pygame.MOUSEBUTTONDOWN and not hover:
+    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and not hover:
         if (graphic_elements[1].get_water() - vegetable['price']) >= 0:
             graphic_elements.append(Tower(
                     pygame.image.load(vegetable['path']),
@@ -80,11 +80,25 @@ def eventListener(event, graphic_elements, hover):
         else:
             print("Not enough water !")
 
-    elif event.type == pygame.MOUSEBUTTONDOWN and hover:
+    elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and hover:
         if (graphic_elements[1].get_water() - vegetable['price']) >= 0:
             graphic_elements, hover = putTower(graphic_elements, vegetable, hover)
         else:
             print("Not enough water !")
+    
+    elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3: #3 => rigth click
+        print("coucou")
+        for g in graphic_elements:
+            if isinstance(g, Tower) and \
+                    mouse_pos[0] // 32 < g.coordinates[0] // 32 and \
+                    mouse_pos[0] // 32 > g.coordinates[0] // 32 and \
+                    mouse_pos[1] // 32 > g.coordinates[1] // 32 and \
+                    mouse_pos[1] // 32 > g.coordinates[1] // 32:
+                graphic_elements[1].set_water(
+                    graphic_elements[1].get_water() + vegetable['price'] / 2)
+                graphic_elements.remove(g)
+                del g
+                #c'est pas encore bon !!
 
     elif event.type == pygame.KEYDOWN:
         if event.key == pygame.K_SPACE and hover:
@@ -107,7 +121,7 @@ def putTower(graphic_elements, vegetable, hover):
     pos = (mouse_pos[0] - mouse_pos[0] % 32,
             mouse_pos[1] - mouse_pos[1] % 32)
     pos_already_taken = -1
-    pos_manhattan = (pos[0] // 32, pos[1] // 32)
+    pos_manhattan = (min(pos[0], 895) // 32, pos[1] // 32)
 
     if not graphic_elements[0].tiles[pos_manhattan[1]][pos_manhattan[0]]:
         for tower in graphic_elements:
@@ -121,8 +135,7 @@ def putTower(graphic_elements, vegetable, hover):
                 vegetable['name'],
                 vegetable['fire_rate'],
                 vegetable['damage'],
-                (mouse_pos[0] - mouse_pos[0] % 32,
-                    mouse_pos[1] - mouse_pos[1] % 32),
+                pos,
                 vegetable['range'])
             )
             hover = False
@@ -134,8 +147,6 @@ def putTower(graphic_elements, vegetable, hover):
                     del g
 
             graphic_elements[1].set_water(graphic_elements[1].get_water() - vegetable['price'])
-        else :
-            print("Position already taken !")
 
     return graphic_elements, hover
 
