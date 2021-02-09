@@ -15,17 +15,37 @@ class HUD:
         self.__surface.fill(Utils.GRAY)
         
         self.__water_image = pygame.image.load("assets/waterdrop.png")
+
+        self.__towers_rect = []
         
         for col in range(2):
             for elem in range(int(len(Utils.TOWERS)/2)):
                 elem_number = elem + (col*int(len(Utils.TOWERS)/2))
                 image = pygame.image.load(Utils.TOWERS[elem_number]["path"])
+                image_rect = image.get_rect()
                 
-                # Displau item sprite
+                # Display item sprite
                 x = 20 + (55 * col)
                 y = 130 + (85 * elem)
                 
-                self.__surface.blit(image, (x, y))
+                image_rect.x = x
+                image_rect.y = y
+                self.__surface.blit(image, image_rect)
+
+                # Create tower hover
+                hover = pygame.Surface((50,15))
+                hover.fill(Utils.RED)
+                font = self.get_font(10)
+                hover_text = font.render("Id : " + str(Utils.TOWERS[elem_number]["id"]), False, Utils.BLACK)
+                hover.blit(hover_text, (5,5))
+
+                self.__towers_rect.append(
+                    {
+                        "id":Utils.TOWERS[elem_number]["id"], 
+                        "rect":image_rect, 
+                        "hover":hover
+                    }
+                )
 
                 # Display name
                 x = 36 + (55 * col)
@@ -64,8 +84,8 @@ class HUD:
     def get_surface(self):
         return self.__surface
     
-    def get_towers(self):
-        return self.__TOWERS
+    def get_towers_rect(self):
+        return self.__towers_rect
 
     def get_font(self, size):
         return pygame.font.Font('assets/font/comic_book.otf', size)
@@ -88,11 +108,10 @@ class HUD:
 
         # Create the tower text
         tower_text = font.render('Towers ', False, Utils.WHITE)
-        
         self.__surface.blit(tower_text, (18, 87))
 
-        font = self.get_font(20)
         # Create the text water
+        font = self.get_font(20)
         water_text = font.render('Water ' + str(self.get_water()), False, Utils.BLUE)
 
         dim = font.size("Water : " + str(self.get_water()))
