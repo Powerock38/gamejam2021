@@ -29,16 +29,32 @@ def eventListener(event, elements):
                 elif mx < 896:
                     garden.putTower()
     else:
-        m_pos = pygame.mouse.get_pos()
-        if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 350 and m_pos[1] <= 672:
-            garden = Garden()
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            m_pos = pygame.mouse.get_pos()
+            menu = elements[0]
+            if menu.page == "Menu":
+                if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 350 and m_pos[1] <= 472:
 
-            # Create HUD
-            hud = HUD(garden, 100, 10)
+                    #Start game
+                    garden = Garden()
+                    hud = HUD(garden, 100, 10)
+                    garden.HUD = hud
 
-            garden.HUD = hud
-
-            elements = [garden, hud]
+                    elements = [garden, hud]
+                    
+                elif m_pos[0] >= 341 and m_pos[0] <= 683 and m_pos[1] >= 492 and m_pos[1] <= 588:
+                    menu.page = "Rules"
+                    
+                elif m_pos[0] >= 341 and m_pos[0] <= 683 and m_pos[1] >= 608 and m_pos[1] <= 704:
+                    menu.page = "Credits"
+            
+            elif menu.page == "Rules":
+                if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 608 and m_pos[1] <= 730:
+                    menu.page = "Menu"
+                
+            elif menu.page == "Credits":
+                if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 608 and m_pos[1] <= 730:
+                    menu.page = "Menu"
 
     return elements
     
