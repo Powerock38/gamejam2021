@@ -5,7 +5,7 @@ class Enemy:
     def __init__(self, sprite, hp = 100, speed = 0.5, pos = [0, 0]):
         """
         Constructor of the Enemy class\n
-        Parameters:\n
+        Parameters :\n
         \tsprite : sprite of the Tower (path png)
         \thp : health point of the enemy (int) (default 100)
         \tspeed : the speed of the enemy (int) (default 0.5)
