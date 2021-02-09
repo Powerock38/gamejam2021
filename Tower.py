@@ -1,6 +1,7 @@
 import pygame
-from Pip import Pip
 import math
+from Pip import Pip
+from Utils import Utils
 
 class Tower:
     """
@@ -15,7 +16,7 @@ class Tower:
     \ttowerRange : the range of fire of the fower (int) (default 5)
     """
 
-    def __init__(self, sprite, name, rate, damage, coordinates = (10,10), towerRange = 5, max_attack = 1):
+    def __init__(self, sprite, name, rate, damage, coordinates = (10,10), towerRange = 5, max_attack = 1, energy_consumption = 1):
         """
         Tower : constructor of a Tower\n
         Arguments :\n
@@ -34,7 +35,9 @@ class Tower:
         self.damage = damage
         self.coordinates = coordinates
         self.__towerRange = towerRange
-        self.__energy = 1 #100%
+        self.__energy = 100
+        self.__energyMax = 100
+        self.__energy_consumption = energy_consumption
         self.tick = 0
         self.max_attack = max_attack
     
@@ -52,7 +55,8 @@ class Tower:
         distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
         if distance < 100:
             pip = Pip(self.coordinates, enemy)
-            
+            self.__energy -= self.__energy_consumption
+
         return pip
 
     def draw(self, screen):
@@ -66,3 +70,8 @@ class Tower:
         tile = self.__sprite.subsurface(((0, 0), (32, 32)))
 
         screen.blit(tile,self.coordinates)
+
+        x,y = self.coordinates
+        for n in range(1, int((self.__energy/self.__energyMax) * 7)):
+            w = 4
+            pygame.draw.rect(screen, Utils.BLUE, (x + (n - 1)*(w + 1), y + 30, w, 4))
