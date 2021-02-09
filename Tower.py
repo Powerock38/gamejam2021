@@ -1,5 +1,6 @@
 import pygame
 from Pip import Pip
+import math
 
 class Tower:
     """
@@ -14,7 +15,7 @@ class Tower:
     \ttowerRange : the range of fire of the fower (int) (default 5)
     """
 
-    def __init__(self, sprite, name, rate, damage, coordinates = (10,10), towerRange = 5 ):
+    def __init__(self, sprite, name, rate, damage, coordinates = (10,10), towerRange = 5, max_attack = 1):
         """
         Tower : constructor of a Tower\n
         Arguments :\n
@@ -32,12 +33,13 @@ class Tower:
         self.name = name
         self.rate = rate
         self.__damage = damage
-        self.__coordinates = coordinates
+        self.coordinates = coordinates
         self.__towerRange = towerRange
         self.__energy = 1 #100%
         self.tick = 0
+        self.max_attack = max_attack
     
-    def attack(self, direction):
+    def attack(self, enemy):
         """
         Attack a position\n
         Parameters :\n
@@ -45,13 +47,14 @@ class Tower:
         Return :\n
         The new pip that attack
         """
-        return Pip((self.__coordinates[0], self.__coordinates[1]), direction)
-
-    def get_coordinates(self):
-        """
-        Return the coordinates of the tower
-        """
-        return self.__coordinates
+        pip = None
+        pos1 = self.coordinates
+        pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0], enemy.pos[1] * 32 + enemy.pos_in_tile[1])
+        distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
+        if distance < 100:
+            pip = Pip(self.coordinates, enemy)
+            
+        return pip
 
     def draw(self, screen):
         """
@@ -63,4 +66,4 @@ class Tower:
         """
         tile = self.__sprite.subsurface(((0, 0), (32, 32)))
 
-        screen.blit(tile,self.get_coordinates())
+        screen.blit(tile,self.coordinates)
