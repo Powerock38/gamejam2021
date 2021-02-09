@@ -13,85 +13,50 @@ def update(graphic_elements):
     for g in graphic_elements:
         if isinstance(g, Garden):
             g.update()
-        
-        elif isinstance(g, Pip):
-            next_pos = g.move()
-            if next_pos[0] > 0 and next_pos[0] < 896 and next_pos[1] > 0 and next_pos[1] < 768 and not next_pos[2]:
-                g.coordinates = (next_pos[0], next_pos[1])
-            else:
-                if g.enemy:
-                    g.enemy.hp -= g.damage
-                    if g.enemy.hp <= 0:
-                        index = graphic_elements[0].enemies.index(g.enemy)
-                        graphic_elements[0].enemies.remove(graphic_elements[0].enemies[index])
-                        enemy = g.enemy
-                        for pip in range(len(graphic_elements)):
-                            if isinstance(graphic_elements[pip], Pip):
-                                if graphic_elements[pip].enemy == enemy:
-                                    graphic_elements[pip].enemy = None
-                        del enemy
-                graphic_elements.remove(g)
-                del g
 
-        elif isinstance(g, Tower):
-            if g.name == "hover":
-                x = g.coordinates[0]
-                y = g.coordinates[1]
-                mouse_pos = pygame.mouse.get_pos()
-
-                if (mouse_pos[0] < 896):
-                    x = mouse_pos[0] - mouse_pos[0] % 32
-                    y = mouse_pos[1] - mouse_pos[1] % 32
-                else:
-                    x = 864
-                    y = mouse_pos[1] - mouse_pos[1] % 32
-
-                g.coordinates = ((x,y))
-                
-            else:
-                g.tick += 1
-                if g.tick == g.rate:
-                    g.tick = 0
-                    attack = 0
-                    for enemy in graphic_elements[0].enemies:
-                        
-                        if attack < g.max_attack:
-                            pip = g.attack(enemy)
-                            
-                            if pip:
-                                graphic_elements.append(pip)
-                                attack += 1
     return graphic_elements
 
 def eventListener(event, elements):
-    garden = elements[0]
-    hud = elements[1]
+    if isinstance(elements[0], Garden):
+        garden = elements[0]
+        hud = elements[1]
 
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        mx, my = pygame.mouse.get_pos()
-        if event.button == 1:
-            if mx >= 896:
-                hud.buy(mx, my)
-            elif mx < 896:
-                garden.putTower()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mx, my = pygame.mouse.get_pos()
+            if event.button == 1:
+                if mx >= 896:
+                    hud.buy(mx, my)
+                elif mx < 896:
+                    garden.putTower()
+    else:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            m_pos = pygame.mouse.get_pos()
+            menu = elements[0]
+            if menu.page == "Menu":
+                if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 350 and m_pos[1] <= 472:
 
-    # if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and not hover:
-    #     if (graphic_elements[1].get_water() - vegetable['price']) >= 0:
-    #         graphic_elements.append(Tower(
-    #                 pygame.image.load(vegetable['path']),
-    #                 "hover",
-    #                 vegetable['fire_rate'],
-    #                 vegetable['damage'],
-    #                 (mouse_pos[0] - mouse_pos[0] % 32,
-    #                 mouse_pos[1] - mouse_pos[1] % 32),
-    #                 vegetable['range'])
-    #             )
-    #         hover = True
-    #     else:
-    #         print("Not enough water !")
+                    #Start game
+                    garden = Garden()
+                    hud = HUD(garden, 100, 10)
+                    garden.HUD = hud
 
-    # elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and hover:
-    #     putTower(graphic_elements, vegetable, hover)
+                    elements = [garden, hud]
+                    
+                elif m_pos[0] >= 341 and m_pos[0] <= 683 and m_pos[1] >= 492 and m_pos[1] <= 588:
+                    menu.page = "Rules"
+                    
+                elif m_pos[0] >= 341 and m_pos[0] <= 683 and m_pos[1] >= 608 and m_pos[1] <= 704:
+                    menu.page = "Credits"
+            
+            elif menu.page == "Rules":
+                if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 608 and m_pos[1] <= 730:
+                    menu.page = "Menu"
+                
+            elif menu.page == "Credits":
+                if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 608 and m_pos[1] <= 730:
+                    menu.page = "Menu"
+
+    return elements
     
     # elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3: #3 => right click
     #     print("coucou")
@@ -117,12 +82,6 @@ def eventListener(event, elements):
 
 #Main
 
-garden = Garden()
 menu = Menu()
 
-# Create HUD
-hud = HUD(garden, 100,10)
-
-garden.HUD = hud
-
-view = View([garden, hud], update, eventListener)
+view = View([menu], update, eventListener)

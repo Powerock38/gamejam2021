@@ -3,11 +3,31 @@ import pygame
 class Menu:
 
     def __init__(self):
+        
+        self.page = "Menu"
 
-        self.__surface = pygame.Surface((1024, 768))
-        self.__surface.blit(pygame.image.load("assets/Main.png"), (0, 0))
-        self.__surface.blit(pygame.image.load("assets/button.png"), (261, 500))
+        self.__menu = pygame.Surface((1024, 768))
+        self.__rules = pygame.Surface((1024, 768))
+        self.__credits = pygame.Surface((1024, 768))
+
+        background = pygame.image.load("assets/menu.png")
+        play_button = pygame.image.load("assets/play.png")
+        
+        self.__menu.blit(background, (0, 0))
+        self.__menu.blit(play_button, (295, 350))
+        self.__menu.blit(pygame.image.load("assets/rules.png"), (341, 492))
+        self.__menu.blit(pygame.image.load("assets/credits.png"), (341, 608))
+        
+        self.__rules.blit(background, (0, 0))
+        self.__rules.blit(play_button, (295, 608))
+        
+        self.__credits.blit(background, (0, 0))
+        self.__credits.blit(play_button, (295, 608))
         
     def draw(self, screen):
-        
-        screen.blit(self.__surface, (0, 0))
+        if self.page == "Menu":
+            screen.blit(self.__menu, (0, 0))
+        elif self.page == "Rules":
+            screen.blit(self.__rules, (0, 0))
+        elif self.page == "Credits":
+            screen.blit(self.__credits, (0, 0))

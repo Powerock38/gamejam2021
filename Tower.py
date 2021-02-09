@@ -67,13 +67,7 @@ class Tower:
         \tscreen : the pygame screen\n
         Return :\n
         None
-        """
-        if self.name == "hover":
-            pygame.draw.circle(screen,
-                            Utils.RED,
-                            (self.coordinates[0] + 16, self.coordinates[1] + 16),
-                            self.__towerRange,
-                            1)
+        """            
 
         screen.blit(self.__sprite, self.coordinates)
 
@@ -81,3 +75,16 @@ class Tower:
         for n in range(1, 1 if self.__energy == 0 else max(2, int((self.__energy/self.__energyMax) * 7))):
             w = 4
             pygame.draw.rect(screen, Utils.BLUE, (x + (n - 1)*(w + 1), y + 30, w, 4))
+
+    def update(self, enemies):
+        self.tick += 1
+        if self.tick == self.rate:
+            self.tick = 0
+            attack = 0
+            for enemy in enemies:
+                if attack < self.max_attack:
+                    pip = self.attack(enemy)
+                    
+                    if pip:
+                        attack += 1
+                        return pip
