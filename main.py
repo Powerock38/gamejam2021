@@ -96,6 +96,13 @@ def eventListener(event, graphic_elements, hover):
     return (graphic_elements, hover)
 
 def putTower(graphic_elements, vegetable, hover):
+    """
+    Function that put a tower if the condition are succesful\n
+    Parameters :\n
+    \tgraphic_element : the graphic elements that we use
+    \tvegetable : the vegetable or fruit that will it put
+    \thover : the bulean value that whe have to know to put or not the tower
+    """
     mouse_pos = pygame.mouse.get_pos()
     pos = (mouse_pos[0] - mouse_pos[0] % 32,
             mouse_pos[1] - mouse_pos[1] % 32)
