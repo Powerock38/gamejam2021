@@ -67,13 +67,14 @@ def eventListener(event, graphic_elements, hover):
                 "hover",
                 20,
                 1,
-                (mouse_pos[0] - mouse_pos[0] % 32, mouse_pos[1] - mouse_pos[1] % 32)))
+                (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
+                pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
         hover = True
 
     elif event.type == pygame.MOUSEBUTTONDOWN and hover:
         graphic_elements.append(Tower(
             pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 20, 1,
-            (mouse_pos[0] - pygame.mouse.get_pos()[0] % 32,
+            (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
             pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
         hover = False
 
