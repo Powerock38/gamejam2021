@@ -7,6 +7,14 @@ class HUD:
 
 
     def __init__(self, life = 100, water = 1, level = 1):
+        """
+        Initialise HUD at the right of the screen\n
+        Parameters :\n
+        \tlife : The life of the player at the start of the game
+        \twater : The number of water money given at the start of the game
+        \tlevel : The level at the start of the game
+        """
+
         self.__life = life
         self.__water = water
         self.__level = level
