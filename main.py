@@ -5,6 +5,7 @@ from Pip import Pip
 from HUD import HUD
 from Utils import Utils
 from Enemy import Enemy
+from Menu import Menu
 import pygame
 import math
 
@@ -117,10 +118,11 @@ def eventListener(event, elements):
 #Main
 
 garden = Garden()
+menu = Menu()
 
 # Create HUD
 hud = HUD(garden, 100,10)
 
 garden.HUD = hud
 
-view = View([garden,hud], update, eventListener)
+view = View([menu], update, eventListener)
