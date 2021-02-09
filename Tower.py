@@ -46,7 +46,6 @@ class Tower:
         Return :\n
         The new pip that attack
         """
-        
         pip = None
         pos1 = self.coordinates
         pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0], enemy.pos[1] * 32 + enemy.pos_in_tile[1])
