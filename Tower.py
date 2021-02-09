@@ -49,16 +49,16 @@ class Tower:
         Return :\n
         The new pip that attack
         """
-        pip = None
-        pos1 = (self.coordinates[0] + 16, self.coordinates[1] + 16)
-        pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0] + 16, enemy.pos[1] * 32 + enemy.pos_in_tile[1] + 16)
-        distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
-        print(distance)
-        if distance < self.__towerRange:
-            pip = Pip(self.coordinates, enemy)
-            self.__energy -= self.__energy_consumption
 
-        return pip
+        if self.__energy > 0:
+            pos1 = (self.coordinates[0] + 16, self.coordinates[1] + 16)
+            pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0] + 16, enemy.pos[1] * 32 + enemy.pos_in_tile[1] + 16)
+            distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
+
+            if distance < self.__towerRange:
+                pip = Pip(self.coordinates, enemy)
+                self.__energy -= self.__energy_consumption
+                return pip
 
     def draw(self, screen):
         """
@@ -81,6 +81,6 @@ class Tower:
         screen.blit(tile,self.coordinates)
 
         x,y = self.coordinates
-        for n in range(1, int((self.__energy/self.__energyMax) * 7)):
+        for n in range(1, 1 if self.__energy == 0 else max(2, int((self.__energy/self.__energyMax) * 7))):
             w = 4
             pygame.draw.rect(screen, Utils.BLUE, (x + (n - 1)*(w + 1), y + 30, w, 4))
