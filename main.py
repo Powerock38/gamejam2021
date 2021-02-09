@@ -125,4 +125,4 @@ hud = HUD(garden, 100,10)
 
 garden.HUD = hud
 
-view = View([menu], update, eventListener)
+view = View([garden, hud], update, eventListener)
