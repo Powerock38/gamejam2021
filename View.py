@@ -12,8 +12,6 @@ class View:
     __screen = None
     __crashed = False
 
-    __hover = False
-
     __graphic_elements = []
 
     def __init__(self, graphic_elements, update, eventListener):
@@ -30,7 +28,8 @@ class View:
                     if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                         self.__crashed = True
                     else:
-                        self.__graphic_elements, self.__hover = eventListener(event, self.__graphic_elements, self.__hover)
+                        # self.__graphic_elements = eventListener(event, self.__graphic_elements)
+                        eventListener(event, self.__graphic_elements)
 
                 self.__graphic_elements = update(self.__graphic_elements)
                 

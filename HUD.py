@@ -6,7 +6,7 @@ pygame.font.init()
 class HUD:
 
 
-    def __init__(self, life = 100, water = 1, level = 1):
+    def __init__(self, garden, life = 100, water = 1, level = 1):
         """
         Initialise HUD at the right of the screen\n
         Parameters :\n
@@ -15,6 +15,7 @@ class HUD:
         \tlevel : The level at the start of the game
         """
 
+        self.GARDEN = garden
         self.__life = life
         self.__water = water
         self.__level = level
@@ -32,54 +33,56 @@ class HUD:
         tower_text = self.__font.render('Towers ', False, Utils.WHITE)
         self.__surface.blit(tower_text, (18, 87))
 
-
-
         self.__towers_rect = []
-        
-        for col in range(2):
-            for elem in range(int(len(Utils.TOWERS)/2)):
-                elem_number = elem + (col*int(len(Utils.TOWERS)/2))
-                image = pygame.image.load(Utils.TOWERS[elem_number]["path"])
-                image_rect = image.get_rect()
-                
-                # Display item sprite
-                x = 20 + (55 * col)
-                y = 130 + (85 * elem)
-                
-                image_rect.x = x
-                image_rect.y = y
-                self.__surface.blit(image, image_rect)
 
-                # Create tower hover
-                hover = pygame.Surface((50,15))
-                hover.fill(Utils.RED)
-                self.__font = self.get_font(10)
-                hover_text = self.__font.render("Id : " + str(Utils.TOWERS[elem_number]["id"]), False, Utils.BLACK)
-                hover.blit(hover_text, (5,5))
+        aGauche = False
+        nb = 0
+        for id, tower in Utils.TOWERS.items():
+            # elem_number = elem + (col*int(len(Utils.TOWERS)/2))
+            image = pygame.image.load(tower['path'])
+            image_rect = image.get_rect()
+            
+            # Display item sprite
+            x = 20 + (55 if aGauche else 0)
+            y = 130 + (85 * (nb//2))
+            
+            image_rect.x = x
+            image_rect.y = y
+            self.__surface.blit(image, image_rect)
 
-                self.__towers_rect.append(
-                    {
-                        "id":Utils.TOWERS[elem_number]["id"], 
-                        "rect":image_rect, 
-                        "hover":hover
-                    }
-                )
+            # Create tower hover
+            hover = pygame.Surface((50,15))
+            hover.fill(Utils.RED)
+            self.__font = self.get_font(10)
+            hover_text = self.__font.render("Id : " + id, False, Utils.BLACK)
+            hover.blit(hover_text, (5,5))
 
-                # Display name
-                x = 36 + (55 * col)
-                y = 162 + (85 * elem)
-                # Get the size wich will be occupated by the text
-                self.__font = self.get_font(12)
-                dim = self.__font.size(Utils.TOWERS[elem_number]["name"])
+            self.__towers_rect.append(
+                {
+                    "id":id,
+                    "rect":image_rect, 
+                    "hover":hover
+                }
+            )
 
-                item_text = self.__font.render(Utils.TOWERS[elem_number]["name"], False, Utils.WHITE)
-                self.__surface.blit(item_text, (x-(int(dim[0]/2)), y+5))
+            # Display name
+            x = 36 + (55 if aGauche else 0)
+            y = 162 + (85 * (nb//2))
+            # Get the size wich will be occupated by the text
+            self.__font = self.get_font(12)
+            dim = self.__font.size(tower["name"])
 
-                # Display price
-                item_text = self.__font.render(str(Utils.TOWERS[elem_number]["price"]), False, Utils.WHITE)
-                x -= 10
-                self.__surface.blit(self.__water_image, (x-dim[0]/2, y+dim[1]))
-                self.__surface.blit(item_text, ((x-dim[0]/2) + 32, y+dim[1] + 8))
+            item_text = self.__font.render(tower["name"], False, Utils.WHITE)
+            self.__surface.blit(item_text, (x-(int(dim[0]/2)), y+5))
+
+            # Display price
+            item_text = self.__font.render(str(tower["price"]), False, Utils.WHITE)
+            x -= 10
+            self.__surface.blit(self.__water_image, (x-dim[0]/2, y+dim[1]))
+            self.__surface.blit(item_text, ((x-dim[0]/2) + 32, y+dim[1] + 8))
+
+            nb += 1
+            aGauche = not aGauche
 
     def get_life(self):
         return self.__life
@@ -148,3 +151,8 @@ class HUD:
     def draw(self, screen):
 
         screen.blit(self.__surface, (896,0))
+
+    def buy(self, x ,y):
+        if True: # self.get_water() >= vegetable['price']:
+            # self.set_water(self.get_water() - tower['price'])
+            self.GARDEN.hold('apple')

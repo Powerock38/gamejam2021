@@ -1,10 +1,13 @@
 import pygame
 import random
+from Utils import Utils
 from Enemy import Enemy
+from Tower import Tower
 from random import randint
 
 class Garden:
     def __init__(self, tiles = []):
+        self.HUD = None
         self.__tick = 0
         self.__tickMax = 200
 
@@ -73,6 +76,8 @@ class Garden:
                             
         self.tiles = tiles
         self.enemies = []
+        self.towers = []
+        self.__holding = None
 
         image = pygame.image.load("assets/tilesets/plowed_soil.png")
 
@@ -199,7 +204,53 @@ class Garden:
         for en in self.enemies:
             en.draw(screen)
 
+        if self.__holding != None:
+            mx, my = pygame.mouse.get_pos()
+            if mx < 896:
+                screen.blit(self.__holding[1], (mx - mx % 32, my - my % 32))
 
     def spawnEnemy(self):
         sprite = pygame.image.load("assets/farmer.png")
         self.enemies = [Enemy(sprite, pos = [1, 0])] + self.enemies
+
+    def hold(self, tower):
+        img = pygame.image.load(Utils.TOWERS[tower]['path']).convert()
+        pygame.Surface.set_alpha(img, 180)
+        self.__holding = (
+                tower,
+                img
+            )
+
+    def putTower(self):
+        """
+        Function that put a tower if the condition are succesful\n
+        Parameters :\n
+        \ttower : the tower that will be placed
+        """
+
+        if self.__holding != None:
+            mx, my = pygame.mouse.get_pos()
+            if mx < 896:
+                x, y = (mx - mx % 32, my - my % 32)
+                x_mh, y_mh = (x // 32, y // 32)
+
+                pos_already_taken = False
+
+                if self.tiles[y_mh][x_mh] != 0:
+                    for otherTower in self.towers:
+                        if otherTower.coordinates == (x,y):
+                            pos_already_taken = True
+
+                    if not pos_already_taken:
+                        tower = Utils.TOWERS[self.__holding[0]]
+                        self.towers.append(Tower(
+                            pygame.image.load(tower['path']),
+                            tower['name'],
+                            tower['fire_rate'],
+                            tower['damage'],
+                            (x, y),
+                            tower['range'],
+                            tower['max_attack'],
+                            tower['energy_consumption']
+                        ))
+                        self.__holding = None
