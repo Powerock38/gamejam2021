@@ -77,6 +77,7 @@ class Garden:
         self.tiles = tiles
         self.enemies = []
         self.towers = []
+        self.pips = []
         self.__holding = None
 
         image = pygame.image.load("assets/tilesets/plowed_soil.png")
@@ -173,33 +174,62 @@ class Garden:
         else:
             self.__tick += 1
 
+        for t in self.towers:
+            pip = t.update(self.enemies)
+            if pip:
+                self.pips.append(pip)
+
+        for p in self.pips:
+            deadEnemy = p.update()
+            
+            if deadEnemy:
+                #self.enemies.remove(deadEnemy)
+                self.pips.remove(p)
+
+                for p2 in self.pips:
+                    if p2.enemy == deadEnemy:
+                        p2.enemy = None
+
+                    if p2.enemy == None:
+                        self.pips.remove(p2)
+                
+
         for en in self.enemies:
-            x = en.pos[0]
-            y = en.pos[1]
-            onTile = self.tiles[y][x]
-
-            possibleMoves = []
-
-            if y > 0 and self.tiles[y - 1][x] > onTile:
-                possibleMoves.append(0)
-
-            if x + 1 < len(self.tiles[y]) and self.tiles[y][x + 1] > onTile:
-                possibleMoves.append(1)
-
-            if y + 1 < len(self.tiles) and self.tiles[y + 1][x] > onTile:
-                possibleMoves.append(2)
-
-            if x > 0 and self.tiles[y][x - 1] > onTile:
-                possibleMoves.append(3)
-
-            if len(possibleMoves):
-                en.move(random.choice(possibleMoves))
-            else:
+            if en.hp <= 0:
                 self.enemies.remove(en)
+            else:
+                x = en.pos[0]
+                y = en.pos[1]
+                onTile = self.tiles[y][x]
+
+                possibleMoves = []
+
+                if y > 0 and self.tiles[y - 1][x] > onTile:
+                    possibleMoves.append(0)
+
+                if x + 1 < len(self.tiles[y]) and self.tiles[y][x + 1] > onTile:
+                    possibleMoves.append(1)
+
+                if y + 1 < len(self.tiles) and self.tiles[y + 1][x] > onTile:
+                    possibleMoves.append(2)
+
+                if x > 0 and self.tiles[y][x - 1] > onTile:
+                    possibleMoves.append(3)
+
+                if len(possibleMoves):
+                    en.move(random.choice(possibleMoves))
+                else:
+                    self.enemies.remove(en)
 
 
     def draw(self, screen):
         screen.blit(self.__background, (0,0))
+
+        for t in self.towers:
+            t.draw(screen)
+
+        for p in self.pips:
+            p.draw(screen)
 
         for en in self.enemies:
             en.draw(screen)
@@ -207,7 +237,9 @@ class Garden:
         if self.__holding != None:
             mx, my = pygame.mouse.get_pos()
             if mx < 896:
-                screen.blit(self.__holding[1], (mx - mx % 32, my - my % 32))
+                x_32, y_32 = (mx - mx % 32, my - my % 32)
+                screen.blit(self.__holding[1], (x_32, y_32))
+                pygame.draw.circle(screen, Utils.RED, (x_32 + 16, y_32 + 16), self.__holding[2], 1)
 
     def spawnEnemy(self):
         sprite = pygame.image.load("assets/farmer.png")
@@ -218,7 +250,8 @@ class Garden:
         pygame.Surface.set_alpha(img, 180)
         self.__holding = (
                 tower,
-                img
+                img,
+                Utils.TOWERS[tower]['range']
             )
 
     def putTower(self):
@@ -236,7 +269,7 @@ class Garden:
 
                 pos_already_taken = False
 
-                if self.tiles[y_mh][x_mh] != 0:
+                if self.tiles[y_mh][x_mh] == 0:
                     for otherTower in self.towers:
                         if otherTower.coordinates == (x,y):
                             pos_already_taken = True

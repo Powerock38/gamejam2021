@@ -52,3 +52,17 @@ class Pip:
         """
 
         screen.blit(self.__surface, self.coordinates)
+
+    def update(self):
+        """
+        Return :\n
+        deadEnemy
+        """
+        
+        nx, ny, touched = self.move()
+        if nx > 0 and nx < 896 and ny > 0 and ny < 768 and not touched:
+            self.coordinates = (nx, ny)
+        else:
+            if self.enemy:
+                self.enemy.hp -= self.damage
+            return self.enemy
