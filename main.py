@@ -20,22 +20,23 @@ def update(graphic_elements):
                 del g
 
         elif isinstance(g, Tower):
-            g.tick += 1
-            if g.tick == g.rate:
-                g.tick = 0
-                attack = 0
-                for enemy in graphic_elements[0].get_ennemies():
-                    
-                    if attack < g.max_attack:
-                        pip = g.attack(enemy)
-                        
-                        if pip:
-                            graphic_elements.append(pip)
-                            attack += 1
             if g.name == "hover":
                 g.coordinates = (
                     (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
                      pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32))
+            else :
+                g.tick += 1
+                if g.tick == g.rate:
+                    g.tick = 0
+                    attack = 0
+                    for enemy in graphic_elements[0].get_ennemies():
+                        
+                        if attack < g.max_attack:
+                            pip = g.attack(enemy)
+                            
+                            if pip:
+                                graphic_elements.append(pip)
+                                attack += 1
     return graphic_elements
 
 #Main
