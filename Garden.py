@@ -95,12 +95,17 @@ class Garden:
         height = len(self.tiles) * 32
         self.__background = pygame.Surface((width, height))
 
+        tmp_garden = []
+
         for i in range(len(self.tiles)):
+            tmp_row = []
             for j in range(len(self.tiles[i])):
                 if self.tiles[i][j] > 0:
+                    tmp_row.append(self.tiles[i][j])
                     self.__background.blit(tile2, (32 * j, 32 * i))
                 else:
                     if i > 0 and self.tiles[i - 1][j]:
+                        tmp_row.append(-1)
                         if j > 0 and self.tiles[i][j - 1]:
                             self.__background.blit(tile7, (32 * j, 32 * i))
                         elif j < len(self.tiles[i]) - 1 and self.tiles[i][j + 1]:
@@ -108,6 +113,7 @@ class Garden:
                         else:
                             self.__background.blit(tile3, (32 * j, 32 * i))
                     elif j > 0 and self.tiles[i][j - 1]:
+                        tmp_row.append(-1)
                         if i > 0 and self.tiles[i - 1][j]:
                             self.__background.blit(tile7, (32 * j, 32 * i))
                         elif i < len(self.tiles) - 1 and self.tiles[i + 1][j]:
@@ -115,6 +121,7 @@ class Garden:
                         else:
                             self.__background.blit(tile4, (32 * j, 32 * i))
                     elif i < len(self.tiles) - 1 and self.tiles[i + 1][j]:
+                        tmp_row.append(-1)
                         if j > 0 and self.tiles[i][j - 1]:
                             self.__background.blit(tile9, (32 * j, 32 * i))
                         elif j < len(self.tiles[i]) - 1 and self.tiles[i][j + 1]:
@@ -122,6 +129,7 @@ class Garden:
                         else:
                             self.__background.blit(tile5, (32 * j, 32 * i))
                     elif j < len(self.tiles[i]) - 1 and self.tiles[i][j + 1]:
+                        tmp_row.append(-1)
                         if i > 0 and self.tiles[i - 1][j]:
                             self.__background.blit(tile8, (32 * j, 32 * i))
                         elif i < len(self.tiles) - 1 and self.tiles[i + 1][j]:
@@ -129,27 +137,28 @@ class Garden:
                         else:
                             self.__background.blit(tile6, (32 * j, 32 * i))
                     elif i > 0 and j > 0 and self.tiles[i - 1][j - 1]:
+                        tmp_row.append(-1)
                         self.__background.blit(tile11, (32 * j, 32 * i))
-                    elif (
-                        i < len(self.tiles) - 1
+                    elif (i < len(self.tiles) - 1
                         and j > 0
-                        and self.tiles[i + 1][j - 1]
-                    ):
+                        and self.tiles[i + 1][j - 1]):
+                        tmp_row.append(-1)
                         self.__background.blit(tile12, (32 * j, 32 * i))
-                    elif (
-                        i > 0
+                    elif (i > 0
                         and j < len(self.tiles[i]) - 1
-                        and self.tiles[i - 1][j + 1]
-                    ):
+                        and self.tiles[i - 1][j + 1]):
+                        tmp_row.append(-1)
                         self.__background.blit(tile13, (32 * j, 32 * i))
-                    elif (
-                        i < len(self.tiles) - 1
+                    elif (i < len(self.tiles) - 1
                         and j < len(self.tiles[i]) - 1
-                        and self.tiles[i + 1][j + 1]
-                    ):
+                        and self.tiles[i + 1][j + 1]):
+                        tmp_row.append(-1)
                         self.__background.blit(tile14, (32 * j, 32 * i))
                     else:
+                        tmp_row.append(0)
                         self.__background.blit(tile1, (32 * j, 32 * i))
+            tmp_garden.append(tmp_row)
+        self.tiles = tmp_garden
 
     def update(self):
         if self.__tick > self.__tickMax:

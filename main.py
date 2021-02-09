@@ -107,7 +107,7 @@ def putTower(graphic_elements, vegetable, hover):
     pos = (mouse_pos[0] - mouse_pos[0] % 32,
             mouse_pos[1] - mouse_pos[1] % 32)
     pos_already_taken = -1
-    pos_manhattan = (pos[0] // 32, pos[1] // 32)
+    pos_manhattan = (min(pos[0], 895) // 32, pos[1] // 32)
 
     if not graphic_elements[0].tiles[pos_manhattan[1]][pos_manhattan[0]]:
         for tower in graphic_elements:
@@ -121,8 +121,7 @@ def putTower(graphic_elements, vegetable, hover):
                 vegetable['name'],
                 vegetable['fire_rate'],
                 vegetable['damage'],
-                (mouse_pos[0] - mouse_pos[0] % 32,
-                    mouse_pos[1] - mouse_pos[1] % 32),
+                pos,
                 vegetable['range'])
             )
             hover = False
@@ -134,8 +133,6 @@ def putTower(graphic_elements, vegetable, hover):
                     del g
 
             graphic_elements[1].set_water(graphic_elements[1].get_water() - vegetable['price'])
-        else :
-            print("Position already taken !")
 
     return graphic_elements, hover
 
