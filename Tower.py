@@ -62,7 +62,7 @@ class Tower:
 
     def draw(self, screen):
         """
-        Attack a position\n
+        Draw the tower\n
         Parameters :\n
         \tscreen : the pygame screen\n
         Return :\n
@@ -71,14 +71,11 @@ class Tower:
         if self.name == "hover":
             pygame.draw.circle(screen,
                             Utils.RED,
-                            (self.coordinates[0] + 16,
-                                self.coordinates[1] + 16),
+                            (self.coordinates[0] + 16, self.coordinates[1] + 16),
                             self.__towerRange,
                             1)
 
-        tile = self.__sprite.subsurface(((0, 0), (32, 32)))
-
-        screen.blit(tile,self.coordinates)
+        screen.blit(self.__sprite, self.coordinates)
 
         x,y = self.coordinates
         for n in range(1, 1 if self.__energy == 0 else max(2, int((self.__energy/self.__energyMax) * 7))):
