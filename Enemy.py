@@ -12,20 +12,10 @@ class Enemy:
         \tpos : position of the enemy (int) (default (0,0))
         """
         self.__sprite = sprite
-        self.__hp = hp
+        self.hp = hp
         self.__speed = speed
         self.pos = pos
         self.pos_in_tile = [0, 0]
-
-    def attack(self, damage = 1):
-        """
-        Hurt the enemy\n
-        Parameters :\n
-        \tdamage : the damage to hurt the enemy (int) (default 1)\n
-        Return :\n
-        None
-        """
-        self.__hp -= damage
 
     def draw(self, screen):
         """

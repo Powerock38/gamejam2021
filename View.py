@@ -45,10 +45,9 @@ class View:
                         self.__hover = True
 
                     elif event.type == pygame.MOUSEBUTTONDOWN and self.__hover:
-                        for g in graphic_elements:
-                            if isinstance(g, Tower) and g.name == "hover":
-                                graphic_elements.remove(g)
-                                del g
+                        self.__graphic_elements.append(Tower(pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 20, 1,
+                                                             (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
+                                                              pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
                         self.__hover = False
 
                     elif event.type == pygame.KEYDOWN:
