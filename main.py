@@ -43,12 +43,11 @@ def update(graphic_elements):
                     x = mouse_pos[0] - mouse_pos[0] % 32
                     y = mouse_pos[1] - mouse_pos[1] % 32
                 else:
-                    x = 864
                     y = mouse_pos[1] - mouse_pos[1] % 32
 
                 g.coordinates = ((x,y))
-                
-            else:
+
+            else :
                 g.tick += 1
                 if g.tick == g.rate:
                     g.tick = 0
@@ -99,7 +98,8 @@ def eventListener(event, graphic_elements, hover):
                 graphic_elements[1].set_water(
                     graphic_elements[1].get_water() + vegetable['price'] / 2)
                 graphic_elements.remove(g)
-                del g #c'est pas encore bon !!
+                del g
+                #c'est pas encore bon !!
 
     elif event.type == pygame.KEYDOWN:
         if event.key == pygame.K_SPACE and hover:
@@ -159,4 +159,4 @@ menu = Menu()
 # Create HUD
 hud = HUD(100,10)
 
-view = View([menu], update, eventListener)
+view = View([garden, hud], update, eventListener)
