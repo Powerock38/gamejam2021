@@ -20,7 +20,7 @@ class Pip:
         Return :\n
         None
         """
-        self.coordinates = coordinates
+        self.coordinates = (coordinates[0] + 16, coordinates[1] + 16)
         self.enemy = enemy
         self.__size = size
         self.__damage = damage
