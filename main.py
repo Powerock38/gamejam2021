@@ -111,6 +111,7 @@ def eventListener(event, graphic_elements, hover):
                         graphic_elements.append(elem.attack(math.pi/2))
     # Event in HUD
     else:
+        print("HUD")
         
     return (graphic_elements, hover)
 
