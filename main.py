@@ -80,28 +80,31 @@ def eventListener(event, graphic_elements, hover):
     elif event.type == pygame.MOUSEBUTTONDOWN and hover:
         pos = (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32, pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)
         pos_already_taken = -1
-        for tower in graphic_elements:
-            if isinstance(tower, Tower):
-                if tower.coordinates == pos:
-                    pos_already_taken += 1
+        pos_manhattan = (pos[0] // 32, pos[1] // 32)
+        if not graphic_elements[0].tiles[pos_manhattan[1]][pos_manhattan[0]]:
             
-        if not pos_already_taken:
-            graphic_elements.append(Tower(
-                    pygame.image.load(vegetable['path']),
-                    vegetable['name'],
-                    vegetable['fire_rate'],
-                    vegetable['damage'],
-                    (mouse_pos[0] - mouse_pos[0] % 32,
-                    mouse_pos[1] - mouse_pos[1] % 32),
-                    vegetable['range'])
-                )
-            hover = False
+            for tower in graphic_elements:
+                if isinstance(tower, Tower):
+                    if tower.coordinates == pos:
+                        pos_already_taken += 1
+            
+            if not pos_already_taken:
+                graphic_elements.append(Tower(
+                        pygame.image.load(vegetable['path']),
+                        vegetable['name'],
+                        vegetable['fire_rate'],
+                        vegetable['damage'],
+                        (mouse_pos[0] - mouse_pos[0] % 32,
+                        mouse_pos[1] - mouse_pos[1] % 32),
+                        vegetable['range'])
+                    )
+                hover = False
 
-            #delete the hover tower
-            for g in graphic_elements:
-                if isinstance(g, Tower) and g.name == "hover":
-                    graphic_elements.remove(g)
-                    del g
+                #delete the hover tower
+                for g in graphic_elements:
+                    if isinstance(g, Tower) and g.name == "hover":
+                        graphic_elements.remove(g)
+                        del g
 
     elif event.type == pygame.KEYDOWN:
         if event.key == pygame.K_SPACE and hover:

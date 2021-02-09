@@ -48,10 +48,11 @@ class Tower:
         The new pip that attack
         """
         pip = None
-        pos1 = self.coordinates
-        pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0], enemy.pos[1] * 32 + enemy.pos_in_tile[1])
+        pos1 = (self.coordinates[0] + 16, self.coordinates[1] + 16)
+        pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0] + 16, enemy.pos[1] * 32 + enemy.pos_in_tile[1] + 16)
         distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
-        if distance < 100:
+        print(distance)
+        if distance < self.__towerRange:
             pip = Pip(self.coordinates, enemy)
 
         return pip
@@ -69,7 +70,7 @@ class Tower:
                             Utils.RED,
                             (self.coordinates[0] + 16,
                                 self.coordinates[1] + 16),
-                            self.__towerRange * 16,
+                            self.__towerRange,
                             1)
 
         tile = self.__sprite.subsurface(((0, 0), (32, 32)))
