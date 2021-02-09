@@ -3,12 +3,12 @@ from Garden import Garden
 from Tower import Tower
 from Pip import Pip
 from HUD import HUD
+from Utils import Utils
 from Enemy import Enemy
 import pygame
 import math
 
 def update(graphic_elements):
-
     for g in graphic_elements:
         if isinstance(g, Garden):
             g.update()
@@ -36,12 +36,14 @@ def update(graphic_elements):
             if g.name == "hover":
                 x = g.coordinates[0]
                 y = g.coordinates[1]
+                mouse_pos = pygame.mouse.get_pos()
 
-                if (pygame.mouse.get_pos()[0] < 896):
-                    x = pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32
-                    y = pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32
+                if (mouse_pos[0] < 896):
+                    x = mouse_pos[0] - mouse_pos[0] % 32
+                    y = mouse_pos[1] - mouse_pos[1] % 32
                 else:
-                    y = pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32
+                    y = mouse_pos[1] - mouse_pos[1] % 32
+
                 g.coordinates = ((x,y))
 
             else :
@@ -60,39 +62,61 @@ def update(graphic_elements):
     return graphic_elements
 
 def eventListener(event, graphic_elements, hover):
+    mouse_pos = pygame.mouse.get_pos()
+    vegetable = [t for t in Utils.TOWERS if t.get('name') == 'Apple'][0]
 
     if event.type == pygame.MOUSEBUTTONDOWN and not hover:
         graphic_elements.append(Tower(
-                pygame.image.load("assets/fruits-veggies/Acorn.png"),
+                pygame.image.load(vegetable['path']),
                 "hover",
-                20,
-                1,
-                (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
-                pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
+                vegetable['fire_rate'],
+                vegetable['damage'],
+                (mouse_pos[0] - mouse_pos[0] % 32,
+                mouse_pos[1] - mouse_pos[1] % 32),
+                vegetable['range'])
+            )
         hover = True
 
     elif event.type == pygame.MOUSEBUTTONDOWN and hover:
-        graphic_elements.append(Tower(
-            pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 20, 1,
-            (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
-            pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
-        hover = False
+        pos = (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32, pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)
+        pos_already_taken = -1
+        pos_manhattan = (pos[0] // 32, pos[1] // 32)
+        if not graphic_elements[0].tiles[pos_manhattan[1]][pos_manhattan[0]]:
+            
+            for tower in graphic_elements:
+                if isinstance(tower, Tower):
+                    if tower.coordinates == pos:
+                        pos_already_taken += 1
+            
+            if not pos_already_taken:
+                graphic_elements.append(Tower(
+                        pygame.image.load(vegetable['path']),
+                        vegetable['name'],
+                        vegetable['fire_rate'],
+                        vegetable['damage'],
+                        (mouse_pos[0] - mouse_pos[0] % 32,
+                        mouse_pos[1] - mouse_pos[1] % 32),
+                        vegetable['range'])
+                    )
+                hover = False
 
-        #delete the hover tower
-        for g in graphic_elements:
-            if isinstance(g, Tower) and g.name == "hover":
-                graphic_elements.remove(g)
-                del g
+                #delete the hover tower
+                for g in graphic_elements:
+                    if isinstance(g, Tower) and g.name == "hover":
+                        graphic_elements.remove(g)
+                        del g
 
     elif event.type == pygame.KEYDOWN:
         if event.key == pygame.K_SPACE and hover:
             graphic_elements.append(Tower(
-                pygame.image.load("assets/fruits-veggies/Acorn.png"),
-                "Acorn",
-                20,
-                1,
-                (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
-                    pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
+                pygame.image.load(vegetable['path']),
+                vegetable['name'],
+                vegetable['fire_rate'],
+                vegetable['damage'],
+                (mouse_pos[0] - mouse_pos[0] % 32,
+                 mouse_pos[1] - mouse_pos[1] % 32),
+                vegetable['range'])
+            )
             hover = False
 
             #delete the hover tower

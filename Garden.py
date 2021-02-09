@@ -71,7 +71,7 @@ class Garden:
                     pos[0] += direction[0]
                     pos[1] += direction[1]
                             
-        self.__tiles = tiles
+        self.tiles = tiles
         self.enemies = []
 
         image = pygame.image.load("assets/tilesets/plowed_soil.png")
@@ -91,61 +91,61 @@ class Garden:
         tile13 = image.subsurface(((32, 32), (32, 32)))
         tile14 = image.subsurface(((32, 0), (32, 32)))
 
-        width = len(self.__tiles[0]) * 32
-        height = len(self.__tiles) * 32
+        width = len(self.tiles[0]) * 32
+        height = len(self.tiles) * 32
         self.__background = pygame.Surface((width, height))
 
-        for i in range(len(self.__tiles)):
-            for j in range(len(self.__tiles[i])):
-                if self.__tiles[i][j] > 0:
+        for i in range(len(self.tiles)):
+            for j in range(len(self.tiles[i])):
+                if self.tiles[i][j] > 0:
                     self.__background.blit(tile2, (32 * j, 32 * i))
                 else:
-                    if i > 0 and self.__tiles[i - 1][j]:
-                        if j > 0 and self.__tiles[i][j - 1]:
+                    if i > 0 and self.tiles[i - 1][j]:
+                        if j > 0 and self.tiles[i][j - 1]:
                             self.__background.blit(tile7, (32 * j, 32 * i))
-                        elif j < len(self.__tiles[i]) - 1 and self.__tiles[i][j + 1]:
+                        elif j < len(self.tiles[i]) - 1 and self.tiles[i][j + 1]:
                             self.__background.blit(tile8, (32 * j, 32 * i))
                         else:
                             self.__background.blit(tile3, (32 * j, 32 * i))
-                    elif j > 0 and self.__tiles[i][j - 1]:
-                        if i > 0 and self.__tiles[i - 1][j]:
+                    elif j > 0 and self.tiles[i][j - 1]:
+                        if i > 0 and self.tiles[i - 1][j]:
                             self.__background.blit(tile7, (32 * j, 32 * i))
-                        elif i < len(self.__tiles) - 1 and self.__tiles[i + 1][j]:
+                        elif i < len(self.tiles) - 1 and self.tiles[i + 1][j]:
                             self.__background.blit(tile9, (32 * j, 32 * i))
                         else:
                             self.__background.blit(tile4, (32 * j, 32 * i))
-                    elif i < len(self.__tiles) - 1 and self.__tiles[i + 1][j]:
-                        if j > 0 and self.__tiles[i][j - 1]:
+                    elif i < len(self.tiles) - 1 and self.tiles[i + 1][j]:
+                        if j > 0 and self.tiles[i][j - 1]:
                             self.__background.blit(tile9, (32 * j, 32 * i))
-                        elif j < len(self.__tiles[i]) - 1 and self.__tiles[i][j + 1]:
+                        elif j < len(self.tiles[i]) - 1 and self.tiles[i][j + 1]:
                             self.__background.blit(tile10, (32 * j, 32 * i))
                         else:
                             self.__background.blit(tile5, (32 * j, 32 * i))
-                    elif j < len(self.__tiles[i]) - 1 and self.__tiles[i][j + 1]:
-                        if i > 0 and self.__tiles[i - 1][j]:
+                    elif j < len(self.tiles[i]) - 1 and self.tiles[i][j + 1]:
+                        if i > 0 and self.tiles[i - 1][j]:
                             self.__background.blit(tile8, (32 * j, 32 * i))
-                        elif i < len(self.__tiles) - 1 and self.__tiles[i + 1][j]:
+                        elif i < len(self.tiles) - 1 and self.tiles[i + 1][j]:
                             self.__background.blit(tile10, (32 * j, 32 * i))
                         else:
                             self.__background.blit(tile6, (32 * j, 32 * i))
-                    elif i > 0 and j > 0 and self.__tiles[i - 1][j - 1]:
+                    elif i > 0 and j > 0 and self.tiles[i - 1][j - 1]:
                         self.__background.blit(tile11, (32 * j, 32 * i))
                     elif (
-                        i < len(self.__tiles) - 1
+                        i < len(self.tiles) - 1
                         and j > 0
-                        and self.__tiles[i + 1][j - 1]
+                        and self.tiles[i + 1][j - 1]
                     ):
                         self.__background.blit(tile12, (32 * j, 32 * i))
                     elif (
                         i > 0
-                        and j < len(self.__tiles[i]) - 1
-                        and self.__tiles[i - 1][j + 1]
+                        and j < len(self.tiles[i]) - 1
+                        and self.tiles[i - 1][j + 1]
                     ):
                         self.__background.blit(tile13, (32 * j, 32 * i))
                     elif (
-                        i < len(self.__tiles) - 1
-                        and j < len(self.__tiles[i]) - 1
-                        and self.__tiles[i + 1][j + 1]
+                        i < len(self.tiles) - 1
+                        and j < len(self.tiles[i]) - 1
+                        and self.tiles[i + 1][j + 1]
                     ):
                         self.__background.blit(tile14, (32 * j, 32 * i))
                     else:
@@ -162,20 +162,20 @@ class Garden:
         for en in self.enemies:
             x = en.pos[0]
             y = en.pos[1]
-            onTile = self.__tiles[y][x]
+            onTile = self.tiles[y][x]
 
             possibleMoves = []
 
-            if y > 0 and self.__tiles[y - 1][x] > onTile:
+            if y > 0 and self.tiles[y - 1][x] > onTile:
                 possibleMoves.append(0)
 
-            if x + 1 < len(self.__tiles[y]) and self.__tiles[y][x + 1] > onTile:
+            if x + 1 < len(self.tiles[y]) and self.tiles[y][x + 1] > onTile:
                 possibleMoves.append(1)
 
-            if y + 1 < len(self.__tiles) and self.__tiles[y + 1][x] > onTile:
+            if y + 1 < len(self.tiles) and self.tiles[y + 1][x] > onTile:
                 possibleMoves.append(2)
 
-            if x > 0 and self.__tiles[y][x - 1] > onTile:
+            if x > 0 and self.tiles[y][x - 1] > onTile:
                 possibleMoves.append(3)
 
             if len(possibleMoves):
