@@ -61,25 +61,37 @@ def update(graphic_elements):
 
 def eventListener(event, graphic_elements, hover):
 
-    # Event in Garden
-    if isinstance(graphic_elements, garden):
+    if event.type == pygame.MOUSEBUTTONDOWN and not hover:
+        graphic_elements.append(Tower(
+                pygame.image.load("assets/fruits-veggies/Acorn.png"),
+                "hover",
+                20,
+                1,
+                (mouse_pos[0] - mouse_pos[0] % 32, mouse_pos[1] - mouse_pos[1] % 32)))
+        hover = True
 
-        if event.type == pygame.MOUSEBUTTONDOWN and not hover:
-            graphic_elements.append(Tower(
-                    pygame.image.load("assets/fruits-veggies/Acorn.png"),
-                    "hover",
-                    20,
-                    1,
-                    (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
-                    pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32))
-                )
-            hover = True
+    elif event.type == pygame.MOUSEBUTTONDOWN and hover:
+        graphic_elements.append(Tower(
+            pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 20, 1,
+            (mouse_pos[0] - pygame.mouse.get_pos()[0] % 32,
+            pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
+        hover = False
 
-        elif event.type == pygame.MOUSEBUTTONDOWN and hover:
+        #delete the hover tower
+        for g in graphic_elements:
+            if isinstance(g, Tower) and g.name == "hover":
+                graphic_elements.remove(g)
+                del g
+
+    elif event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_SPACE and hover:
             graphic_elements.append(Tower(
-                pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 20, 1,
+                pygame.image.load("assets/fruits-veggies/Acorn.png"),
+                "Acorn",
+                20,
+                1,
                 (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
-                pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
+                    pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
             hover = False
 
             #delete the hover tower
@@ -88,31 +100,11 @@ def eventListener(event, graphic_elements, hover):
                     graphic_elements.remove(g)
                     del g
 
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE and hover:
-                graphic_elements.append(Tower(
-                    pygame.image.load("assets/fruits-veggies/Acorn.png"),
-                    "Acorn",
-                    20,
-                    1,
-                    (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
-                        pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
-                hover = False
+        elif event.key == pygame.K_a:
+            for elem in graphic_elements:
+                if isinstance(elem, Tower) and elem.name != "hover":
+                    graphic_elements.append(elem.attack(math.pi/2))
 
-                #delete the hover tower
-                for g in graphic_elements:
-                    if isinstance(g, Tower) and g.name == "hover":
-                        graphic_elements.remove(g)
-                        del g
-
-            elif event.key == pygame.K_a:
-                for elem in graphic_elements:
-                    if isinstance(elem, Tower) and elem.name != "hover":
-                        graphic_elements.append(elem.attack(math.pi/2))
-    # Event in HUD
-    else:
-        print("HUD")
-        
     return (graphic_elements, hover)
 
 #Main
