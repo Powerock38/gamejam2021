@@ -17,7 +17,7 @@ class Utils:
             'fire_rate':15,
             'damage':1,
             'range':100,
-            'energy_consomation':1,
+            'energy_consumption':1,
             'sleeping_time': 2
         },
         {
@@ -29,7 +29,7 @@ class Utils:
             'fire_rate':20,
             'damage':1,
             'range':100,
-            'energy_consomation':1,
+            'energy_consumption':1,
             'sleeping_time': 2
         },
         {
@@ -41,7 +41,7 @@ class Utils:
             'fire_rate':25,
             'damage':1.5,
             'range':100,
-            'energy_consomation':1.5,
+            'energy_consumption':1.5,
             'sleeping_time': 2
         },
         {
@@ -53,7 +53,7 @@ class Utils:
             'fire_rate':20,
             'damage':1,
             'range':100,
-            'energy_consomation':2,
+            'energy_consumption':2,
             'sleeping_time': 2
         },
         {
@@ -65,7 +65,7 @@ class Utils:
             'fire_rate':15,
             'damage':2,
             'range':100,
-            'energy_consomation':1.5,
+            'energy_consumption':1.5,
             'sleeping_time': 2
         },
         {
@@ -77,7 +77,7 @@ class Utils:
             'fire_rate':2,
             'damage':2,
             'range':100,
-            'energy_consomation':2,
+            'energy_consumption':2,
             'sleeping_time': 2
         },
         {
@@ -89,7 +89,7 @@ class Utils:
             'fire_rate':5,
             'damage':3,
             'range':100,
-            'energy_consomation':2,
+            'energy_consumption':2,
             'sleeping_time': 2
         },
         {
@@ -101,7 +101,7 @@ class Utils:
             'fire_rate':10,
             'damage':3,
             'range':5,
-            'energy_consomation':1,
+            'energy_consumption':1,
             'sleeping_time': 2
         },
         {
@@ -113,7 +113,7 @@ class Utils:
             'fire_rate':40,
             'damage':0.5,
             'range':100,
-            'energy_consomation':2.5,
+            'energy_consumption':2.5,
             'sleeping_time': 2
         },
         {
@@ -125,7 +125,7 @@ class Utils:
             'fire_rate':20,
             'damage':5,
             'range':100,
-            'energy_consomation':2.5,
+            'energy_consumption':2.5,
             'sleeping_time': 2
         },
         {
@@ -137,7 +137,7 @@ class Utils:
             'fire_rate':3,
             'damage':10,
             'range':100,
-            'energy_consomation':1.8,
+            'energy_consumption':1.8,
             'sleeping_time': 2
         },
         {
@@ -149,7 +149,7 @@ class Utils:
             'fire_rate':40,
             'damage':0.6,
             'range':7,
-            'energy_consomation':3.5,
+            'energy_consumption':3.5,
             'sleeping_time': 2
         },
         {
@@ -161,7 +161,7 @@ class Utils:
             'fire_rate':40,
             'damage':0.6,
             'range':100,
-            'energy_consomation':2,
+            'energy_consumption':2,
             'sleeping_time': 2
         },
         {
@@ -173,7 +173,7 @@ class Utils:
             'fire_rate':1,
             'damage':15,
             'range':100,
-            'energy_consomation':3.5,
+            'energy_consumption':3.5,
             'sleeping_time': 2
         }
     ]
