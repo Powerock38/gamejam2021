@@ -118,7 +118,7 @@ def eventListener(event, graphic_elements, hover):
             for elem in graphic_elements:
                 if isinstance(elem, Tower) and elem.name != "hover":
                     graphic_elements.append(elem.attack(math.pi/2))
-    
+
     return (graphic_elements, hover)
 
 #Main
