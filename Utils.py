@@ -17,9 +17,10 @@ class Utils:
             'fire_rate':15,
             'damage':1,
             'range':100,
-            'energy_consomation':1,
             'sleeping_time': 2,
-            'max_attack': 1
+            'max_attack': 1,
+            'energy_consumption':1,
+            'sleeping_time': 2
         },
         {
             'id':'pear',
@@ -30,9 +31,10 @@ class Utils:
             'fire_rate':20,
             'damage':1,
             'range':100,
-            'energy_consomation':1,
             'sleeping_time': 2,
-            'max_attack': 1
+            'max_attack': 1,
+            'energy_consumption':1,
+            'sleeping_time': 2
         },
         {
             'id':'banana',
@@ -43,9 +45,10 @@ class Utils:
             'fire_rate':25,
             'damage':1.5,
             'range':100,
-            'energy_consomation':1.5,
             'sleeping_time': 2,
-            'max_attack': 3
+            'max_attack': 3,
+            'energy_consumption':1.5,
+            'sleeping_time': 2
         },
         {
             'id':'tomato',
@@ -56,9 +59,10 @@ class Utils:
             'fire_rate':20,
             'damage':1,
             'range':100,
-            'energy_consomation':2,
             'sleeping_time': 2,
-            'max_attack': 1
+            'max_attack': 1,
+            'energy_consumption':2,
+            'sleeping_time': 2
         },
         {
             'id':'peach',
@@ -69,9 +73,10 @@ class Utils:
             'fire_rate':15,
             'damage':2,
             'range':100,
-            'energy_consomation':1.5,
             'sleeping_time': 2,
-            'max_attack': 2
+            'max_attack': 2,
+            'energy_consumption':1.5,
+            'sleeping_time': 2
         },
         {
             'id':'orange',
@@ -82,9 +87,10 @@ class Utils:
             'fire_rate':2,
             'damage':2,
             'range':100,
-            'energy_consomation':2,
             'sleeping_time': 2,
-            'max_attack': 2
+            'max_attack': 2,
+            'energy_consumption':2,
+            'sleeping_time': 2
         },
         {
             'id':'cherry',
@@ -95,9 +101,10 @@ class Utils:
             'fire_rate':5,
             'damage':3,
             'range':100,
-            'energy_consomation':2,
             'sleeping_time': 2,
-            'max_attack': 2
+            'max_attack': 2,
+            'energy_consumption':2,
+            'sleeping_time': 2
         },
         {
             'id':'potato',
@@ -108,9 +115,10 @@ class Utils:
             'fire_rate':10,
             'damage':3,
             'range':5,
-            'energy_consomation':1,
             'sleeping_time': 2,
-            'max_attack': 1
+            'max_attack': 1,
+            'energy_consumption':1,
+            'sleeping_time': 2
         },
         {
             'id':'pepper',
@@ -121,9 +129,10 @@ class Utils:
             'fire_rate':40,
             'damage':0.5,
             'range':100,
-            'energy_consomation':2.5,
             'sleeping_time': 2,
-            'max_attack': 3
+            'max_attack': 3,
+            'energy_consumption':2.5,
+            'sleeping_time': 2
         },
         {
             'id':'lettuce',
@@ -134,9 +143,9 @@ class Utils:
             'fire_rate':20,
             'damage':5,
             'range':100,
-            'energy_consomation':2.5,
-            'sleeping_time': 2,
-            'max_attack': 2
+            'max_attack': 2,
+            'energy_consumption':2.5,
+            'sleeping_time': 2
         },
         {
             'id':'carrot',
@@ -147,9 +156,10 @@ class Utils:
             'fire_rate':3,
             'damage':10,
             'range':100,
-            'energy_consomation':1.8,
             'sleeping_time': 2,
-            'max_attack': 1
+            'max_attack': 1,
+            'energy_consumption':1.8,
+            'sleeping_time': 2
         },
         {
             'id':'squash',
@@ -160,9 +170,10 @@ class Utils:
             'fire_rate':40,
             'damage':0.6,
             'range':7,
-            'energy_consomation':3.5,
             'sleeping_time': 2,
-            'max_attack': 5
+            'max_attack': 5,
+            'energy_consumption':3.5,
+            'sleeping_time': 2
         },
         {
             'id':'aubergine',
@@ -173,9 +184,10 @@ class Utils:
             'fire_rate':40,
             'damage':0.6,
             'range':100,
-            'energy_consomation':2,
             'sleeping_time': 2,
-            'max_attack':1
+            'max_attack':1,
+            'energy_consumption':2,
+            'sleeping_time': 2
         },
         {
             'id':'broccoli',
@@ -186,9 +198,10 @@ class Utils:
             'fire_rate':1,
             'damage':15,
             'range':100,
-            'energy_consomation':3.5,
             'sleeping_time': 2,
-            'max_attack': 1
+            'max_attack': 1,
+            'energy_consumption':3.5,
+            'sleeping_time': 2
         }
     ]
 
