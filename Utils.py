@@ -18,7 +18,8 @@ class Utils:
             'damage':1,
             'range':100,
             'energy_consomation':1,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 1
         },
         {
             'id':'pear',
@@ -30,7 +31,8 @@ class Utils:
             'damage':1,
             'range':100,
             'energy_consomation':1,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 1
         },
         {
             'id':'banana',
@@ -42,7 +44,8 @@ class Utils:
             'damage':1.5,
             'range':100,
             'energy_consomation':1.5,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 3
         },
         {
             'id':'tomato',
@@ -54,7 +57,8 @@ class Utils:
             'damage':1,
             'range':100,
             'energy_consomation':2,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 1
         },
         {
             'id':'peach',
@@ -66,7 +70,8 @@ class Utils:
             'damage':2,
             'range':100,
             'energy_consomation':1.5,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 2
         },
         {
             'id':'orange',
@@ -78,7 +83,8 @@ class Utils:
             'damage':2,
             'range':100,
             'energy_consomation':2,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 2
         },
         {
             'id':'cherry',
@@ -90,7 +96,8 @@ class Utils:
             'damage':3,
             'range':100,
             'energy_consomation':2,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 2
         },
         {
             'id':'potato',
@@ -102,7 +109,8 @@ class Utils:
             'damage':3,
             'range':5,
             'energy_consomation':1,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 1
         },
         {
             'id':'pepper',
@@ -114,7 +122,8 @@ class Utils:
             'damage':0.5,
             'range':100,
             'energy_consomation':2.5,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 3
         },
         {
             'id':'lettuce',
@@ -126,7 +135,8 @@ class Utils:
             'damage':5,
             'range':100,
             'energy_consomation':2.5,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 2
         },
         {
             'id':'carrot',
@@ -138,7 +148,8 @@ class Utils:
             'damage':10,
             'range':100,
             'energy_consomation':1.8,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 1
         },
         {
             'id':'squash',
@@ -150,7 +161,8 @@ class Utils:
             'damage':0.6,
             'range':7,
             'energy_consomation':3.5,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 5
         },
         {
             'id':'aubergine',
@@ -162,7 +174,8 @@ class Utils:
             'damage':0.6,
             'range':100,
             'energy_consomation':2,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack':1
         },
         {
             'id':'broccoli',
@@ -174,7 +187,8 @@ class Utils:
             'damage':15,
             'range':100,
             'energy_consomation':3.5,
-            'sleeping_time': 2
+            'sleeping_time': 2,
+            'max_attack': 1
         }
     ]
 
