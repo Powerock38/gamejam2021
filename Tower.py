@@ -1,5 +1,6 @@
 import pygame
 from Pip import Pip
+from Utils import Utils
 import math
 
 class Tower:
@@ -63,6 +64,14 @@ class Tower:
         Return :\n
         None
         """
+        if self.name == "hover":
+            pygame.draw.circle(screen,
+                            Utils.RED,
+                            (self.coordinates[0] + 16,
+                                self.coordinates[1] + 16),
+                            self.__towerRange * 16,
+                            1)
+
         tile = self.__sprite.subsurface(((0, 0), (32, 32)))
 
         screen.blit(tile,self.coordinates)
