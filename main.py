@@ -21,9 +21,16 @@ def update(graphic_elements):
 
         elif isinstance(g, Tower):
             if g.name == "hover":
-                g.coordinates = (
-                    (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
-                     pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32))
+                x = g.coordinates[0]
+                y = g.coordinates[1]
+
+                if (pygame.mouse.get_pos()[0] < 896):
+                    x = pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32
+                    y = pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32
+                else:
+                    y = pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32
+                g.coordinates = ((x,y))
+
             else :
                 g.tick += 1
                 if g.tick == g.rate:
