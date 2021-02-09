@@ -20,10 +20,9 @@ class Tower:
         Arguments :\n
         \tsprite : sprite of the Tower (path png)
         \tname : name of the fruit or vegetable (not given in the constructor)  (string)
-        \tcoordinates : coordinates of the tower (tupple of int)
         \trate : fire rate of the tower (int)
         \tdamage : the level of damage of the tower (int)
-        \tcoordinates : the coordinates of the tower (tupple of int) (default (0,0))
+        \tcoordinates : the coordinates of the tower (tupple of int) (default (10,10))
         \ttowerRange : the range of fire of the fower (int) (default 5)\n
         Return :\n
         None
@@ -32,7 +31,7 @@ class Tower:
         self.name = name
         self.rate = rate
         self.__damage = damage
-        self.__coordinates = coordinates
+        self.coordinates = coordinates
         self.__towerRange = towerRange
         self.__energy = 1 #100%
         self.tick = 0
@@ -45,13 +44,7 @@ class Tower:
         Return :\n
         The new pip that attack
         """
-        return Pip((self.__coordinates[0], self.__coordinates[1]), direction)
-
-    def get_coordinates(self):
-        """
-        Return the coordinates of the tower
-        """
-        return self.__coordinates
+        return Pip((self.coordinates[0], self.coordinates[1]), direction)
 
     def draw(self, screen):
         """
@@ -63,4 +56,4 @@ class Tower:
         """
         tile = self.__sprite.subsurface(((0, 0), (32, 32)))
 
-        screen.blit(tile,self.get_coordinates())
+        screen.blit(tile,self.coordinates)

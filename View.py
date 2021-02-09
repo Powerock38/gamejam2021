@@ -34,22 +34,32 @@ class View:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self.__crashed = True
-                    elif event.type == pygame.MOUSEBUTTONDOWN:
-                        self.__graphic_elements.append(Tower(pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 20, 1, (event.pos[0], event.pos[1])))
+
+                    elif event.type == pygame.MOUSEBUTTONDOWN and not self.__hover:
+                        self.__graphic_elements.append(Tower(
+                                pygame.image.load("assets/fruits-veggies/Acorn.png"),
+                                "hover", 20, 1,
+                                (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
+                                pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32))
+                            )
                         self.__hover = True
+
                     elif event.type == pygame.MOUSEBUTTONDOWN and self.__hover:
                         for g in graphic_elements:
-                            if isinstance(g, Pip) and g.name == "hover":
+                            if isinstance(g, Tower) and g.name == "hover":
                                 graphic_elements.remove(g)
                                 del g
                         self.__hover = False
+
                     elif event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
                             self.__crashed = True
+
                         elif event.key == pygame.K_SPACE:
                             self.__graphic_elements.append(Tower(pygame.image.load("assets/fruits-veggies/Acorn.png"), "Acorn", 20, 1,
                                 (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32,
                                  pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)))
+
                         elif event.key == pygame.K_a:
                             for elem in self.__graphic_elements:
                                 if isinstance(elem, Tower) and elem.name != "hover":
