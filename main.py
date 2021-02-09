@@ -62,59 +62,67 @@ def update(graphic_elements):
     return graphic_elements
 
 def eventListener(event, graphic_elements, hover):
-    mouse_pos = pygame.mouse.get_pos()
     vegetable = [t for t in Utils.TOWERS if t.get('name') == 'Apple'][0]
+    mouse_pos = pygame.mouse.get_pos()
 
     if event.type == pygame.MOUSEBUTTONDOWN and not hover:
-        graphic_elements.append(Tower(
-                pygame.image.load(vegetable['path']),
-                "hover",
-                vegetable['fire_rate'],
-                vegetable['damage'],
-                (mouse_pos[0] - mouse_pos[0] % 32,
-                mouse_pos[1] - mouse_pos[1] % 32),
-                vegetable['range'])
-            )
-        hover = True
+        if (graphic_elements[1].get_water() - vegetable['price']) >= 0:
+            graphic_elements.append(Tower(
+                    pygame.image.load(vegetable['path']),
+                    "hover",
+                    vegetable['fire_rate'],
+                    vegetable['damage'],
+                    (mouse_pos[0] - mouse_pos[0] % 32,
+                    mouse_pos[1] - mouse_pos[1] % 32),
+                    vegetable['range'])
+                )
+            hover = True
+        else:
+            print("Not enough water !")
 
     elif event.type == pygame.MOUSEBUTTONDOWN and hover:
-        pos = (pygame.mouse.get_pos()[0] - pygame.mouse.get_pos()[0] % 32, pygame.mouse.get_pos()[1] - pygame.mouse.get_pos()[1] % 32)
-        pos_already_taken = -1
-        pos_manhattan = (pos[0] // 32, pos[1] // 32)
-        if not graphic_elements[0].tiles[pos_manhattan[1]][pos_manhattan[0]]:
-            
-            for tower in graphic_elements:
-                if isinstance(tower, Tower):
-                    if tower.coordinates == pos:
-                        pos_already_taken += 1
-            
-            if not pos_already_taken:
-                graphic_elements.append(Tower(
-                        pygame.image.load(vegetable['path']),
-                        vegetable['name'],
-                        vegetable['fire_rate'],
-                        vegetable['damage'],
-                        (mouse_pos[0] - mouse_pos[0] % 32,
-                        mouse_pos[1] - mouse_pos[1] % 32),
-                        vegetable['range'])
-                    )
-                hover = False
-
-                #delete the hover tower
-                for g in graphic_elements:
-                    if isinstance(g, Tower) and g.name == "hover":
-                        graphic_elements.remove(g)
-                        del g
+        if (graphic_elements[1].get_water() - vegetable['price']) >= 0:
+            graphic_elements, hover = putTower(graphic_elements, vegetable, hover)
+        else:
+            print("Not enough water !")
 
     elif event.type == pygame.KEYDOWN:
         if event.key == pygame.K_SPACE and hover:
+            if (graphic_elements[1].get_water() - vegetable['price']) >= 0:
+                graphic_elements, hover = putTower(graphic_elements, vegetable, hover)
+            else:
+                print("Not enough water !")
+
+    return (graphic_elements, hover)
+
+def putTower(graphic_elements, vegetable, hover):
+    """
+    Function that put a tower if the condition are succesful\n
+    Parameters :\n
+    \tgraphic_element : the graphic elements that we use
+    \tvegetable : the vegetable or fruit that will it put
+    \thover : the bulean value that whe have to know to put or not the tower
+    """
+    mouse_pos = pygame.mouse.get_pos()
+    pos = (mouse_pos[0] - mouse_pos[0] % 32,
+            mouse_pos[1] - mouse_pos[1] % 32)
+    pos_already_taken = -1
+    pos_manhattan = (pos[0] // 32, pos[1] // 32)
+
+    if not graphic_elements[0].tiles[pos_manhattan[1]][pos_manhattan[0]]:
+        for tower in graphic_elements:
+            if isinstance(tower, Tower):
+                if tower.coordinates == pos:
+                    pos_already_taken += 1
+
+        if not pos_already_taken:
             graphic_elements.append(Tower(
                 pygame.image.load(vegetable['path']),
                 vegetable['name'],
                 vegetable['fire_rate'],
                 vegetable['damage'],
                 (mouse_pos[0] - mouse_pos[0] % 32,
-                 mouse_pos[1] - mouse_pos[1] % 32),
+                    mouse_pos[1] - mouse_pos[1] % 32),
                 vegetable['range'])
             )
             hover = False
@@ -125,12 +133,11 @@ def eventListener(event, graphic_elements, hover):
                     graphic_elements.remove(g)
                     del g
 
-        elif event.key == pygame.K_a:
-            for elem in graphic_elements:
-                if isinstance(elem, Tower) and elem.name != "hover":
-                    graphic_elements.append(elem.attack(math.pi/2))
+            graphic_elements[1].set_water(graphic_elements[1].get_water() - vegetable['price'])
+        else :
+            print("Position already taken !")
 
-    return (graphic_elements, hover)
+    return graphic_elements, hover
 
 #Main
 
