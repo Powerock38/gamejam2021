@@ -20,9 +20,9 @@ class Menu:
                           pygame.image.load("assets/back_hover.png")]
 
         #Initilalisation of the music
-        pygame.mixer.music.load("assets/musics/tmp_menu.ogg")
-        pygame.mixer.music.play(-1)
-        pygame.mixer.music.set_volume(0.5)
+        musicLoad = pygame.mixer.Sound("assets/musics/tmp_menu.ogg")
+        pygame.mixer.Channel(1).play(musicLoad, -1)
+        pygame.mixer.Channel(1).set_volume(0.1)
 
         self.__menu.blit(pygame.image.load("assets/menu.png"), (0, 0))
         self.__rules.blit(pygame.image.load("assets/rules_page.png"), (0, 0))

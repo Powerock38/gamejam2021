@@ -10,9 +10,9 @@ class Garden:
 
     def __init__(self, tiles=[]):
         #Initilalisation of the music of the Garden
-        pygame.mixer.music.load("assets/musics/tmp_main.ogg")
-        pygame.mixer.music.play(-1)
-        pygame.mixer.music.set_volume(0.5)
+        musicLoad = pygame.mixer.Sound("assets/musics/tmp_main.ogg")
+        pygame.mixer.Channel(0).play(musicLoad, -1)
+        pygame.mixer.Channel(0).set_volume(0.1)
 
         self.HUD = None
         self.__tick = 0
@@ -269,6 +269,12 @@ class Garden:
         """
 
         if self.holding != None:
+            #set the music when we put a tower
+            musicLoad = pygame.mixer.Sound("assets/musics/putTower.ogg")
+            pygame.mixer.Channel(1).play(musicLoad)
+            pygame.mixer.Channel(1).set_volume(0.1)
+
+
             mx, my = pygame.mouse.get_pos()
             if mx < 896:
                 x, y = (mx - mx % 32, my - my % 32)
@@ -293,6 +299,11 @@ class Garden:
         Parameters :\n
         \ttower : the tower that will be removed
         """
+        #set the music when we remove a tower
+        musicLoad = pygame.mixer.Sound("assets/musics/removeTower.ogg")
+        pygame.mixer.Channel(1).play(musicLoad)
+        pygame.mixer.Channel(1).set_volume(0.1)
+
         mx, my = pygame.mouse.get_pos()
         mx -= mx % 32
         my -= my % 32
