@@ -260,7 +260,8 @@ class Utils:
         (15 * ('rat', 45) +
          7 * ('chicken', 60)),
         
-        (1 * ('rabbit', 0)))
+        (1 * ('rabbit', 0))
+    )
 
     for id, en in ENEMIES.items():
         spritesheet = pygame.image.load(en['path'])
