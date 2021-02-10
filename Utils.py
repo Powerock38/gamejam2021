@@ -15,12 +15,12 @@ class Utils:
             'name':'Apple',
             'price':5,
             'description':'blablabla',
-            'fire_rate':1,
+            'fire_rate':2,
             'damage':1,
             'range':85,
             'max_attack': 1,
-            'energy_consumption':1,
-            'sleeping_time': 4
+            'energy_consumption':10,
+            'sleeping_time': 5
         },
         'potato' : {
             'path':'assets/fruits-veggies/potato.png',
@@ -38,13 +38,13 @@ class Utils:
         'pear' : {
             'path':'assets/fruits-veggies/pear.png',
             'name':'Pear',
-            'price':15,
+            'price':20,
             'description':'blablabla',
-            'fire_rate':1,
-            'damage':1,
-            'range':85,
+            'fire_rate':3,
+            'damage':2,
+            'range':90,
             'max_attack': 1,
-            'energy_consumption':1,
+            'energy_consumption':9,
             'sleeping_time': 4
         },
         'pepper' : {
@@ -243,7 +243,7 @@ class Utils:
             },
             'rat' : {
                 'path': 'assets/sprites/rat.png',
-                'hp': 10,
+                'hp': 5,
                 'speed': 0.5,
                 'water': 1
             },

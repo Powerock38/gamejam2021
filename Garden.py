@@ -195,7 +195,10 @@ class Garden:
             self.__interWave = True
 
         if self.__interWave:
-            time = 600
+            if len(self.enemies) == 0:
+                time = max(120, self.__tick)
+            else:
+                time = max(0, 2400 - 240 * difficulty)
         else:
             time = wave[self.__wave_enemy_index + 1]
         
@@ -205,8 +208,7 @@ class Garden:
             self.enemies = [Enemy(enemy, [1, 0])] + self.enemies
             self.__tick = 0
             self.__wave_enemy_index += 2
-        else:
-            self.__tick += 1
+        else:self.__tick += 1
 
         #update towers
         for t in self.towers:
