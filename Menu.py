@@ -22,22 +22,34 @@ class Menu:
                           pygame.image.load("assets/ui/back_hover.png")]
 
         #Initilalisation of the music
-        musicLoad = pygame.mixer.Sound("assets/musics/tmp_menu.ogg")
-        pygame.mixer.Channel(0).play(musicLoad, -1)
-        pygame.mixer.Channel(0).set_volume(0.1)
+        pygame.mixer.music.load("assets/musics/tmp_menu.ogg")
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.5)
 
         self.__menu.blit(pygame.image.load("assets/ui/menu.png"), (0, 0))
         self.__rules.blit(pygame.image.load("assets/ui/rules_page.png"), (0, 0))
         self.__credits.blit(pygame.image.load("assets/ui/credits_page.png"), (0, 0))
 
         self.__scoreboard = pygame.Surface((200, 260))
-        self.__scoreboard.set_alpha(0)
-        
-        font = pygame.font.Font('assets/font/comic_book.otf', 20)
-        text = font.render('Towers', False, (255, 255, 255))
-        self.__scoreboard.blit(text, (0, 0))
+        self.__scoreboard.set_colorkey((0, 0, 0))
 
-        self.__menu.blit(self.__scoreboard, (52, 433))
+        size = 21
+        font = pygame.font.Font('assets/font/comic_book.otf', size)
+
+        f = open("scoreboard", "r", encoding = "utf-8")
+        scoreboard = f.read().split("\n")
+        f.close()
+
+        print(scoreboard)
+
+        for i, x in enumerate(scoreboard):
+            text = x.split(" : ")
+            t1 = font.render(text[0], False, (255, 255, 255))
+            t2 = font.render(": " + text[1], False, (255, 255, 255))
+            self.__scoreboard.blit(t1, (0, i * (size + 2)))
+            self.__scoreboard.blit(t2, (130, i * (size + 2)))
+
+        self.__menu.blit(self.__scoreboard, (50, 433))
         
     def draw(self, screen):
         m_pos = pygame.mouse.get_pos()
