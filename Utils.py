@@ -20,7 +20,8 @@ class Utils:
             'range':85,
             'max_attack': 1,
             'energy_consumption':10,
-            'sleeping_time': 5
+            'sleeping_time': 5,
+            'ricochet': False
         },
         'potato' : {
             'path':'assets/fruits-veggies/potato.png',
@@ -32,7 +33,8 @@ class Utils:
             'range':85,
             'max_attack': 1,
             'energy_consumption':1,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': False
         },
 
         'pear' : {
@@ -41,11 +43,12 @@ class Utils:
             'price':20,
             'description':'blablabla',
             'fire_rate':3,
-            'damage':2,
+            'damage':1,
             'range':90,
             'max_attack': 1,
             'energy_consumption':9,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': True
         },
         'pepper' : {
             'path':'assets/fruits-veggies/pepper_green.png',
@@ -57,7 +60,8 @@ class Utils:
             'range':100,
             'max_attack': 1,
             'energy_consumption':50,
-            'sleeping_time': 10
+            'sleeping_time': 10,
+            'ricochet': False
         },
 
         'banana' : {
@@ -70,7 +74,8 @@ class Utils:
             'range':85,
             'max_attack': 3,
             'energy_consumption':8,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': False
         },
         'lettuce' : {
             'path':'assets/fruits-veggies/lettuce.png',
@@ -82,7 +87,8 @@ class Utils:
             'range':100,
             'max_attack': 2,
             'energy_consumption':2.5,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': False
         },
 
         'tomato' : {
@@ -95,7 +101,8 @@ class Utils:
             'range':100,
             'max_attack': 1,
             'energy_consumption':2,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': False
         },
         'carrot' : {
             'path':'assets/fruits-veggies/carrot.png',
@@ -107,7 +114,8 @@ class Utils:
             'range':100,
             'max_attack': 1,
             'energy_consumption':1.8,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': False
         },
 
         'peach' : {
@@ -120,7 +128,8 @@ class Utils:
             'range':100,
             'max_attack': 2,
             'energy_consumption':1.5,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': False
         },
         'squash' : {
             'path':'assets/fruits-veggies/squash.png',
@@ -132,7 +141,8 @@ class Utils:
             'range':100,
             'max_attack': 1,
             'energy_consumption':3.5,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': False
         },
 
         'orange' : {
@@ -145,7 +155,8 @@ class Utils:
             'range':100,
             'max_attack': 3,
             'energy_consumption':2,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': False
         },
         'aubergine' : {
             'path':'assets/fruits-veggies/aubergine.png',
@@ -157,7 +168,8 @@ class Utils:
             'range':300,
             'max_attack':1,
             'energy_consumption':2,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': False
         },
 
         'cherry' : {
@@ -170,7 +182,8 @@ class Utils:
             'range':150,
             'max_attack': 4,
             'energy_consumption':2,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': False
         },
         'broccoli' : {
             'path':'assets/fruits-veggies/broccoli.png',
@@ -182,7 +195,8 @@ class Utils:
             'range':200,
             'max_attack': 1,
             'energy_consumption':3.5,
-            'sleeping_time': 4
+            'sleeping_time': 4,
+            'ricochet': False
         }
     }
 
