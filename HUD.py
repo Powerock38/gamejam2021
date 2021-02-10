@@ -21,10 +21,10 @@ class HUD:
         self.__water = water
         self.__level = level
 
-        self.__surface = pygame.image.load("assets/ui/hub_background.png")
+        self.__surface = pygame.image.load("assets/ui/hud/hud_background.png")
         
-        self.__water_image = pygame.image.load("assets/ui/waterdrop.png")
-        self.__heart_image = pygame.image.load("assets/ui/heart.png")
+        self.__water_image = pygame.image.load("assets/ui/hud/waterdrop.png")
+        self.__heart_image = pygame.image.load("assets/ui/hud/heart.png")
 
         self.set_level(level)
         self.set_water(water)
@@ -93,7 +93,7 @@ class HUD:
             sprite_rect.y = y + 50
 
             # Create tower hover
-            hover = pygame.image.load("assets/ui/hover_board.png")
+            hover = pygame.image.load("assets/ui/hud/hover_board.png")
             self.__font = self.get_font(24)
             
             dim = self.__font.size(tower["name"])
@@ -135,8 +135,7 @@ class HUD:
         # Initialise font with the font available in assets/font
         self.__font = self.get_font(25)
 
-        life_surface = pygame.Surface((self.__surface.get_width(),54))
-        life_surface.set_colorkey(Utils.BLACK)
+        life_surface = pygame.image.load("assets/ui/hud/hud_life_background.png")
 
         # x, y cords
         x = life_surface.get_width() // 2
@@ -163,8 +162,7 @@ class HUD:
         # Initialise font with the font available in assets/font
         self.__font = self.get_font(25)
 
-        water_surface = pygame.Surface((self.__surface.get_width(),54))
-        water_surface.set_colorkey(Utils.BLACK)
+        water_surface = pygame.image.load("assets/ui/hud/hud_water_background.png")
 
         # x, y cords
         x = water_surface.get_width() // 2
@@ -196,16 +194,15 @@ class HUD:
         self.__font = self.get_font(25)
 
 
-        level_surface = pygame.Surface((self.__surface.get_width(),50))
-        level_surface.set_colorkey(Utils.BLACK)
+        level_surface = pygame.image.load("assets/ui/hud/hud_level_background.png")
 
         # x, y cords
         x = level_surface.get_width() // 2
         y = level_surface.get_height() // 2
 
         # Create the level text
-        level_text = self.__font.render('Level ' + str(self.get_level()), False, Utils.WHITE)
-        dim = self.__font.size("Level " + str(self.get_level()))
+        level_text = self.__font.render('Wave ' + str(self.get_level()), False, Utils.WHITE)
+        dim = self.__font.size("Wave " + str(self.get_level()))
         level_surface.blit(level_text, (x - dim[0] // 2, y - dim[1] // 2))
 
         self.__surface.blit(level_surface, (0,0))
