@@ -22,6 +22,7 @@ class Garden:
         self.HUD = None
         self.__tick = 0
         self.__wave_enemy_index = 0
+        self.__interWave = False
 
         directions = [[1, 0], [0, 1], [-1, 0], [0, -1]]
 
@@ -187,15 +188,23 @@ class Garden:
         wave_nb = self.HUD.get_level() % len(Utils.WAVES)
         wave = Utils.WAVES[wave_nb]
         
-        if self.__tick > wave[self.__wave_enemy_index + 1]:
+
+        if self.__wave_enemy_index == len(wave):
+            self.__wave_enemy_index = 0
+            self.HUD.set_level(self.HUD.get_level() + 1)
+            self.__interWave = True
+
+        if self.__interWave:
+            time = 600
+        else:
+            time = wave[self.__wave_enemy_index + 1]
+        
+        if self.__tick >= time:
+            self.__interWave = False
             enemy = Utils.ENEMIES[wave[self.__wave_enemy_index]]
             self.enemies = [Enemy(enemy, [1, 0])] + self.enemies
             self.__tick = 0
             self.__wave_enemy_index += 2
-            
-            if self.__wave_enemy_index >= len(wave):
-                self.__wave_enemy_index = 0
-                self.HUD.set_level(self.HUD.get_level() + 1)
         else:
             self.__tick += 1
 

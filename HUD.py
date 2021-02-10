@@ -5,7 +5,7 @@ pygame.font.init()
 
 class HUD:
 
-    def __init__(self, garden, life = 100, water = 1, level = 1):
+    def __init__(self, garden, life = 100, water = 1, level = 0):
         """
         Initialise HUD at the right of the screen\n
         Parameters :\n
