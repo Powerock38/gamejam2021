@@ -8,6 +8,7 @@ from random import randint, choice
 class Garden:
     pygame.mixer.init()
 
+    musicLoad_ouch = pygame.mixer.Sound("assets/musics/ouch.ogg")
     musicLoad_put = pygame.mixer.Sound("assets/musics/putTower.ogg")
     musicLoad_remove = pygame.mixer.Sound("assets/musics/removeTower.ogg")
     musicLoad = pygame.mixer.Sound("assets/musics/main.ogg")
@@ -16,11 +17,11 @@ class Garden:
         #Initilalisation of the music of the Garden
         channel = pygame.mixer.Channel(0)
         channel.play(Garden.musicLoad, -1)
-        pygame.mixer.music.set_volume(0.25)
+        pygame.mixer.music.set_volume(0.4)
 
         self.HUD = None
         self.__tick = 0
-        self.__tickMax = 200
+        self.__wave_enemy_index = 0
 
         directions = [[1, 0], [0, 1], [-1, 0], [0, -1]]
 
@@ -181,19 +182,31 @@ class Garden:
         self.tiles = tmp_garden
 
     def update(self):
-        if self.__tick > self.__tickMax:
-            self.spawnEnemy()
+        # waves
+        difficulty = self.HUD.get_level() // len(Utils.WAVES)
+        wave_nb = self.HUD.get_level() % len(Utils.WAVES)
+        wave = Utils.WAVES[wave_nb]
+        
+        if self.__tick > wave[self.__wave_enemy_index + 1]:
+            enemy = Utils.ENEMIES[wave[self.__wave_enemy_index]]
+            self.enemies = [Enemy(enemy, [1, 0])] + self.enemies
             self.__tick = 0
-            self.__tickMax = max(30, self.__tickMax - 1)
+            self.__wave_enemy_index += 2
+            
+            if self.__wave_enemy_index >= len(wave):
+                self.__wave_enemy_index = 0
+                self.HUD.set_level(self.HUD.get_level() + 1)
         else:
             self.__tick += 1
 
+        #update towers
         for t in self.towers:
             pips = t.update(self.enemies)
             if pips:
                 for pip in pips:
                     self.pips.append(pip)
 
+        #update pips
         for p in self.pips:
             deadEnemy = p.update()
             
@@ -207,7 +220,7 @@ class Garden:
                     if p2.enemy == None:
                         self.pips.remove(p2)
                 
-
+        #update enemies
         for en in self.enemies:
             if en.hp <= 0:
                 self.HUD.set_water(self.HUD.get_water() + en.water)
@@ -234,6 +247,11 @@ class Garden:
                 if len(possibleMoves):
                     en.move(random.choice(possibleMoves))
                 else:
+                    #Initilalisation of the music of the Garden
+                    channel = pygame.mixer.Channel(3)
+                    channel.play(Garden.musicLoad_ouch)
+                    pygame.mixer.music.set_volume(0.1)
+
                     self.HUD.set_life(self.HUD.get_life() - 1)
                     self.enemies.remove(en)
 
@@ -256,10 +274,6 @@ class Garden:
                 x_32, y_32 = (mx - mx % 32, my - my % 32)
                 screen.blit(self.holding[1], (x_32, y_32))
                 pygame.draw.circle(screen, (255, 0, 0, 128), (x_32 + 16, y_32 + 16), self.holding[2], 1)
-
-    def spawnEnemy(self):
-        enemy = choice(list(Utils.ENEMIES.values()))
-        self.enemies = [Enemy(enemy, [1, 0])] + self.enemies
 
     def hold(self, tower):
         img = pygame.image.load(Utils.TOWERS[tower]['path']).convert_alpha()

@@ -82,5 +82,4 @@ def eventListener(event, elements):
 
 menu = Menu()
 
-#view = View([end], update, eventListener)
 view = View([menu], update, eventListener)
