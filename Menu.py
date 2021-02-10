@@ -21,8 +21,8 @@ class Menu:
 
         #Initilalisation of the music
         musicLoad = pygame.mixer.Sound("assets/musics/tmp_menu.ogg")
-        pygame.mixer.Channel(1).play(musicLoad, -1)
-        pygame.mixer.Channel(1).set_volume(0.1)
+        pygame.mixer.Channel(0).play(musicLoad, -1)
+        pygame.mixer.Channel(0).set_volume(0.1)
 
         self.__menu.blit(pygame.image.load("assets/menu.png"), (0, 0))
         self.__rules.blit(pygame.image.load("assets/rules_page.png"), (0, 0))
