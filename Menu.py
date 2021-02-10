@@ -1,7 +1,9 @@
 import pygame
 
+pygame.mixer.init()
+pygame.font.init()
+
 class Menu:
-    pygame.mixer.init()
 
     def __init__(self):
         
@@ -27,6 +29,15 @@ class Menu:
         self.__menu.blit(pygame.image.load("assets/menu.png"), (0, 0))
         self.__rules.blit(pygame.image.load("assets/rules_page.png"), (0, 0))
         self.__credits.blit(pygame.image.load("assets/credits_page.png"), (0, 0))
+
+        self.__scoreboard = pygame.Surface((200, 260))
+        self.__scoreboard.set_alpha(0)
+        
+        font = pygame.font.Font('assets/font/comic_book.otf', 20)
+        text = font.render('Towers', False, (255, 255, 255))
+        self.__scoreboard.blit(text, (0, 0))
+
+        self.__menu.blit(self.__scoreboard, (52, 433))
         
     def draw(self, screen):
         m_pos = pygame.mouse.get_pos()
