@@ -10,6 +10,8 @@ class Pip:
     \tdamage : damage of the pip (int) (default 1)
     """
 
+    pygame.mixer.init()
+
     sprite = pygame.image.load('assets/tilesets/bullet.png').subsurface(((14, 14), (4, 4)))
 
     def __init__(self, coordinates, enemy, size = 1, damage = 1):
@@ -31,6 +33,11 @@ class Pip:
         """
         Move the pip with the direction given in the constructor
         """
+        #set the music for the pip
+        musicLoad = pygame.mixer.Sound("assets/musics/attack.ogg")
+        pygame.mixer.Channel(1).play(musicLoad)
+        pygame.mixer.Channel(1).set_volume(0.1)
+
         if self.enemy:
             pos1 = self.coordinates
             pos2 = (self.enemy.pos[0] * 32 + self.enemy.pos_in_tile[0] + 16, self.enemy.pos[1] * 32 + self.enemy.pos_in_tile[1] + 16)
