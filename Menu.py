@@ -58,14 +58,17 @@ class Menu:
                 self.__menu.blit(self.__buttons[4], (295, 350))
                 self.__menu.blit(self.__buttons[1], (341, 492))
                 self.__menu.blit(self.__buttons[2], (341, 608))
+
             elif m_pos[0] >= 341 and m_pos[0] <= 683 and m_pos[1] >= 492 and m_pos[1] <= 588:
                 self.__menu.blit(self.__buttons[0], (295, 350))
                 self.__menu.blit(self.__buttons[5], (341, 492))
                 self.__menu.blit(self.__buttons[2], (341, 608))
+
             elif m_pos[0] >= 341 and m_pos[0] <= 683 and m_pos[1] >= 608 and m_pos[1] <= 704:
                 self.__menu.blit(self.__buttons[0], (295, 350))
                 self.__menu.blit(self.__buttons[1], (341, 492))
                 self.__menu.blit(self.__buttons[6], (341, 608))
+
             else:
                 self.__menu.blit(self.__buttons[0], (295, 350))
                 self.__menu.blit(self.__buttons[1], (341, 492))
@@ -76,16 +79,16 @@ class Menu:
             
         elif self.page == "Rules":
             if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 608 and m_pos[1] <= 730:
-                self.__rules.blit(self.__buttons[3], (341, 640))
-            else:
                 self.__rules.blit(self.__buttons[7], (341, 640))
+            else:
+                self.__rules.blit(self.__buttons[3], (341, 640))
                 
             screen.blit(self.__rules, (0, 0))
             
         elif self.page == "Credits":
             if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 608 and m_pos[1] <= 730:
-                self.__credits.blit(self.__buttons[3], (341, 640))
-            else:
                 self.__credits.blit(self.__buttons[7], (341, 640))
+            else:
+                self.__credits.blit(self.__buttons[3], (341, 640))
                 
             screen.blit(self.__credits, (0, 0))

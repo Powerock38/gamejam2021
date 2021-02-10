@@ -259,7 +259,7 @@ class Garden:
                     #Initilalisation of the music of the Garden
                     channel = pygame.mixer.Channel(2)
                     channel.play(Garden.musicLoad_ouch)
-                    pygame.mixer.music.set_volume(0.01)
+                    channel.set_volume(0.25)
 
                     self.HUD.set_life(self.HUD.get_life() - 1)
                     if self.HUD.get_life() <= 0:
