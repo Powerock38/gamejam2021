@@ -18,7 +18,7 @@ class Utils:
             'range':100,
             'max_attack': 1,
             'energy_consumption':1,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
         'potato' : {
             'path':'assets/fruits-veggies/potato.png',
@@ -30,7 +30,7 @@ class Utils:
             'range':5,
             'max_attack': 1,
             'energy_consumption':1,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
 
         'pear' : {
@@ -43,7 +43,7 @@ class Utils:
             'range':100,
             'max_attack': 1,
             'energy_consumption':1,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
         'pepper' : {
             'path':'assets/fruits-veggies/pepper_green.png',
@@ -55,7 +55,7 @@ class Utils:
             'range':100,
             'max_attack': 3,
             'energy_consumption':2.5,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
 
         'banana' : {
@@ -68,7 +68,7 @@ class Utils:
             'range':100,
             'max_attack': 3,
             'energy_consumption':1.5,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
         'lettuce' : {
             'path':'assets/fruits-veggies/lettuce.png',
@@ -80,7 +80,7 @@ class Utils:
             'range':100,
             'max_attack': 2,
             'energy_consumption':2.5,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
 
         'tomato' : {
@@ -93,7 +93,7 @@ class Utils:
             'range':100,
             'max_attack': 1,
             'energy_consumption':2,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
         'carrot' : {
             'path':'assets/fruits-veggies/carrot.png',
@@ -105,7 +105,7 @@ class Utils:
             'range':100,
             'max_attack': 1,
             'energy_consumption':1.8,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
 
         'peach' : {
@@ -118,7 +118,7 @@ class Utils:
             'range':100,
             'max_attack': 2,
             'energy_consumption':1.5,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
         'squash' : {
             'path':'assets/fruits-veggies/squash.png',
@@ -130,7 +130,7 @@ class Utils:
             'range':7,
             'max_attack': 5,
             'energy_consumption':3.5,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
 
         'orange' : {
@@ -143,7 +143,7 @@ class Utils:
             'range':100,
             'max_attack': 2,
             'energy_consumption':2,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
         'aubergine' : {
             'path':'assets/fruits-veggies/aubergine.png',
@@ -155,7 +155,7 @@ class Utils:
             'range':100,
             'max_attack':1,
             'energy_consumption':2,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
 
         'cherry' : {
@@ -168,7 +168,7 @@ class Utils:
             'range':100,
             'max_attack': 2,
             'energy_consumption':2,
-            'sleeping_time': 2
+            'sleeping_time': 4
         },
         'broccoli' : {
             'path':'assets/fruits-veggies/broccoli.png',
@@ -180,7 +180,7 @@ class Utils:
             'range':100,
             'max_attack': 1,
             'energy_consumption':3.5,
-            'sleeping_time': 2
+            'sleeping_time': 4
         }
     }
 

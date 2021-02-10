@@ -16,7 +16,9 @@ class Tower:
     \ttowerRange : the range of fire of the fower (int) (default 5)
     """
 
-    def __init__(self, sprite, name, rate, damage, coordinates = (10,10), towerRange = 5, max_attack = 1, energy_consumption = 1):
+    sleepingFrames = [pygame.image.load('assets/zzz.png').subsurface([i*32,0,32,32]) for i in range(3)]
+
+    def __init__(self, tower, coordinates = (10,10)):
         """
         Tower : constructor of a Tower\n
         Arguments :\n
@@ -29,36 +31,21 @@ class Tower:
         Return :\n
         None
         """
-        self.__sprite = sprite
-        self.name = name
-        self.rate = rate
-        self.damage = damage
+
         self.coordinates = coordinates
-        self.__towerRange = towerRange
         self.__energy = 100
-        self.__energyMax = 100
-        self.__energy_consumption = energy_consumption
+        self.__energyMax = self.__energy
         self.tick = 0
-        self.max_attack = max_attack
-    
-    def attack(self, enemy):
-        """
-        Attack a position\n
-        Parameters :\n
-        \tdirection : the direction to attack in radian (int)\n
-        Return :\n
-        The new pip that attack
-        """
+        self.animTick = 0
 
-        if self.__energy > 0:
-            pos1 = (self.coordinates[0] + 16, self.coordinates[1] + 16)
-            pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0] + 16, enemy.pos[1] * 32 + enemy.pos_in_tile[1] + 16)
-            distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
-
-            if distance < self.__towerRange:
-                pip = Pip(self.coordinates, enemy)
-                self.__energy -= self.__energy_consumption
-                return pip
+        self.__sprite = pygame.image.load(tower['path'])
+        self.name = tower['name']
+        self.rate = tower['fire_rate']
+        self.damage = tower['damage']
+        self.__towerRange = tower['range']
+        self.__energy_consumption = tower['energy_consumption']
+        self.max_attack = tower['max_attack']
+        self.sleeping_time = tower['sleeping_time']
 
     def draw(self, screen):
         """
@@ -69,22 +56,43 @@ class Tower:
         None
         """            
 
+        # sprite
         screen.blit(self.__sprite, self.coordinates)
 
+        # sleeping
         x,y = self.coordinates
-        for n in range(1, 1 if self.__energy == 0 else max(2, int((self.__energy/self.__energyMax) * 7))):
-            w = 4
-            pygame.draw.rect(screen, Utils.BLUE, (x + (n - 1)*(w + 1), y + 30, w, 4))
+        if self.__energy <= 0:
+            if self.animTick >= 120:
+                self.animTick = 0
+                
+            screen.blit(Tower.sleepingFrames[self.animTick // 40], (x, y - 10))
+            self.animTick += 1
 
-    def update(self, enemies):
-        self.tick += 1
-        if self.tick == self.rate:
-            self.tick = 0
-            attack = 0
-            for enemy in enemies:
-                if attack < self.max_attack:
-                    pip = self.attack(enemy)
-                    
-                    if pip:
-                        attack += 1
-                        return pip
+        else: # energy bars
+            for n in range(1, max(2, int((self.__energy/self.__energyMax) * 7))):
+                w = 4
+                pygame.draw.rect(screen, Utils.BLUE, (x + (n - 1)*(w + 1), y + 30, w, 4))
+
+    def update(self, enemies):        
+        if self.__energy > 0:
+            self.tick += 1
+            if self.tick == self.rate:
+                self.tick = 0
+                attack = 0
+                for enemy in enemies:
+                    if self.__energy > 0 and attack < self.max_attack:
+                        pos1 = (self.coordinates[0] + 16, self.coordinates[1] + 16)
+                        pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0] + 16, enemy.pos[1] * 32 + enemy.pos_in_tile[1] + 16)
+                        distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
+
+                        if distance < self.__towerRange:
+                            pip = Pip(self.coordinates, enemy)
+                            self.__energy -= self.__energy_consumption
+                            attack += 1
+                            return pip
+        else:
+            if self.tick >= 60 * self.sleeping_time:
+                self.tick = 0
+                self.__energy = self.__energyMax
+
+            self.tick += 1

@@ -183,7 +183,6 @@ class Garden:
             deadEnemy = p.update()
             
             if deadEnemy:
-                #self.enemies.remove(deadEnemy)
                 self.pips.remove(p)
 
                 for p2 in self.pips:
@@ -239,15 +238,16 @@ class Garden:
             if mx < 896:
                 x_32, y_32 = (mx - mx % 32, my - my % 32)
                 screen.blit(self.__holding[1], (x_32, y_32))
-                pygame.draw.circle(screen, Utils.RED, (x_32 + 16, y_32 + 16), self.__holding[2], 1)
+                pygame.draw.circle(screen, (255, 0, 0, 128), (x_32 + 16, y_32 + 16), self.__holding[2], 1)
 
     def spawnEnemy(self):
         sprite = pygame.image.load("assets/farmer.png")
         self.enemies = [Enemy(sprite, pos = [1, 0])] + self.enemies
 
     def hold(self, tower):
-        img = pygame.image.load(Utils.TOWERS[tower]['path']).convert()
-        pygame.Surface.set_alpha(img, 180)
+        img = pygame.image.load(Utils.TOWERS[tower]['path']).convert_alpha()
+        transparency = 128
+        img.fill((255, 255, 255, transparency), special_flags=pygame.BLEND_RGBA_MULT) 
         self.__holding = (
                 tower,
                 img,
@@ -256,7 +256,7 @@ class Garden:
 
     def putTower(self):
         """
-        Function that put a tower if the condition are succesful\n
+        Place a tower at mouse postion if holding one\n
         Parameters :\n
         \ttower : the tower that will be placed
         """
@@ -276,14 +276,5 @@ class Garden:
 
                     if not pos_already_taken:
                         tower = Utils.TOWERS[self.__holding[0]]
-                        self.towers.append(Tower(
-                            pygame.image.load(tower['path']),
-                            tower['name'],
-                            tower['fire_rate'],
-                            tower['damage'],
-                            (x, y),
-                            tower['range'],
-                            tower['max_attack'],
-                            tower['energy_consumption']
-                        ))
+                        self.towers.append(Tower(tower, (x,y)))
                         self.__holding = None
