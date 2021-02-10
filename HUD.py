@@ -93,19 +93,21 @@ class HUD:
             sprite_rect.y = y + 50
 
             # Create tower hover
-            hover = pygame.Surface((300,250))
-            hover.fill(Utils.BLACK)
-            self.__font = self.get_font(15)
+            hover = pygame.image.load("assets/hover_board.png")
+            self.__font = self.get_font(24)
+            
+            dim = self.__font.size(tower["name"])
+            hover.blit(self.__font.render(tower["name"], False, Utils.WHITE), (150 - dim[0]//2, 55))
 
-            ########################
-            # TODO Change for display better
-            # J'ai mis "un" peu en forme
-            y_offset = 5
-            for elem in tower:
-                text = self.__font.render(str(elem) + " : " + str(tower[elem]), False, Utils.RED)
-                hover.blit(text, (5,y_offset))
-                y_offset += 20
-            ########################
+            self.__font = self.get_font(14)
+            data_text_color = Utils.GREEN
+            hover.blit(self.__font.render(str(tower["fire_rate"]) + " shot/s", False, data_text_color), (120, 84))
+            hover.blit(self.__font.render(str(tower["damage"]) + "/shot", False, data_text_color), (110, 101))
+            hover.blit(self.__font.render(str(tower["range"]) + " px", False, data_text_color), (99, 117))
+            hover.blit(self.__font.render(str(tower["max_attack"]) + " enemies/shot", False, data_text_color), (139, 133))
+            hover.blit(self.__font.render(str(tower["energy_consumption"]) + "/shot", False, data_text_color), (194, 151))
+            hover.blit(self.__font.render(str(tower["sleeping_time"]) + " s", False, data_text_color), (149, 167))
+
 
             self.__towers_rect.append(
                 {
@@ -149,11 +151,17 @@ class HUD:
 
         # Create the text water
         self.__font = self.get_font(20)
+        dim = self.__font.size("Water : " + str(self.get_water()))
+
+        if dim[0] + self.__water_image.get_width() > self.__surface.get_width():
+            self.__font = self.get_font(18)
+            dim = self.__font.size("Water : " + str(self.get_water()))
+
         self.__water_text = self.__font.render('Water ' + str(self.get_water()), False, Utils.BLUE)
 
-        dim = self.__font.size("Water : " + str(self.get_water()))
+
         water_surface.blit(self.__water_text, (x - dim[0] // 2, y - dim[1] // 2))
-        water_surface.blit(self.__water_image, (x + dim[0] // 2 - 16, y - dim[1] // 2))
+        water_surface.blit(self.__water_image, ((x - dim[0] // 2) + dim[0] - 16, y - dim[1] // 2))
 
         self.__surface.blit(water_surface, (0,660))
 
@@ -192,9 +200,16 @@ class HUD:
         return pygame.font.Font('assets/font/comic_book.otf', size)
 
     def buy(self, x ,y):
-        if True: # self.get_water() >= vegetable['price']:
-            # self.set_water(self.get_water() - tower['price'])
-            self.GARDEN.hold('apple')
+
+        mx, my = pygame.mouse.get_pos()
+        if mx >= 896:
+            for elem in self.__towers_rect:
+                rect = elem["rect"]
+                if rect.collidepoint(mx-896,my):
+                    tower = Utils.TOWERS[elem["id"]]
+                    if self.get_water() >= tower['price'] and self.GARDEN.holding == None:
+                        self.set_water(self.get_water() - tower['price'])
+                        self.GARDEN.hold(elem['id'])
 
     # Draw the element
     def draw(self, screen):
@@ -208,6 +223,6 @@ class HUD:
                 if rect.collidepoint(mx-896,my):
 
                     display_x = mx-310
-                    display_y = my-250 if my-250 >= 0 else 0
+                    display_y = my-125 if my-125 >= 0 else 0
 
                     screen.blit(tower["hover"], (display_x,display_y))

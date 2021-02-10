@@ -18,7 +18,7 @@ class Tower:
 
     sleepingFrames = [pygame.image.load('assets/zzz.png').subsurface([i*32,0,32,32]) for i in range(3)]
 
-    def __init__(self, tower, coordinates = (10,10)):
+    def __init__(self, tower, coordinates):
         """
         Tower : constructor of a Tower\n
         Arguments :\n
@@ -46,6 +46,7 @@ class Tower:
         self.__energy_consumption = tower['energy_consumption']
         self.max_attack = tower['max_attack']
         self.sleeping_time = tower['sleeping_time']
+        self.price = tower['price']
 
     def draw(self, screen):
         """
