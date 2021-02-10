@@ -33,7 +33,7 @@ def eventListener(event, elements):
             else:
                 garden.removeTower()
 
-        if hud.get_life() <= 0:
+        if event.type == pygame.USEREVENT:
             elements.remove(garden)
             elements.remove(hud)
             elements.append(End())
