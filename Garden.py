@@ -10,7 +10,7 @@ class Garden:
 
     def __init__(self, tiles=[]):
         #Initilalisation of the music of the Garden
-        pygame.mixer.music.load("assets/musics/tmp_main.mp3")
+        pygame.mixer.music.load("assets/musics/tmp_main.ogg")
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.5)
 
