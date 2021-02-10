@@ -10,7 +10,7 @@ class Garden:
 
     musicLoad_put = pygame.mixer.Sound("assets/musics/putTower.ogg")
     musicLoad_remove = pygame.mixer.Sound("assets/musics/removeTower.ogg")
-    musicLoad = pygame.mixer.Sound("assets/musics/tmp_main.ogg")
+    musicLoad = pygame.mixer.Sound("assets/musics/main.ogg")
 
     def __init__(self, tiles=[]):
         #Initilalisation of the music of the Garden

@@ -195,9 +195,9 @@ class Utils:
             },
             'chicken' : {
                 'path': 'assets/sprites/chicken.png',
-                'hp': 20,
+                'hp': 10,
                 'speed': 1,
-                'water': 1
+                'water': 3
             },
             'bat' : {
                 'path': 'assets/sprites/bat.png',
@@ -237,17 +237,29 @@ class Utils:
             },
             'rabbit' : {
                 'path': 'assets/sprites/rabbit.png',
-                'hp': 100,
-                'speed': 0.5,
-                'water': 1
+                'hp': 50,
+                'speed': 2,
+                'water': 10
             },
             'rat' : {
                 'path': 'assets/sprites/rat.png',
-                'hp': 100,
+                'hp': 10,
                 'speed': 0.5,
                 'water': 1
             },
         }
+
+    WAVES = (
+        (((5, 'rat')),
+         ((4, 60), (1, 1200))),
+        (((7, 'rat')),
+         ((4, 55), (1, 1200))),
+        (((10, 'rat'), (3, 'chicken')),
+         ((9, 50), (3, 75), (1, 1200))),
+        (((15, 'rat'), (7, 'chicken')),
+         ((14, 45), (7, 60), (1, 1200))),
+        (((1, 'rabbit')),
+         ((1, 1200))))
 
     for id, en in ENEMIES.items():
         spritesheet = pygame.image.load(en['path'])
