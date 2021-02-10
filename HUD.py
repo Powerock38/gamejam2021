@@ -5,7 +5,7 @@ pygame.font.init()
 
 class HUD:
 
-    def __init__(self, garden, life = 100, water = 1, level = 0):
+    def __init__(self, garden, life = 10, water = 10, level = 0):
         """
         Initialise HUD at the right of the screen\n
         Parameters :\n
@@ -155,7 +155,6 @@ class HUD:
         return self.__water
 
     def set_water(self, water):
-
         self.__water = water
 
         # Initialise font with the font available in assets/font
@@ -186,7 +185,6 @@ class HUD:
         return self.__level
 
     def set_level(self, level):
-
         self.__level = level
 
         # Initialise font with the font available in assets/font
@@ -216,7 +214,6 @@ class HUD:
         return pygame.font.Font('assets/font/comic_book.otf', size)
 
     def buy(self, x ,y):
-
         # Check for evry elem if mouse is in
         for elem in self.__towers_rect:
             rect = elem["rect"]
@@ -230,14 +227,12 @@ class HUD:
                     self.refund()
 
     def refund(self):
-
         if self.GARDEN.holding != None:
-            self.set_water(self.get_water() + Utils.TOWERS[self.GARDEN.holding[0]]['price'])
+            self.set_water(self.get_water() + self.GARDEN.holding[0]['price'])
             self.GARDEN.holding = None
 
     # Draw the element
     def draw(self, screen):
-
         screen.blit(self.__surface, (896,0))
 
         mx, my = pygame.mouse.get_pos()

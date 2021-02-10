@@ -203,7 +203,6 @@ class Garden:
         wave_nb = self.HUD.get_level() % len(Utils.WAVES)
         wave = Utils.WAVES[wave_nb]
         
-
         if self.__wave_enemy_index == len(wave):
             self.__wave_enemy_index = 0
             self.HUD.set_level(self.HUD.get_level() + 1)
@@ -223,7 +222,8 @@ class Garden:
             self.enemies = [Enemy(enemy, [1, 0])] + self.enemies
             self.__tick = 0
             self.__wave_enemy_index += 2
-        else:self.__tick += 1
+        else:
+            self.__tick += 1
 
         #update towers
         for t in self.towers:
@@ -319,9 +319,9 @@ class Garden:
         img = tower['sprite'].convert_alpha()
         img.fill((255, 255, 255, 128), special_flags=pygame.BLEND_RGBA_MULT) 
         self.holding = (
-                tower,
-                img,
-            )
+            tower,
+            img,
+        )
 
     def putTower(self):
         """
@@ -330,21 +330,24 @@ class Garden:
         \ttower : the tower that will be placed
         """
 
+        mx, my = pygame.mouse.get_pos()
+
         if self.holding != None:
-            #set the music when we put a tower
-            channel = pygame.mixer.Channel(1)
-            channel.play(Garden.musicLoad_put)
-            channel.set_volume(0.1)
-
-
-            mx, my = pygame.mouse.get_pos()
             if mx < 896:
                 x, y = (mx - mx % 32, my - my % 32)
                 x_mh, y_mh = (x // 32, y // 32)
 
                 pos_already_taken = False
+                
+                allowed_tile = self.tiles[y_mh][x_mh] == 0
 
-                if self.tiles[y_mh][x_mh] == 0:
+                if self.holding[0]['path_border']:
+                    allowed_tile = self.tiles[y_mh][x_mh] == -1
+                
+                if self.holding[0]['path_mine']:
+                    allowed_tile = self.tiles[y_mh][x_mh] > 0
+
+                if allowed_tile:
                     for otherTower in self.towers:
                         if otherTower.coordinates == (x,y):
                             pos_already_taken = True
@@ -353,6 +356,19 @@ class Garden:
                     if not pos_already_taken:
                         self.towers.append(Tower(self.holding[0], (x,y)))
                         self.holding = None
+                        #set the music when we put a tower
+                        channel = pygame.mixer.Channel(1)
+                        channel.play(Garden.musicLoad_put)
+                        channel.set_volume(0.1)
+        else:
+            if self.HUD.get_water() > 0:
+                for tower in self.towers:
+                    if tower.energy <= tower.energyMax // 2:
+                        x,y = tower.coordinates
+                        if mx >= x and mx <= x + 32 and my >= y and my <= y + 32:
+                            tower.energy = tower.energyMax
+                            self.HUD.set_water(self.HUD.get_water() - 1)
+
 
     def removeTower(self):
         """
@@ -360,10 +376,6 @@ class Garden:
         Parameters :\n
         \ttower : the tower that will be removed
         """
-        #set the music when we remove a tower
-        channel = pygame.mixer.Channel(1)
-        channel.play(Garden.musicLoad_remove)
-        channel.set_volume(0.1)
 
         mx, my = pygame.mouse.get_pos()
         mx -= mx % 32
@@ -375,3 +387,7 @@ class Garden:
             if mx == posx and my == posy:
                 self.HUD.set_water(self.HUD.get_water() + t.price // 2)
                 self.towers.remove(t)
+                #set the music when we remove a tower
+                channel = pygame.mixer.Channel(1)
+                channel.play(Garden.musicLoad_remove)
+                channel.set_volume(0.1)

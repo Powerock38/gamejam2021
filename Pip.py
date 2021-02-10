@@ -22,7 +22,7 @@ class Pip:
         """
         Constructor of the pips\n
         Arguments :\n
-        \tcoordinates : the coordinates of the pip (int) (default (10,10))
+        \tcoordinates : the coordinates of the pip (int)
         \tdamage : damage of the pip (int) (default 1)\n
         Return :\n
         None
