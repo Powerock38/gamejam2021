@@ -50,26 +50,26 @@ class Utils:
         'pepper' : {
             'path':'assets/fruits-veggies/pepper_green.png',
             'name':'Pepper',
-            'price':100,
+            'price':30,
             'description':'blablabla',
-            'fire_rate':10,
-            'damage':1,
+            'fire_rate':0.5,
+            'damage':20,
             'range':100,
             'max_attack': 1,
-            'energy_consumption':2.5,
-            'sleeping_time': 4
+            'energy_consumption':50,
+            'sleeping_time': 10
         },
 
         'banana' : {
             'path':'assets/fruits-veggies/banana.png',
             'name':'Banana',
-            'price':10,
+            'price':100,
             'description':'blablabla',
-            'fire_rate':1,
-            'damage':2,
+            'fire_rate':6,
+            'damage':3,
             'range':85,
-            'max_attack': 1,
-            'energy_consumption':1.5,
+            'max_attack': 3,
+            'energy_consumption':8,
             'sleeping_time': 4
         },
         'lettuce' : {
@@ -237,7 +237,7 @@ class Utils:
             },
             'rabbit' : {
                 'path': 'assets/sprites/rabbit.png',
-                'hp': 50,
+                'hp': 30,
                 'speed': 2,
                 'water': 10
             },
@@ -250,17 +250,24 @@ class Utils:
         }
 
     WAVES = (
-        (5 * ('rat', 60)),
+        (5 * ('rat', 80)),
         
-        (7 * ('rat', 55)),
+        (7 * ('rat', 70)),
         
-        (10 * ('rat', 50) +
-         3 * ('chicken', 75)),
+        (10 * ('rat', 60) +
+         3 * ('chicken', 90)),
 
-        (15 * ('rat', 45) +
-         7 * ('chicken', 60)),
+        (15 * ('rat', 50) +
+         7 * ('chicken', 75)),
         
-        (1 * ('rabbit', 0))
+        (1 * ('rabbit', 120)),
+
+         (30 * ('rat', 40) +
+         1 * ('rabbit', 300)),
+          
+         (40 * ('rat', 40) +
+         10 * ('chicken', 60) +
+         1 * ('rabbit', 240))
     )
 
     for id, en in ENEMIES.items():
