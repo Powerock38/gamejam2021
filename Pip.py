@@ -31,7 +31,7 @@ class Pip:
         """
         #Set the music for the pip
         channel = pygame.mixer.Channel(Pip.numPip % 1000 + 2)
-        channel.play(Pip.musicLoad, 1)
+        channel.play(Pip.musicLoad, 0)
         channel.set_volume(0.08)
         Pip.numPip += 1
 

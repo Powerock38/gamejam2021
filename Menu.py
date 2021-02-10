@@ -42,8 +42,6 @@ class Menu:
         scoreboard = f.read().split("\n")
         f.close()
 
-        print(scoreboard)
-
         for i, x in enumerate(scoreboard):
             text = x.split(" : ")
             t1 = font.render(text[0], False, (255, 255, 255))
