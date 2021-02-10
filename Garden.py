@@ -292,6 +292,6 @@ class Garden:
             posx, posy = g.coordinates
             posx -= posx % 32
             posy -= posy % 32
-            if mx >= posx and mx <= posx + 32 and my >= posy and my <= posy + 32:
+            if mx == posx and my == posy:
                 self.towers.remove(g)
                 del g
