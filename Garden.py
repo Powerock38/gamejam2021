@@ -16,7 +16,7 @@ class Garden:
         #Initilalisation of the music of the Garden
         channel = pygame.mixer.Channel(0)
         channel.play(Garden.musicLoad, -1)
-        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.set_volume(0.25)
 
         self.HUD = None
         self.__tick = 0
@@ -200,9 +200,10 @@ class Garden:
 
         #update towers
         for t in self.towers:
-            pip = t.update(self.enemies)
-            if pip:
-                self.pips.append(pip)
+            pips = t.update(self.enemies)
+            if pips:
+                for pip in pips:
+                    self.pips.append(pip)
 
         #update pips
         for p in self.pips:

@@ -13,12 +13,12 @@ def update(graphic_elements):
     return graphic_elements
 
 def eventListener(event, elements):
+    mx, my = pygame.mouse.get_pos()
     if isinstance(elements[0], Garden):
         garden = elements[0]
         hud = elements[1]
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            mx, my = pygame.mouse.get_pos()
             if event.button == 1:
                 if mx >= 896:
                     hud.buy(mx, my)
@@ -33,12 +33,29 @@ def eventListener(event, elements):
             else:
                 garden.removeTower()
 
+        if hud.get_life() <= 0:
+            elements.remove(garden)
+            elements.remove(hud)
+            elements.append(End())
+
+    elif isinstance(elements[0], End):
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if mx >= 120 and mx <= 462 and my >= 642 and my <= 738:
+                #Start game
+                garden = Garden()
+                hud = HUD(garden, 10, 1000)
+                garden.HUD = hud
+
+                elements = [garden, hud]
+
+            elif mx >= 536 and mx <= 878 and my >= 642 and my <= 738:
+                View.crashed = True
+
     else:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            m_pos = pygame.mouse.get_pos()
             menu = elements[0]
             if menu.page == "Menu":
-                if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 350 and m_pos[1] <= 472:
+                if mx >= 295 and mx <= 728 and my >= 350 and my <= 472:
 
                     #Start game
                     garden = Garden()
@@ -46,19 +63,19 @@ def eventListener(event, elements):
                     garden.HUD = hud
 
                     elements = [garden, hud]
-                    
-                elif m_pos[0] >= 341 and m_pos[0] <= 683 and m_pos[1] >= 492 and m_pos[1] <= 588:
+
+                elif mx >= 341 and mx <= 683 and my >= 492 and my <= 588:
                     menu.page = "Rules"
                     
-                elif m_pos[0] >= 341 and m_pos[0] <= 683 and m_pos[1] >= 608 and m_pos[1] <= 704:
+                elif mx >= 341 and mx <= 683 and my >= 608 and my <= 704:
                     menu.page = "Credits"
-            
+
             elif menu.page == "Rules":
-                if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 608 and m_pos[1] <= 730:
+                if mx >= 295 and mx <= 728 and my >= 608 and my <= 730:
                     menu.page = "Menu"
-                
+
             elif menu.page == "Credits":
-                if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 608 and m_pos[1] <= 730:
+                if mx >= 295 and mx <= 728 and my >= 608 and my <= 730:
                     menu.page = "Menu"
 
     return elements
