@@ -7,7 +7,6 @@ class Pip:
     Class Pip :\n
     Attibuts :\n
     \tcoordinates : the coordinates of the pip (int) (default (10,10))
-    \tsize : size of the pip (int) (default 1)
     \tdamage : damage of the pip (int) (default 1)
     """
 
@@ -19,12 +18,11 @@ class Pip:
     sprite = pygame.image.load('assets/particles/bullet.png').subsurface(((14, 14), (4, 4)))
     musicLoad = pygame.mixer.Sound("assets/musics/attack.ogg")
 
-    def __init__(self, coordinates, enemy, size = 1, damage = 1):
+    def __init__(self, coordinates, enemy, damage = 1):
         """
         Constructor of the pips\n
         Arguments :\n
         \tcoordinates : the coordinates of the pip (int) (default (10,10))
-        \tsize : size of the pip (int) (default 1)
         \tdamage : damage of the pip (int) (default 1)\n
         Return :\n
         None
@@ -37,7 +35,6 @@ class Pip:
 
         self.coordinates = (coordinates[0] + 16, coordinates[1] + 16)
         self.enemy = enemy
-        self.__size = size
         self.damage = damage
     
     def move(self):

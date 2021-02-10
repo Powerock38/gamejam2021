@@ -77,7 +77,7 @@ class Tower:
     def update(self, enemies):
         if self.__energy > 0:
             self.tick += 1
-            if self.tick >= self.rate:
+            if self.tick >= 60 // self.rate:
                 self.tick = 0
                 attack = 0
                 for enemy in enemies:
@@ -87,7 +87,7 @@ class Tower:
                         distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
 
                         if distance < self.__towerRange:
-                            pip = Pip(self.coordinates, enemy)
+                            pip = Pip(self.coordinates, enemy, self.damage)
                             self.__energy -= self.__energy_consumption
                             attack += 1
                             return pip
