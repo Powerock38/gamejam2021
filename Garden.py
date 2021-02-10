@@ -21,7 +21,7 @@ class Garden:
 
         self.HUD = None
         self.__tick = 0
-        self.__tickMax = 200
+        self.__wave_enemy_index = 0
 
         directions = [[1, 0], [0, 1], [-1, 0], [0, -1]]
 
@@ -182,18 +182,31 @@ class Garden:
         self.tiles = tmp_garden
 
     def update(self):
-        if self.__tick > self.__tickMax:
-            self.spawnEnemy()
+        # waves
+        difficulty = self.HUD.get_level() // len(Utils.WAVES)
+        wave_nb = self.HUD.get_level() % len(Utils.WAVES)
+        wave = Utils.WAVES[wave_nb]
+        
+        if self.__tick > wave[self.__wave_enemy_index + 1]:
+            enemy = Utils.ENEMIES[wave[self.__wave_enemy_index]]
+            self.enemies = [Enemy(enemy, [1, 0])] + self.enemies
             self.__tick = 0
-            self.__tickMax = max(30, self.__tickMax - 1)
+            self.__wave_enemy_index += 2
+            
+            if self.__wave_enemy_index >= len(wave):
+                self.__wave_enemy_index = 0
+                self.HUD.set_level(self.HUD.get_level() + 1)
         else:
             self.__tick += 1
 
+        #update towers
         for t in self.towers:
-            pip = t.update(self.enemies)
-            if pip:
-                self.pips.append(pip)
+            pips = t.update(self.enemies)
+            if pips:
+                for pip in pips:
+                    self.pips.append(pip)
 
+        #update pips
         for p in self.pips:
             deadEnemy = p.update()
             
@@ -207,7 +220,7 @@ class Garden:
                     if p2.enemy == None:
                         self.pips.remove(p2)
                 
-
+        #update enemies
         for en in self.enemies:
             if en.hp <= 0:
                 self.HUD.set_water(self.HUD.get_water() + en.water)
@@ -261,10 +274,6 @@ class Garden:
                 x_32, y_32 = (mx - mx % 32, my - my % 32)
                 screen.blit(self.holding[1], (x_32, y_32))
                 pygame.draw.circle(screen, (255, 0, 0, 128), (x_32 + 16, y_32 + 16), self.holding[2], 1)
-
-    def spawnEnemy(self):
-        enemy = choice(list(Utils.ENEMIES.values()))
-        self.enemies = [Enemy(enemy, [1, 0])] + self.enemies
 
     def hold(self, tower):
         img = pygame.image.load(Utils.TOWERS[tower]['path']).convert_alpha()

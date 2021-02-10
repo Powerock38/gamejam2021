@@ -80,17 +80,20 @@ class Tower:
             if self.tick >= 60 // self.rate:
                 self.tick = 0
                 attack = 0
+                pips = []
                 for enemy in enemies:
-                    if self.__energy > 0 and attack < self.max_attack:
+                    if attack < self.max_attack:
                         pos1 = (self.coordinates[0] + 16, self.coordinates[1] + 16)
                         pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0] + 16, enemy.pos[1] * 32 + enemy.pos_in_tile[1] + 16)
                         distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
 
                         if distance < self.__towerRange:
-                            pip = Pip(self.coordinates, enemy, self.damage)
+                            pips.append(Pip(self.coordinates, enemy, self.damage))
                             self.__energy -= self.__energy_consumption
+                            if self.__energy <= 0:
+                                self.tick = 0
                             attack += 1
-                            return pip
+                return pips
         else:
             if self.tick >= 60 * self.sleeping_time:
                 self.tick = 0
