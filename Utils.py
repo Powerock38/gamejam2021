@@ -6,6 +6,7 @@ class Utils:
     WHITE = (255,255,255)
     BLUE = (115,182,254)
     RED = (255,0,0)
+    GREEN = (50,255,0)
 
     TOWERS = {
         'apple' : {
