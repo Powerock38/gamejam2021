@@ -8,6 +8,9 @@ from random import randint
 class Garden:
     pygame.mixer.init()
 
+    musicLoad_put = pygame.mixer.Sound("assets/musics/putTower.ogg")
+    musicLoad_remove = pygame.mixer.Sound("assets/musics/removeTower.ogg")
+
     def __init__(self, tiles=[]):
         #Initilalisation of the music of the Garden
         musicLoad = pygame.mixer.Sound("assets/musics/tmp_main.ogg")
@@ -270,9 +273,9 @@ class Garden:
 
         if self.holding != None:
             #set the music when we put a tower
-            musicLoad = pygame.mixer.Sound("assets/musics/putTower.ogg")
-            pygame.mixer.Channel(1).play(musicLoad)
-            pygame.mixer.Channel(1).set_volume(0.1)
+            channel = pygame.mixer.Channel(1)
+            channel.play(Garden.musicLoad_put)
+            channel.set_volume(0.08)
 
 
             mx, my = pygame.mouse.get_pos()
@@ -300,9 +303,9 @@ class Garden:
         \ttower : the tower that will be removed
         """
         #set the music when we remove a tower
-        musicLoad = pygame.mixer.Sound("assets/musics/removeTower.ogg")
-        pygame.mixer.Channel(1).play(musicLoad)
-        pygame.mixer.Channel(1).set_volume(0.1)
+        channel = pygame.mixer.Channel(1)
+        channel.play(Garden.musicLoad_remove)
+        channel.set_volume(0.08)
 
         mx, my = pygame.mouse.get_pos()
         mx -= mx % 32
