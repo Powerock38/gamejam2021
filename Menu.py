@@ -1,6 +1,7 @@
 import pygame
 
 class Menu:
+    pygame.mixer.init()
 
     def __init__(self):
         
@@ -12,7 +13,11 @@ class Menu:
 
         background = pygame.image.load("assets/menu.png")
         play_button = pygame.image.load("assets/play.png")
-        
+
+        #Initilalisation of the music
+        pygame.mixer.music.load("assets/musics/tmp_menu.mp3")
+        pygame.mixer.music.play(-1)
+
         self.__menu.blit(background, (0, 0))
         self.__menu.blit(play_button, (295, 350))
         self.__menu.blit(pygame.image.load("assets/rules.png"), (341, 492))

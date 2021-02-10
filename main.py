@@ -62,28 +62,6 @@ def eventListener(event, elements):
                     menu.page = "Menu"
 
     return elements
-    
-    # elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3: #3 => right click
-    #     print("coucou")
-    #     for g in graphic_elements:
-    #         if isinstance(g, Tower) and \
-    #                 mouse_pos[0] // 32 < g.coordinates[0] // 32 and \
-    #                 mouse_pos[0] // 32 > g.coordinates[0] // 32 and \
-    #                 mouse_pos[1] // 32 > g.coordinates[1] // 32 and \
-    #                 mouse_pos[1] // 32 > g.coordinates[1] // 32:
-    #             graphic_elements[1].set_water(
-    #                 graphic_elements[1].get_water() + vegetable['price'] / 2)
-    #             graphic_elements.remove(g)
-    #             del g #c'est pas encore bon !!
-
-    # elif event.type == pygame.KEYDOWN:
-    #     if event.key == pygame.K_SPACE and hover:
-    #         if (graphic_elements[1].get_water() - vegetable['price']) >= 0:
-    #             graphic_elements, hover = putTower(graphic_elements, vegetable, hover)
-    #         else:
-    #             print("Not enough water !")
-
-    # return graphic_elements
 
 #Main
 

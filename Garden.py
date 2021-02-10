@@ -6,7 +6,14 @@ from Tower import Tower
 from random import randint
 
 class Garden:
-    def __init__(self, tiles = []):
+    pygame.mixer.init()
+
+    def __init__(self, tiles=[]):
+        #Initilalisation of the music of the Garden
+        pygame.mixer.music.load("assets/musics/tmp_main.mp3")
+        pygame.mixer.music.play(-1)
+
+
         self.HUD = None
         self.__tick = 0
         self.__tickMax = 200
