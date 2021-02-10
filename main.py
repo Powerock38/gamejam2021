@@ -2,7 +2,7 @@ from View import View
 from Garden import Garden
 from HUD import HUD
 from Menu import Menu
-# from End import End
+from End import End
 import pygame
 
 def update(graphic_elements):
