@@ -1,13 +1,8 @@
 from View import View
 from Garden import Garden
-from Tower import Tower
-from Pip import Pip
 from HUD import HUD
-from Utils import Utils
-from Enemy import Enemy
 from Menu import Menu
 import pygame
-import math
 
 def update(graphic_elements):
     for g in graphic_elements:

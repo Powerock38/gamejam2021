@@ -1,3 +1,4 @@
+import pygame
 
 class Utils:
 
@@ -186,10 +187,75 @@ class Utils:
     }
 
     ENEMIES = {
-        'farmer' : {
-            'path': 'assets/farmer.png',
-            'hp': 100,
-            'speed': 0.5,
-            'water': 1
-        },
-    }
+            'cow' : {
+                'path': 'assets/sprites/cow.png',
+                'hp': 100,
+                'speed': 0.5,
+                'water': 1
+            },
+            'chicken' : {
+                'path': 'assets/sprites/chicken.png',
+                'hp': 20,
+                'speed': 1,
+                'water': 1
+            },
+            'bat' : {
+                'path': 'assets/sprites/bat.png',
+                'hp': 10,
+                'speed': 2.5,
+                'water': 1
+            },
+            'dog' : {
+                'path': 'assets/sprites/dog.png',
+                'hp': 50,
+                'speed': 2,
+                'water': 1
+            },
+            'fox' : {
+                'path': 'assets/sprites/fox.png',
+                'hp': 40,
+                'speed': 2,
+                'water': 1
+            },
+            'frog' : {
+                'path': 'assets/sprites/frog.png',
+                'hp': 100,
+                'speed': 0.5,
+                'water': 1
+            },
+            'hyena' : {
+                'path': 'assets/sprites/hyena.png',
+                'hp': 100,
+                'speed': 2,
+                'water': 1
+            },
+            'monkey' : {
+                'path': 'assets/sprites/monkey.png',
+                'hp': 100,
+                'speed': 0.5,
+                'water': 1
+            },
+            'rabbit' : {
+                'path': 'assets/sprites/rabbit.png',
+                'hp': 100,
+                'speed': 0.5,
+                'water': 1
+            },
+            'rat' : {
+                'path': 'assets/sprites/rat.png',
+                'hp': 100,
+                'speed': 0.5,
+                'water': 1
+            },
+        }
+
+    for id, en in ENEMIES.items():
+        spritesheet = pygame.image.load(en['path'])
+        sprite_list = []
+        for direction in range(4):
+            frames = []
+            for frame in range(3):
+                frames.append(spritesheet.subsurface(((32 * frame, 32 * direction), (32, 32))))
+            sprite_list.append(frames)
+        
+        en['sprites'] = sprite_list
