@@ -17,6 +17,7 @@ class Tower:
     """
 
     sleepingFrames = [pygame.image.load('assets/particles/zzz.png').subsurface([i*32,0,32,32]) for i in range(3)]
+    wateringCan = pygame.image.load('assets/particles/watering_can.png')
 
     def __init__(self, tower, coordinates):
         """
@@ -33,8 +34,8 @@ class Tower:
         """
 
         self.coordinates = coordinates
-        self.__energy = 100
-        self.__energyMax = self.__energy
+        self.energy = 100
+        self.energyMax = self.energy
         self.tick = 0
         self.animTick = 0
 
@@ -43,7 +44,7 @@ class Tower:
         self.rate = tower['fire_rate']
         self.damage = tower['damage']
         self.__towerRange = tower['range']
-        self.__energy_consumption = tower['energy_consumption']
+        self.energy_consumption = tower['energy_consumption']
         self.max_attack = tower['max_attack']
         self.sleeping_time = tower['sleeping_time']
         self.price = tower['price']
@@ -66,9 +67,13 @@ class Tower:
         mx, my = pygame.mouse.get_pos()
         if mx >= x and mx <= x + 32 and my >= y and my <= y + 32:
             pygame.draw.circle(screen, (255, 0, 0, 128), (x + 16, y + 16), self.__towerRange, 1)
+            if self.energy <= self.energyMax // 2:
+                pygame.mouse.set_visible(False)
+                screen.blit(Tower.wateringCan, (mx, my))
+
 
         # sleeping
-        if self.__energy <= 0:
+        if self.energy <= 0:
             if self.animTick >= 120:
                 self.animTick = 0
                 
@@ -76,12 +81,12 @@ class Tower:
             self.animTick += 1
 
         else: # energy bars
-            for n in range(1, max(2, int((self.__energy/self.__energyMax) * 7))):
+            for n in range(1, max(2, int((self.energy/self.energyMax) * 7))):
                 w = 4
                 pygame.draw.rect(screen, Utils.BLUE, (x + (n - 1)*(w + 1), y + 30, w, 4))
 
     def update(self, enemies):
-        if self.__energy > 0:
+        if self.energy > 0:
             self.tick += 1
             if self.tick >= 60 // self.rate:
                 self.tick = 0
@@ -95,14 +100,14 @@ class Tower:
 
                         if distance < self.__towerRange:
                             pips.append(Pip(self.coordinates, enemy, self.damage))
-                            self.__energy -= self.__energy_consumption
-                            if self.__energy <= 0:
+                            self.energy -= self.energy_consumption
+                            if self.energy <= 0:
                                 self.tick = 0
                             attack += 1
                 return pips
         else:
             if self.tick >= 60 * self.sleeping_time:
                 self.tick = 0
-                self.__energy = self.__energyMax
+                self.energy = self.energyMax
 
             self.tick += 1

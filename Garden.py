@@ -286,6 +286,8 @@ class Garden:
     def draw(self, screen):
         screen.blit(self.__background, (0,0))
 
+        pygame.mouse.set_visible(True)
+
         for t in self.towers:
             t.draw(screen)
 
@@ -319,14 +321,9 @@ class Garden:
         \ttower : the tower that will be placed
         """
 
+        mx, my = pygame.mouse.get_pos()
+
         if self.holding != None:
-            #set the music when we put a tower
-            channel = pygame.mixer.Channel(1)
-            channel.play(Garden.musicLoad_put)
-            channel.set_volume(0.1)
-
-
-            mx, my = pygame.mouse.get_pos()
             if mx < 896:
                 x, y = (mx - mx % 32, my - my % 32)
                 x_mh, y_mh = (x // 32, y // 32)
@@ -343,6 +340,18 @@ class Garden:
                         tower = Utils.TOWERS[self.holding[0]]
                         self.towers.append(Tower(tower, (x,y)))
                         self.holding = None
+                        #set the music when we put a tower
+                        channel = pygame.mixer.Channel(1)
+                        channel.play(Garden.musicLoad_put)
+                        channel.set_volume(0.1)
+        else:
+            if self.HUD.get_water() > 0:
+                for tower in self.towers:
+                    if tower.energy <= tower.energyMax // 2:
+                        x,y = tower.coordinates
+                        if mx >= x and mx <= x + 32 and my >= y and my <= y + 32:
+                            tower.energy = tower.energyMax
+                            self.HUD.set_water(self.HUD.get_water() - 1)
 
     def removeTower(self):
         """
