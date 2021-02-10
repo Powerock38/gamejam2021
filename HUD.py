@@ -21,8 +21,7 @@ class HUD:
         self.__water = water
         self.__level = level
 
-        self.__surface = pygame.Surface((128,768))
-        self.__surface.fill(Utils.GRAY)
+        self.__surface = pygame.image.load("assets/ui/hub_background.png")
         
         self.__water_image = pygame.image.load("assets/ui/waterdrop.png")
         self.__heart_image = pygame.image.load("assets/ui/heart.png")
@@ -33,11 +32,11 @@ class HUD:
 
         # Container for tower text + tower sprites
         self.__tower_container = pygame.Surface((self.__surface.get_width(), 80*7+50)) # (128, 80 per sprite + 50 TOWER title)
-        self.__tower_container.fill(Utils.GRAY)
+        self.__tower_container.set_colorkey(Utils.BLACK)
         
         # Surface for TOWER text
         tower_title_surface = pygame.Surface((self.__surface.get_width(), 50))
-        tower_title_surface.fill(Utils.GRAY)
+        tower_title_surface.set_colorkey(Utils.BLACK)
 
         # Create the tower text
         self.__font = self.get_font(25)
@@ -57,7 +56,6 @@ class HUD:
         for id, tower in Utils.TOWERS.items():
 
             sprite_surface = pygame.Surface((self.__tower_container.get_width()//2, 80))
-            sprite_surface.fill(Utils.GRAY)
 
             # Display name
             # Get the size wich will be occupated by the text
@@ -138,7 +136,7 @@ class HUD:
         self.__font = self.get_font(25)
 
         life_surface = pygame.Surface((self.__surface.get_width(),54))
-        life_surface.fill(Utils.BLACK)
+        life_surface.set_colorkey(Utils.BLACK)
 
         # x, y cords
         x = life_surface.get_width() // 2
@@ -166,7 +164,7 @@ class HUD:
         self.__font = self.get_font(25)
 
         water_surface = pygame.Surface((self.__surface.get_width(),54))
-        water_surface.fill(Utils.GRAY)
+        water_surface.set_colorkey(Utils.BLACK)
 
         # x, y cords
         x = water_surface.get_width() // 2
@@ -199,7 +197,7 @@ class HUD:
 
 
         level_surface = pygame.Surface((self.__surface.get_width(),50))
-        level_surface.fill(Utils.GRAY)
+        level_surface.set_colorkey(Utils.BLACK)
 
         # x, y cords
         x = level_surface.get_width() // 2
