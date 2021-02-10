@@ -5,6 +5,8 @@ pygame.font.init()
 
 class Menu:
 
+    musicLoad = pygame.mixer.Sound("assets/musics/tmp_menu.ogg")
+
     def __init__(self):
         
         self.page = "Menu"
@@ -22,9 +24,9 @@ class Menu:
                           pygame.image.load("assets/ui/back_hover.png")]
 
         #Initilalisation of the music
-        pygame.mixer.music.load("assets/musics/tmp_menu.ogg")
-        pygame.mixer.music.play(-1)
-        pygame.mixer.music.set_volume(0.5)
+        channel = pygame.mixer.Channel(0)
+        channel.play(Menu.musicLoad,-1)
+        channel.set_volume(0.5)
 
         self.__menu.blit(pygame.image.load("assets/ui/menu.png"), (0, 0))
         self.__rules.blit(pygame.image.load("assets/ui/rules_page.png"), (0, 0))
@@ -39,8 +41,6 @@ class Menu:
         f = open("scoreboard", "r", encoding = "utf-8")
         scoreboard = f.read().split("\n")
         f.close()
-
-        print(scoreboard)
 
         for i, x in enumerate(scoreboard):
             text = x.split(" : ")
