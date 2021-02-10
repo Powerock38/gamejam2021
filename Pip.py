@@ -12,7 +12,7 @@ class Pip:
 
     pygame.mixer.init()
 
-    sprite = pygame.image.load('assets/tilesets/bullet.png').subsurface(((14, 14), (4, 4)))
+    sprite = pygame.image.load('assets/particles/bullet.png').subsurface(((14, 14), (4, 4)))
 
     def __init__(self, coordinates, enemy, size = 1, damage = 1):
         """

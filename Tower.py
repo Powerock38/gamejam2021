@@ -16,7 +16,7 @@ class Tower:
     \ttowerRange : the range of fire of the fower (int) (default 5)
     """
 
-    sleepingFrames = [pygame.image.load('assets/zzz.png').subsurface([i*32,0,32,32]) for i in range(3)]
+    sleepingFrames = [pygame.image.load('assets/particles/zzz.png').subsurface([i*32,0,32,32]) for i in range(3)]
 
     def __init__(self, tower, coordinates):
         """

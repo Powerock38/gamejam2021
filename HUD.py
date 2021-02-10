@@ -24,8 +24,8 @@ class HUD:
         self.__surface = pygame.Surface((128,768))
         self.__surface.fill(Utils.GRAY)
         
-        self.__water_image = pygame.image.load("assets/waterdrop.png")
-        self.__heart_image = pygame.image.load("assets/heart.png")
+        self.__water_image = pygame.image.load("assets/ui/waterdrop.png")
+        self.__heart_image = pygame.image.load("assets/ui/heart.png")
 
         self.set_level(level)
         self.set_water(water)
@@ -95,7 +95,7 @@ class HUD:
             sprite_rect.y = y + 50
 
             # Create tower hover
-            hover = pygame.image.load("assets/hover_board.png")
+            hover = pygame.image.load("assets/ui/hover_board.png")
             self.__font = self.get_font(24)
             
             dim = self.__font.size(tower["name"])

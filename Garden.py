@@ -171,6 +171,9 @@ class Garden:
                         tmp_row.append(0)
                         self.__background.blit(tile1, (32 * j, 32 * i))
             tmp_garden.append(tmp_row)
+        
+        self.__background.blit(pygame.image.load('assets/tilesets/farmer.png'), (800, 736))
+
         self.tiles = tmp_garden
 
     def update(self):
@@ -226,6 +229,7 @@ class Garden:
                 if len(possibleMoves):
                     en.move(random.choice(possibleMoves))
                 else:
+                    self.HUD.set_life(self.HUD.get_life() - 1)
                     self.enemies.remove(en)
 
 

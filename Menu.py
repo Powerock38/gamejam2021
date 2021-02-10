@@ -12,23 +12,23 @@ class Menu:
         self.__menu = pygame.Surface((1024, 768))
         self.__rules = pygame.Surface((1024, 768))
         self.__credits = pygame.Surface((1024, 768))
-        self.__buttons = [pygame.image.load("assets/play.png"),
-                          pygame.image.load("assets/rules.png"),
-                          pygame.image.load("assets/credits.png"),
-                          pygame.image.load("assets/back.png"),
-                          pygame.image.load("assets/play_hover.png"),
-                          pygame.image.load("assets/rules_hover.png"),
-                          pygame.image.load("assets/credits_hover.png"),
-                          pygame.image.load("assets/back_hover.png")]
+        self.__buttons = [pygame.image.load("assets/ui/play.png"),
+                          pygame.image.load("assets/ui/rules.png"),
+                          pygame.image.load("assets/ui/credits.png"),
+                          pygame.image.load("assets/ui/back.png"),
+                          pygame.image.load("assets/ui/play_hover.png"),
+                          pygame.image.load("assets/ui/rules_hover.png"),
+                          pygame.image.load("assets/ui/credits_hover.png"),
+                          pygame.image.load("assets/ui/back_hover.png")]
 
         #Initilalisation of the music
         musicLoad = pygame.mixer.Sound("assets/musics/tmp_menu.ogg")
         pygame.mixer.Channel(0).play(musicLoad, -1)
         pygame.mixer.Channel(0).set_volume(0.1)
 
-        self.__menu.blit(pygame.image.load("assets/menu.png"), (0, 0))
-        self.__rules.blit(pygame.image.load("assets/rules_page.png"), (0, 0))
-        self.__credits.blit(pygame.image.load("assets/credits_page.png"), (0, 0))
+        self.__menu.blit(pygame.image.load("assets/ui/menu.png"), (0, 0))
+        self.__rules.blit(pygame.image.load("assets/ui/rules_page.png"), (0, 0))
+        self.__credits.blit(pygame.image.load("assets/ui/credits_page.png"), (0, 0))
 
         self.__scoreboard = pygame.Surface((200, 260))
         self.__scoreboard.set_alpha(0)
