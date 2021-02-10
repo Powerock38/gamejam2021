@@ -15,7 +15,7 @@ class Menu:
         play_button = pygame.image.load("assets/play.png")
 
         #Initilalisation of the music
-        pygame.mixer.music.load("assets/musics/tmp_menu.mp3")
+        pygame.mixer.music.load("assets/musics/tmp_menu.ogg")
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.5)
 
