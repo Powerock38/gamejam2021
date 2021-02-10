@@ -85,7 +85,7 @@ class Garden:
         self.enemies = []
         self.towers = []
         self.pips = []
-        self.__holding = None
+        self.holding = None
 
         image = pygame.image.load("assets/tilesets/plowed_soil.png")
 
@@ -202,6 +202,7 @@ class Garden:
 
         for en in self.enemies:
             if en.hp <= 0:
+                self.HUD.set_water(self.HUD.get_water() + en.water)
                 self.enemies.remove(en)
             else:
                 x = en.pos[0]
@@ -240,22 +241,21 @@ class Garden:
         for en in self.enemies:
             en.draw(screen)
 
-        if self.__holding != None:
+        if self.holding != None:
             mx, my = pygame.mouse.get_pos()
             if mx < 896:
                 x_32, y_32 = (mx - mx % 32, my - my % 32)
-                screen.blit(self.__holding[1], (x_32, y_32))
-                pygame.draw.circle(screen, (255, 0, 0, 128), (x_32 + 16, y_32 + 16), self.__holding[2], 1)
+                screen.blit(self.holding[1], (x_32, y_32))
+                pygame.draw.circle(screen, (255, 0, 0, 128), (x_32 + 16, y_32 + 16), self.holding[2], 1)
 
     def spawnEnemy(self):
-        sprite = pygame.image.load("assets/farmer.png")
-        self.enemies = [Enemy(sprite, pos = [1, 0])] + self.enemies
+        self.enemies = [Enemy(Utils.ENEMIES['farmer'], [1, 0])] + self.enemies
 
     def hold(self, tower):
         img = pygame.image.load(Utils.TOWERS[tower]['path']).convert_alpha()
         transparency = 128
         img.fill((255, 255, 255, transparency), special_flags=pygame.BLEND_RGBA_MULT) 
-        self.__holding = (
+        self.holding = (
                 tower,
                 img,
                 Utils.TOWERS[tower]['range']
@@ -268,7 +268,7 @@ class Garden:
         \ttower : the tower that will be placed
         """
 
-        if self.__holding != None:
+        if self.holding != None:
             mx, my = pygame.mouse.get_pos()
             if mx < 896:
                 x, y = (mx - mx % 32, my - my % 32)
@@ -280,11 +280,12 @@ class Garden:
                     for otherTower in self.towers:
                         if otherTower.coordinates == (x,y):
                             pos_already_taken = True
+                            break
 
                     if not pos_already_taken:
-                        tower = Utils.TOWERS[self.__holding[0]]
+                        tower = Utils.TOWERS[self.holding[0]]
                         self.towers.append(Tower(tower, (x,y)))
-                        self.__holding = None
+                        self.holding = None
 
     def removeTower(self):
         """
@@ -295,10 +296,10 @@ class Garden:
         mx, my = pygame.mouse.get_pos()
         mx -= mx % 32
         my -= my % 32
-        for g in self.towers:
-            posx, posy = g.coordinates
+        for t in self.towers:
+            posx, posy = t.coordinates
             posx -= posx % 32
             posy -= posy % 32
             if mx == posx and my == posy:
-                self.towers.remove(g)
-                del g
+                self.HUD.set_water(self.HUD.get_water() + t.price // 2)
+                self.towers.remove(t)

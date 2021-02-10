@@ -10,6 +10,8 @@ class Pip:
     \tdamage : damage of the pip (int) (default 1)
     """
 
+    sprite = pygame.image.load('assets/tilesets/bullet.png').subsurface(((14, 14), (4, 4)))
+
     def __init__(self, coordinates, enemy, size = 1, damage = 1):
         """
         Constructor of the pips\n
@@ -24,7 +26,6 @@ class Pip:
         self.enemy = enemy
         self.__size = size
         self.damage = damage
-        self.__surface = pygame.image.load('assets/tilesets/bullet.png').subsurface(((14, 14), (4, 4)))
     
     def move(self):
         """
@@ -51,7 +52,7 @@ class Pip:
         None
         """
 
-        screen.blit(self.__surface, self.coordinates)
+        screen.blit(Pip.sprite, self.coordinates)
 
     def update(self):
         """

@@ -126,7 +126,7 @@ class Utils:
             'name':'Squash',
             'price':200,
             'description':'blablabla',
-            'fire_rate':40,
+            'fire_rate':20,
             'damage':0.6,
             'range':7,
             'max_attack': 5,
@@ -189,6 +189,7 @@ class Utils:
         'farmer' : {
             'path': 'assets/farmer.png',
             'hp': 100,
-            'speed': 0.5
+            'speed': 0.5,
+            'water': 1
         },
     }

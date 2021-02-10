@@ -1,7 +1,7 @@
 import pygame
 
 class Enemy:
-    def __init__(self, sprite, hp = 100, speed = 0.5, pos = [0, 0]):
+    def __init__(self, enemy, pos):
         """
         Constructor of the Enemy class\n
         Parameters :\n
@@ -10,10 +10,11 @@ class Enemy:
         \tspeed : the speed of the enemy (int) (default 0.5)
         \tpos : position of the enemy (int) (default (0,0))
         """
-        self.__sprite = sprite
-        self.hp = hp
-        self.__hpMax = hp
-        self.__speed = speed
+        self.__sprite = pygame.image.load(enemy['path'])
+        self.hp = enemy['hp']
+        self.__hpMax = self.hp
+        self.__speed = enemy['speed']
+        self.water = enemy['water']
         self.pos = pos
         self.pos_in_tile = [0, 0]
 

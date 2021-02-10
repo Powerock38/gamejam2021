@@ -207,7 +207,7 @@ class HUD:
                 rect = elem["rect"]
                 if rect.collidepoint(mx-896,my):
                     tower = Utils.TOWERS[elem["id"]]
-                    if self.get_water() >= tower['price']:
+                    if self.get_water() >= tower['price'] and self.GARDEN.holding == None:
                         self.set_water(self.get_water() - tower['price'])
                         self.GARDEN.hold(elem['id'])
 
