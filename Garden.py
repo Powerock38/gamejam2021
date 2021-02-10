@@ -286,8 +286,6 @@ class Garden:
     def draw(self, screen):
         screen.blit(self.__background, (0,0))
 
-        pygame.mouse.set_visible(True)
-
         for t in self.towers:
             t.draw(screen)
 
@@ -302,16 +300,14 @@ class Garden:
             if mx < 896:
                 x_32, y_32 = (mx - mx % 32, my - my % 32)
                 screen.blit(self.holding[1], (x_32, y_32))
-                pygame.draw.circle(screen, (255, 0, 0, 128), (x_32 + 16, y_32 + 16), self.holding[2], 1)
+                pygame.draw.circle(screen, (255, 0, 0, 128), (x_32 + 16, y_32 + 16), self.holding[0]['range'], 1)
 
     def hold(self, tower):
-        img = pygame.image.load(Utils.TOWERS[tower]['path']).convert_alpha()
-        transparency = 128
-        img.fill((255, 255, 255, transparency), special_flags=pygame.BLEND_RGBA_MULT) 
+        img = tower['sprite'].convert_alpha()
+        img.fill((255, 255, 255, 128), special_flags=pygame.BLEND_RGBA_MULT) 
         self.holding = (
                 tower,
                 img,
-                Utils.TOWERS[tower]['range']
             )
 
     def putTower(self):
@@ -337,8 +333,7 @@ class Garden:
                             break
 
                     if not pos_already_taken:
-                        tower = Utils.TOWERS[self.holding[0]]
-                        self.towers.append(Tower(tower, (x,y)))
+                        self.towers.append(Tower(self.holding[0], (x,y)))
                         self.holding = None
                         #set the music when we put a tower
                         channel = pygame.mixer.Channel(1)

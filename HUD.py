@@ -225,7 +225,7 @@ class HUD:
                 if self.GARDEN.holding == None:
                     if self.get_water() >= tower['price']:
                         self.set_water(self.get_water() - tower['price'])
-                        self.GARDEN.hold(elem['id'])
+                        self.GARDEN.hold(tower)
                 else:
                     self.refund()
 

@@ -270,6 +270,9 @@ class Utils:
          1 * ('rabbit', 240))
     )
 
+    for id, tw in TOWERS.items():
+        tw['sprite'] = pygame.image.load(tw['path'])
+
     for id, en in ENEMIES.items():
         spritesheet = pygame.image.load(en['path'])
         sprite_list = []

@@ -17,7 +17,7 @@ class Tower:
     """
 
     sleepingFrames = [pygame.image.load('assets/particles/zzz.png').subsurface([i*32,0,32,32]) for i in range(3)]
-    wateringCan = pygame.image.load('assets/particles/watering_can.png')
+    wateringCan = pygame.image.load('assets/ui/watering_can.png')
 
     def __init__(self, tower, coordinates):
         """
@@ -39,11 +39,11 @@ class Tower:
         self.tick = 0
         self.animTick = 0
 
-        self.__sprite = pygame.image.load(tower['path'])
+        self.sprite = tower['sprite']
         self.name = tower['name']
         self.rate = tower['fire_rate']
         self.damage = tower['damage']
-        self.__towerRange = tower['range']
+        self.towerRange = tower['range']
         self.energy_consumption = tower['energy_consumption']
         self.max_attack = tower['max_attack']
         self.sleeping_time = tower['sleeping_time']
@@ -59,16 +59,15 @@ class Tower:
         """            
 
         # sprite
-        screen.blit(self.__sprite, self.coordinates)
+        screen.blit(self.sprite, self.coordinates)
         
         x,y = self.coordinates
 
         #hover
         mx, my = pygame.mouse.get_pos()
         if mx >= x and mx <= x + 32 and my >= y and my <= y + 32:
-            pygame.draw.circle(screen, (255, 0, 0, 128), (x + 16, y + 16), self.__towerRange, 1)
+            pygame.draw.circle(screen, (255, 0, 0, 128), (x + 16, y + 16), self.towerRange, 1)
             if self.energy <= self.energyMax // 2:
-                pygame.mouse.set_visible(False)
                 screen.blit(Tower.wateringCan, (mx, my))
 
 
@@ -98,7 +97,7 @@ class Tower:
                         pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0] + 16, enemy.pos[1] * 32 + enemy.pos_in_tile[1] + 16)
                         distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
 
-                        if distance < self.__towerRange:
+                        if distance < self.towerRange:
                             pips.append(Pip(self.coordinates, enemy, self.damage))
                             self.energy -= self.energy_consumption
                             if self.energy <= 0:
