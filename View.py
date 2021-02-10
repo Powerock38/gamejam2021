@@ -28,7 +28,6 @@ class View:
                     if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                         self.__crashed = True
                     else:
-                        # self.__graphic_elements = eventListener(event, self.__graphic_elements)
                         self.__graphic_elements = eventListener(event, self.__graphic_elements)
 
                 self.__graphic_elements = update(self.__graphic_elements)

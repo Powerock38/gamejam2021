@@ -21,13 +21,18 @@ def eventListener(event, elements):
         garden = elements[0]
         hud = elements[1]
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             mx, my = pygame.mouse.get_pos()
             if event.button == 1:
                 if mx >= 896:
                     hud.buy(mx, my)
                 elif mx < 896:
                     garden.putTower()
+
+        #Delete the tower that is holding
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
+            garden.removeTower()
+
     else:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             m_pos = pygame.mouse.get_pos()

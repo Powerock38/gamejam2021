@@ -278,3 +278,20 @@ class Garden:
                         tower = Utils.TOWERS[self.__holding[0]]
                         self.towers.append(Tower(tower, (x,y)))
                         self.__holding = None
+
+    def removeTower(self):
+        """
+        Remove a tower at mouse postion\n
+        Parameters :\n
+        \ttower : the tower that will be removed
+        """
+        mx, my = pygame.mouse.get_pos()
+        mx -= mx % 32
+        my -= my % 32
+        for g in self.towers:
+            posx, posy = g.coordinates
+            posx -= posx % 32
+            posy -= posy % 32
+            if mx >= posx and mx <= posx + 32 and my >= posy and my <= posy + 32:
+                self.towers.remove(g)
+                del g
