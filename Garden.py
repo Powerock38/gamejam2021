@@ -109,6 +109,10 @@ class Garden:
         tile12 = image.subsurface(((64, 0), (32, 32)))
         tile13 = image.subsurface(((32, 32), (32, 32)))
         tile14 = image.subsurface(((32, 0), (32, 32)))
+        tile15 = image.subsurface(((0, 0), (32, 32)))
+        tile16 = image.subsurface(((0, 160), (32, 32)))
+        tile17 = image.subsurface(((32, 160), (32, 32)))
+        tile18 = image.subsurface(((64, 160), (32, 32)))
 
         width = len(self.tiles[0]) * 32
         height = len(self.tiles) * 32
@@ -175,7 +179,17 @@ class Garden:
                         self.__background.blit(tile14, (32 * j, 32 * i))
                     else:
                         tmp_row.append(0)
-                        self.__background.blit(tile1, (32 * j, 32 * i))
+                        r = randint(0, 99)
+                        if not r:
+                            self.__background.blit(tile15, (32 * j, 32 * i))
+                        elif not r - 1:
+                            self.__background.blit(tile16, (32 * j, 32 * i))
+                        elif not r - 2:
+                            self.__background.blit(tile17, (32 * j, 32 * i))
+                        elif not r - 3:
+                            self.__background.blit(tile18, (32 * j, 32 * i))
+                        else:
+                            self.__background.blit(tile1, (32 * j, 32 * i))
             tmp_garden.append(tmp_row)
         
         self.__background.blit(pygame.image.load('assets/tilesets/farmer.png'), (800, 736))
