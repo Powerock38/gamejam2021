@@ -5,7 +5,7 @@ pygame.font.init()
 
 class Menu:
 
-    musicLoad = pygame.mixer.Sound("assets/musics/tmp_menu.ogg")
+    musicLoad = pygame.mixer.Sound("assets/musics/menu.ogg")
 
     def __init__(self):
         
@@ -14,23 +14,23 @@ class Menu:
         self.__menu = pygame.Surface((1024, 768))
         self.__rules = pygame.Surface((1024, 768))
         self.__credits = pygame.Surface((1024, 768))
-        self.__buttons = [pygame.image.load("assets/ui/play.png"),
-                          pygame.image.load("assets/ui/rules.png"),
-                          pygame.image.load("assets/ui/credits.png"),
-                          pygame.image.load("assets/ui/back.png"),
-                          pygame.image.load("assets/ui/play_hover.png"),
-                          pygame.image.load("assets/ui/rules_hover.png"),
-                          pygame.image.load("assets/ui/credits_hover.png"),
-                          pygame.image.load("assets/ui/back_hover.png")]
+        self.__buttons = [pygame.image.load("assets/ui/menu/play.png"),
+                          pygame.image.load("assets/ui/menu/rules.png"),
+                          pygame.image.load("assets/ui/menu/credits.png"),
+                          pygame.image.load("assets/ui/menu/back.png"),
+                          pygame.image.load("assets/ui/menu/play_hover.png"),
+                          pygame.image.load("assets/ui/menu/rules_hover.png"),
+                          pygame.image.load("assets/ui/menu/credits_hover.png"),
+                          pygame.image.load("assets/ui/menu/back_hover.png")]
 
         #Initilalisation of the music
         channel = pygame.mixer.Channel(0)
         channel.play(Menu.musicLoad,-1)
         channel.set_volume(0.5)
 
-        self.__menu.blit(pygame.image.load("assets/ui/menu.png"), (0, 0))
-        self.__rules.blit(pygame.image.load("assets/ui/rules_page.png"), (0, 0))
-        self.__credits.blit(pygame.image.load("assets/ui/credits_page.png"), (0, 0))
+        self.__menu.blit(pygame.image.load("assets/ui/menu/menu.png"), (0, 0))
+        self.__rules.blit(pygame.image.load("assets/ui/menu/rules_page.png"), (0, 0))
+        self.__credits.blit(pygame.image.load("assets/ui/menu/credits_page.png"), (0, 0))
 
         self.__scoreboard = pygame.Surface((200, 260))
         self.__scoreboard.set_colorkey((0, 0, 0))

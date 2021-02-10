@@ -2,6 +2,7 @@ from View import View
 from Garden import Garden
 from HUD import HUD
 from Menu import Menu
+from End import End
 import pygame
 
 def update(graphic_elements):
@@ -26,7 +27,11 @@ def eventListener(event, elements):
 
         #Delete the tower that is holding
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
-            garden.removeTower()
+            if garden.holding != None:
+                # The method will detect that garden.holding is not None and will refund
+                hud.refund()
+            else:
+                garden.removeTower()
 
     else:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -61,5 +66,7 @@ def eventListener(event, elements):
 #Main
 
 menu = Menu()
+end = End()
 
+#view = View([end], update, eventListener)
 view = View([menu], update, eventListener)

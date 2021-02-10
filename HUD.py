@@ -218,17 +218,23 @@ class HUD:
 
     def buy(self, x ,y):
 
-        mx, my = pygame.mouse.get_pos()
-        # Check if mouse is in HUD
-        if mx >= 896:
-            # Check for evry elem if mouse is in
-            for elem in self.__towers_rect:
-                rect = elem["rect"]
-                if rect.collidepoint(mx-896,my):
-                    tower = Utils.TOWERS[elem["id"]]
-                    if self.get_water() >= tower['price'] and self.GARDEN.holding == None:
+        # Check for evry elem if mouse is in
+        for elem in self.__towers_rect:
+            rect = elem["rect"]
+            if rect.collidepoint(x-896,y):
+                tower = Utils.TOWERS[elem["id"]]
+                if self.GARDEN.holding == None:
+                    if self.get_water() >= tower['price']:
                         self.set_water(self.get_water() - tower['price'])
                         self.GARDEN.hold(elem['id'])
+                else:
+                    self.refund()
+
+    def refund(self):
+
+        if self.GARDEN.holding != None:
+            self.set_water(self.get_water() + Utils.TOWERS[self.GARDEN.holding[0]]['price'])
+            self.GARDEN.holding = None
 
     # Draw the element
     def draw(self, screen):
