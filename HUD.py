@@ -99,9 +99,10 @@ class HUD:
 
             ########################
             # TODO Change for display better
+            # J'ai mis "un" peu en forme
             y_offset = 5
             for elem in tower:
-                text = self.__font.render(str(tower[elem]), False, Utils.RED)
+                text = self.__font.render(str(elem) + " : " + str(tower[elem]), False, Utils.RED)
                 hover.blit(text, (5,y_offset))
                 y_offset += 20
             ########################
