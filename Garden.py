@@ -8,6 +8,7 @@ from random import randint, choice
 class Garden:
     pygame.mixer.init()
 
+    musicLoad_ouch = pygame.mixer.Sound("assets/musics/ouch.ogg")
     musicLoad_put = pygame.mixer.Sound("assets/musics/putTower.ogg")
     musicLoad_remove = pygame.mixer.Sound("assets/musics/removeTower.ogg")
     musicLoad = pygame.mixer.Sound("assets/musics/main.ogg")
@@ -16,7 +17,7 @@ class Garden:
         #Initilalisation of the music of the Garden
         channel = pygame.mixer.Channel(0)
         channel.play(Garden.musicLoad, -1)
-        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.set_volume(0.4)
 
         self.HUD = None
         self.__tick = 0
@@ -233,6 +234,11 @@ class Garden:
                 if len(possibleMoves):
                     en.move(random.choice(possibleMoves))
                 else:
+                    #Initilalisation of the music of the Garden
+                    channel = pygame.mixer.Channel(3)
+                    channel.play(Garden.musicLoad_ouch)
+                    pygame.mixer.music.set_volume(0.1)
+
                     self.HUD.set_life(self.HUD.get_life() - 1)
                     self.enemies.remove(en)
 

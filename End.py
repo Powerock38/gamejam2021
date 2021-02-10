@@ -19,7 +19,7 @@ class End:
         #Initilalisation of the music
         channel = pygame.mixer.Channel(0)
         channel.play(End.musicLoad, -1)
-        channel.set_volume(0.5)
+        channel.set_volume(0.4)
 #(342,96)
     def draw(self, screen):
         m_pos = pygame.mouse.get_pos()
