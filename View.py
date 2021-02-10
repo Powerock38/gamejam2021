@@ -10,7 +10,7 @@ os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (50, 50)
 class View:
     __clock = None
     __screen = None
-    __crashed = False
+    crashed = False
 
     __graphic_elements = []
 
@@ -22,13 +22,13 @@ class View:
         pygame.display.set_caption('Garden Defense')
 
         try:
-            while not self.__crashed:
+            while not self.crashed:
                 #t1 = time.time()
                 self.__clock.tick(60)
 
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
-                        self.__crashed = True
+                        self.crashed = True
                     else:
                         self.__graphic_elements = eventListener(event, self.__graphic_elements)
 
