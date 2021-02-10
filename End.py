@@ -18,7 +18,7 @@ class End:
 
         #Initilalisation of the music
         channel = pygame.mixer.Channel(0)
-        channel.play(End.musicLoad, -1)
+        channel.play(End.musicLoad)
         channel.set_volume(0.25)
 #(342,96)
     def draw(self, screen):

@@ -248,9 +248,9 @@ class Garden:
                     en.move(random.choice(possibleMoves))
                 else:
                     #Initilalisation of the music of the Garden
-                    channel = pygame.mixer.Channel(3)
+                    channel = pygame.mixer.Channel(2)
                     channel.play(Garden.musicLoad_ouch)
-                    pygame.mixer.music.set_volume(0.1)
+                    pygame.mixer.music.set_volume(0.01)
 
                     self.HUD.set_life(self.HUD.get_life() - 1)
                     if self.HUD.get_life() <= 0:
