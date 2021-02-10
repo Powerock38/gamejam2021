@@ -2,6 +2,7 @@ from View import View
 from Garden import Garden
 from HUD import HUD
 from Menu import Menu
+from End import End
 import pygame
 
 def update(graphic_elements):
@@ -61,5 +62,7 @@ def eventListener(event, elements):
 #Main
 
 menu = Menu()
+end = End()
 
+#view = View([end], update, eventListener)
 view = View([menu], update, eventListener)

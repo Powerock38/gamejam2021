@@ -5,7 +5,7 @@ pygame.font.init()
 
 class Menu:
 
-    musicLoad = pygame.mixer.Sound("assets/musics/tmp_menu.ogg")
+    musicLoad = pygame.mixer.Sound("assets/musics/menu.ogg")
 
     def __init__(self):
         
