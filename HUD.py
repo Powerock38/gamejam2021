@@ -200,7 +200,7 @@ class HUD:
         y = level_surface.get_height() // 2
 
         # Create the level text
-        level_text = self.__font.render('Wave ' + str(self.get_level()), False, Utils.WHITE)
+        level_text = self.__font.render('Wave ' + str(self.get_level() + 1), False, Utils.WHITE)
         dim = self.__font.size("Wave " + str(self.get_level()))
         level_surface.blit(level_text, (x - dim[0] // 2, y - dim[1] // 2))
 

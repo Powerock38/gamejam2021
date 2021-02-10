@@ -59,9 +59,15 @@ class Tower:
 
         # sprite
         screen.blit(self.__sprite, self.coordinates)
+        
+        x,y = self.coordinates
+
+        #hover
+        mx, my = pygame.mouse.get_pos()
+        if mx >= x and mx <= x + 32 and my >= y and my <= y + 32:
+            pygame.draw.circle(screen, (255, 0, 0, 128), (x + 16, y + 16), self.__towerRange, 1)
 
         # sleeping
-        x,y = self.coordinates
         if self.__energy <= 0:
             if self.animTick >= 120:
                 self.animTick = 0
@@ -81,7 +87,7 @@ class Tower:
                 self.tick = 0
                 attack = 0
                 pips = []
-                for enemy in enemies:
+                for enemy in enemies[::-1]:
                     if attack < self.max_attack:
                         pos1 = (self.coordinates[0] + 16, self.coordinates[1] + 16)
                         pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0] + 16, enemy.pos[1] * 32 + enemy.pos_in_tile[1] + 16)
