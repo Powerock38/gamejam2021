@@ -23,6 +23,7 @@ class Menu:
         self.__menu.blit(play_button, (295, 350))
         self.__menu.blit(pygame.image.load("assets/rules.png"), (341, 492))
         self.__menu.blit(pygame.image.load("assets/credits.png"), (341, 608))
+        self.__menu.blit(pygame.image.load("assets/farmer.png"), (900, 550))
         
         self.__rules.blit(background, (0, 0))
         self.__rules.blit(play_button, (295, 608))
