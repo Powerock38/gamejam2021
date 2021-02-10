@@ -30,10 +30,10 @@ class Enemy:
         """
         x, y = (32 * self.pos[0] + self.pos_in_tile[0], 32 * self.pos[1] + self.pos_in_tile[1])
         
-        if self.__animTick >= 120:
+        if self.__animTick >= 30:
             self.__animTick = 0
         
-        screen.blit(self.__sprites[Enemy.dirToSpriteLine[self.__direction]][self.__animTick // 40], (x, y))
+        screen.blit(self.__sprites[Enemy.dirToSpriteLine[self.__direction]][self.__animTick // 10], (x, y))
         
         self.__animTick += 1
 
