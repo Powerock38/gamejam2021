@@ -48,6 +48,7 @@ class Tower:
         self.max_attack = tower['max_attack']
         self.sleeping_time = tower['sleeping_time']
         self.price = tower['price']
+        self.ricochet = tower['ricochet']
 
     def draw(self, screen):
         """
@@ -91,14 +92,14 @@ class Tower:
                 self.tick = 0
                 attack = 0
                 pips = []
+                pos1 = (self.coordinates[0] + 16, self.coordinates[1] + 16)
                 for enemy in enemies[::-1]:
                     if attack < self.max_attack:
-                        pos1 = (self.coordinates[0] + 16, self.coordinates[1] + 16)
                         pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0] + 16, enemy.pos[1] * 32 + enemy.pos_in_tile[1] + 16)
                         distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
 
                         if distance < self.towerRange:
-                            pips.append(Pip(self.coordinates, enemy, self.damage))
+                            pips.append(Pip(self.coordinates, enemy, self.damage, self.ricochet))
                             self.energy -= self.energy_consumption
                             if self.energy <= 0:
                                 self.tick = 0

@@ -4,6 +4,7 @@ from Utils import Utils
 from Enemy import Enemy
 from Tower import Tower
 from random import randint, choice
+import math
 
 class Garden:
     pygame.mixer.init()
@@ -236,7 +237,19 @@ class Garden:
             deadEnemy = p.update()
             
             if deadEnemy:
-                self.pips.remove(p)
+                if deadEnemy.hp <= 0 and p.ricochet:
+                    pos1 = p.coordinates
+                    target = None
+                    dist_min = 0
+                    for enemy in self.enemies[::-1]:
+                        pos2 = (enemy.pos[0] * 32 + enemy.pos_in_tile[0] + 16, enemy.pos[1] * 32 + enemy.pos_in_tile[1] + 16)
+                        distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
+
+                        if (not dist_min or distance < dist_min) and distance <= 64:
+                            target = enemy
+                    p.enemy = target
+                else:
+                    self.pips.remove(p)
 
                 for p2 in self.pips:
                     if p2.enemy == deadEnemy:
@@ -317,9 +330,14 @@ class Garden:
         \ttower : the tower that will be placed
         """
 
-        mx, my = pygame.mouse.get_pos()
-
         if self.holding != None:
+            #set the music when we put a tower
+            channel = pygame.mixer.Channel(1)
+            channel.play(Garden.musicLoad_put)
+            channel.set_volume(0.1)
+
+
+            mx, my = pygame.mouse.get_pos()
             if mx < 896:
                 x, y = (mx - mx % 32, my - my % 32)
                 x_mh, y_mh = (x // 32, y // 32)
@@ -335,18 +353,6 @@ class Garden:
                     if not pos_already_taken:
                         self.towers.append(Tower(self.holding[0], (x,y)))
                         self.holding = None
-                        #set the music when we put a tower
-                        channel = pygame.mixer.Channel(1)
-                        channel.play(Garden.musicLoad_put)
-                        channel.set_volume(0.1)
-        else:
-            if self.HUD.get_water() > 0:
-                for tower in self.towers:
-                    if tower.energy <= tower.energyMax // 2:
-                        x,y = tower.coordinates
-                        if mx >= x and mx <= x + 32 and my >= y and my <= y + 32:
-                            tower.energy = tower.energyMax
-                            self.HUD.set_water(self.HUD.get_water() - 1)
 
     def removeTower(self):
         """
