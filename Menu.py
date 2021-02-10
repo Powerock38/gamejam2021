@@ -17,6 +17,7 @@ class Menu:
         #Initilalisation of the music
         pygame.mixer.music.load("assets/musics/tmp_menu.mp3")
         pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.5)
 
         self.__menu.blit(background, (0, 0))
         self.__menu.blit(play_button, (295, 350))
