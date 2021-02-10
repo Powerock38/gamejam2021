@@ -16,7 +16,7 @@ class Pip:
     pygame.mixer.init()
     pygame.mixer.set_num_channels(1000)
 
-    sprite = pygame.image.load('assets/tilesets/bullet.png').subsurface(((14, 14), (4, 4)))
+    sprite = pygame.image.load('assets/particles/bullet.png').subsurface(((14, 14), (4, 4)))
     musicLoad = pygame.mixer.Sound("assets/musics/attack.ogg")
 
     def __init__(self, coordinates, enemy, size = 1, damage = 1):
@@ -32,7 +32,7 @@ class Pip:
         #Set the music for the pip
         channel = pygame.mixer.Channel(Pip.numPip % 1000 + 2)
         channel.play(Pip.musicLoad, 1)
-        channel.set_volume(0.03)
+        channel.set_volume(0.08)
         Pip.numPip += 1
 
         self.coordinates = (coordinates[0] + 16, coordinates[1] + 16)

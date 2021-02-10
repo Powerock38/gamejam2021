@@ -21,21 +21,22 @@ class HUD:
         self.__water = water
         self.__level = level
 
-        self.__surface = pygame.Surface((128,768))
-        self.__surface.fill(Utils.GRAY)
+        self.__surface = pygame.image.load("assets/ui/hub_background.png")
         
-        self.__water_image = pygame.image.load("assets/waterdrop.png")
+        self.__water_image = pygame.image.load("assets/ui/waterdrop.png")
+        self.__heart_image = pygame.image.load("assets/ui/heart.png")
 
-        self.set_water(water)
         self.set_level(level)
+        self.set_water(water)
+        self.set_life(life)
 
         # Container for tower text + tower sprites
         self.__tower_container = pygame.Surface((self.__surface.get_width(), 80*7+50)) # (128, 80 per sprite + 50 TOWER title)
-        self.__tower_container.fill(Utils.GRAY)
+        self.__tower_container.set_colorkey(Utils.BLACK)
         
         # Surface for TOWER text
         tower_title_surface = pygame.Surface((self.__surface.get_width(), 50))
-        tower_title_surface.fill(Utils.GRAY)
+        tower_title_surface.set_colorkey(Utils.BLACK)
 
         # Create the tower text
         self.__font = self.get_font(25)
@@ -55,7 +56,6 @@ class HUD:
         for id, tower in Utils.TOWERS.items():
 
             sprite_surface = pygame.Surface((self.__tower_container.get_width()//2, 80))
-            sprite_surface.fill(Utils.GRAY)
 
             # Display name
             # Get the size wich will be occupated by the text
@@ -93,7 +93,7 @@ class HUD:
             sprite_rect.y = y + 50
 
             # Create tower hover
-            hover = pygame.image.load("assets/hover_board.png")
+            hover = pygame.image.load("assets/ui/hover_board.png")
             self.__font = self.get_font(24)
             
             dim = self.__font.size(tower["name"])
@@ -132,6 +132,27 @@ class HUD:
     def set_life(self, life):
         self.__life = life
 
+        # Initialise font with the font available in assets/font
+        self.__font = self.get_font(25)
+
+        life_surface = pygame.Surface((self.__surface.get_width(),54))
+        life_surface.set_colorkey(Utils.BLACK)
+
+        # x, y cords
+        x = life_surface.get_width() // 2
+        y = life_surface.get_height() // 2
+
+        # Create the text water
+        self.__font = self.get_font(30)
+
+        life_text = self.__font.render(str(self.get_life()), False, Utils.RED)
+        dim = self.__font.size(str(self.get_life()))
+
+        life_surface.blit(life_text, (30, (y - dim[1] // 2)-5))
+        life_surface.blit(self.__heart_image, (30 + dim[0] + 5, y - self.__heart_image.get_height() // 2))
+
+        self.__surface.blit(life_surface, (0,714))
+
     def get_water(self):
         return self.__water
 
@@ -143,7 +164,7 @@ class HUD:
         self.__font = self.get_font(25)
 
         water_surface = pygame.Surface((self.__surface.get_width(),54))
-        water_surface.fill(Utils.GRAY)
+        water_surface.set_colorkey(Utils.BLACK)
 
         # x, y cords
         x = water_surface.get_width() // 2
@@ -151,17 +172,16 @@ class HUD:
 
         # Create the text water
         self.__font = self.get_font(20)
-        dim = self.__font.size("Water : " + str(self.get_water()))
+        dim = self.__font.size(str(self.get_water()))
 
         if dim[0] + self.__water_image.get_width() > self.__surface.get_width():
             self.__font = self.get_font(18)
-            dim = self.__font.size("Water : " + str(self.get_water()))
+            dim = self.__font.size(str(self.get_water()))
 
-        self.__water_text = self.__font.render('Water ' + str(self.get_water()), False, Utils.BLUE)
+        water_text = self.__font.render(str(self.get_water()), False, Utils.BLUE)
 
-
-        water_surface.blit(self.__water_text, (x - dim[0] // 2, y - dim[1] // 2))
-        water_surface.blit(self.__water_image, ((x - dim[0] // 2) + dim[0] - 16, y - dim[1] // 2))
+        water_surface.blit(water_text, ((x-10) - dim[0] // 2, y - dim[1] // 2))
+        water_surface.blit(self.__water_image, ((x-10) - dim[0] // 2 + dim[0], y - dim[1] // 2))
 
         self.__surface.blit(water_surface, (0,660))
 
@@ -177,7 +197,7 @@ class HUD:
 
 
         level_surface = pygame.Surface((self.__surface.get_width(),50))
-        level_surface.fill(Utils.GRAY)
+        level_surface.set_colorkey(Utils.BLACK)
 
         # x, y cords
         x = level_surface.get_width() // 2
@@ -202,7 +222,9 @@ class HUD:
     def buy(self, x ,y):
 
         mx, my = pygame.mouse.get_pos()
+        # Check if mouse is in HUD
         if mx >= 896:
+            # Check for evry elem if mouse is in
             for elem in self.__towers_rect:
                 rect = elem["rect"]
                 if rect.collidepoint(mx-896,my):

@@ -18,6 +18,7 @@ class View:
         self.__clock = pygame.time.Clock()
         self.__screen = pygame.display.set_mode(size = (1024, 768))
         self.__graphic_elements = graphic_elements
+        pygame.display.set_icon(pygame.image.load('assets/fruits-veggies/apple_red.png'))
 
         try:
             while not self.__crashed:

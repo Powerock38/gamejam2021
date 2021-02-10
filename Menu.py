@@ -1,7 +1,11 @@
 import pygame
 
+pygame.mixer.init()
+pygame.font.init()
+
 class Menu:
-    pygame.mixer.init()
+
+    musicLoad = pygame.mixer.Sound("assets/musics/tmp_menu.ogg")
 
     def __init__(self):
         
@@ -10,23 +14,44 @@ class Menu:
         self.__menu = pygame.Surface((1024, 768))
         self.__rules = pygame.Surface((1024, 768))
         self.__credits = pygame.Surface((1024, 768))
-        self.__buttons = [pygame.image.load("assets/play.png"),
-                          pygame.image.load("assets/rules.png"),
-                          pygame.image.load("assets/credits.png"),
-                          pygame.image.load("assets/back.png"),
-                          pygame.image.load("assets/play_hover.png"),
-                          pygame.image.load("assets/rules_hover.png"),
-                          pygame.image.load("assets/credits_hover.png"),
-                          pygame.image.load("assets/back_hover.png")]
+        self.__buttons = [pygame.image.load("assets/ui/play.png"),
+                          pygame.image.load("assets/ui/rules.png"),
+                          pygame.image.load("assets/ui/credits.png"),
+                          pygame.image.load("assets/ui/back.png"),
+                          pygame.image.load("assets/ui/play_hover.png"),
+                          pygame.image.load("assets/ui/rules_hover.png"),
+                          pygame.image.load("assets/ui/credits_hover.png"),
+                          pygame.image.load("assets/ui/back_hover.png")]
 
         #Initilalisation of the music
-        musicLoad = pygame.mixer.Sound("assets/musics/tmp_menu.ogg")
-        pygame.mixer.Channel(0).play(musicLoad, -1)
-        pygame.mixer.Channel(0).set_volume(0.1)
+        channel = pygame.mixer.Channel(0)
+        channel.play(Menu.musicLoad,-1)
+        channel.set_volume(0.5)
 
-        self.__menu.blit(pygame.image.load("assets/menu.png"), (0, 0))
-        self.__rules.blit(pygame.image.load("assets/rules_page.png"), (0, 0))
-        self.__credits.blit(pygame.image.load("assets/credits_page.png"), (0, 0))
+        self.__menu.blit(pygame.image.load("assets/ui/menu.png"), (0, 0))
+        self.__rules.blit(pygame.image.load("assets/ui/rules_page.png"), (0, 0))
+        self.__credits.blit(pygame.image.load("assets/ui/credits_page.png"), (0, 0))
+
+        self.__scoreboard = pygame.Surface((200, 260))
+        self.__scoreboard.set_colorkey((0, 0, 0))
+
+        size = 21
+        font = pygame.font.Font('assets/font/comic_book.otf', size)
+
+        f = open("scoreboard", "r", encoding = "utf-8")
+        scoreboard = f.read().split("\n")
+        f.close()
+
+        print(scoreboard)
+
+        for i, x in enumerate(scoreboard):
+            text = x.split(" : ")
+            t1 = font.render(text[0], False, (255, 255, 255))
+            t2 = font.render(": " + text[1], False, (255, 255, 255))
+            self.__scoreboard.blit(t1, (0, i * (size + 2)))
+            self.__scoreboard.blit(t2, (130, i * (size + 2)))
+
+        self.__menu.blit(self.__scoreboard, (50, 433))
         
     def draw(self, screen):
         m_pos = pygame.mouse.get_pos()

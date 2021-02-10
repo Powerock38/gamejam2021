@@ -16,7 +16,7 @@ class Tower:
     \ttowerRange : the range of fire of the fower (int) (default 5)
     """
 
-    sleepingFrames = [pygame.image.load('assets/zzz.png').subsurface([i*32,0,32,32]) for i in range(3)]
+    sleepingFrames = [pygame.image.load('assets/particles/zzz.png').subsurface([i*32,0,32,32]) for i in range(3)]
 
     def __init__(self, tower, coordinates):
         """
@@ -74,10 +74,10 @@ class Tower:
                 w = 4
                 pygame.draw.rect(screen, Utils.BLUE, (x + (n - 1)*(w + 1), y + 30, w, 4))
 
-    def update(self, enemies):        
+    def update(self, enemies):
         if self.__energy > 0:
             self.tick += 1
-            if self.tick == self.rate:
+            if self.tick >= self.rate:
                 self.tick = 0
                 attack = 0
                 for enemy in enemies:

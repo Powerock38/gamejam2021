@@ -3,19 +3,20 @@ import random
 from Utils import Utils
 from Enemy import Enemy
 from Tower import Tower
-from random import randint
+from random import randint, choice
 
 class Garden:
     pygame.mixer.init()
 
     musicLoad_put = pygame.mixer.Sound("assets/musics/putTower.ogg")
     musicLoad_remove = pygame.mixer.Sound("assets/musics/removeTower.ogg")
+    musicLoad = pygame.mixer.Sound("assets/musics/tmp_main.ogg")
 
     def __init__(self, tiles=[]):
         #Initilalisation of the music of the Garden
-        musicLoad = pygame.mixer.Sound("assets/musics/tmp_main.ogg")
-        pygame.mixer.Channel(0).play(musicLoad, -1)
-        pygame.mixer.Channel(0).set_volume(0.1)
+        channel = pygame.mixer.Channel(0)
+        channel.play(Garden.musicLoad, -1)
+        pygame.mixer.music.set_volume(0.5)
 
         self.HUD = None
         self.__tick = 0
@@ -174,6 +175,9 @@ class Garden:
                         tmp_row.append(0)
                         self.__background.blit(tile1, (32 * j, 32 * i))
             tmp_garden.append(tmp_row)
+        
+        self.__background.blit(pygame.image.load('assets/tilesets/farmer.png'), (800, 736))
+
         self.tiles = tmp_garden
 
     def update(self):
@@ -229,6 +233,7 @@ class Garden:
                 if len(possibleMoves):
                     en.move(random.choice(possibleMoves))
                 else:
+                    self.HUD.set_life(self.HUD.get_life() - 1)
                     self.enemies.remove(en)
 
 
@@ -252,7 +257,8 @@ class Garden:
                 pygame.draw.circle(screen, (255, 0, 0, 128), (x_32 + 16, y_32 + 16), self.holding[2], 1)
 
     def spawnEnemy(self):
-        self.enemies = [Enemy(Utils.ENEMIES['farmer'], [1, 0])] + self.enemies
+        enemy = choice(list(Utils.ENEMIES.values()))
+        self.enemies = [Enemy(enemy, [1, 0])] + self.enemies
 
     def hold(self, tower):
         img = pygame.image.load(Utils.TOWERS[tower]['path']).convert_alpha()
@@ -275,7 +281,7 @@ class Garden:
             #set the music when we put a tower
             channel = pygame.mixer.Channel(1)
             channel.play(Garden.musicLoad_put)
-            channel.set_volume(0.08)
+            channel.set_volume(0.1)
 
 
             mx, my = pygame.mouse.get_pos()
@@ -305,7 +311,7 @@ class Garden:
         #set the music when we remove a tower
         channel = pygame.mixer.Channel(1)
         channel.play(Garden.musicLoad_remove)
-        channel.set_volume(0.08)
+        channel.set_volume(0.1)
 
         mx, my = pygame.mouse.get_pos()
         mx -= mx % 32
