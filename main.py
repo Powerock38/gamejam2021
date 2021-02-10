@@ -42,11 +42,9 @@ def eventListener(event, elements):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if mx >= 120 and mx <= 462 and my >= 642 and my <= 738:
                 #Start game
-                garden = Garden()
-                hud = HUD(garden, 10, 1000)
-                garden.HUD = hud
+                menu = Menu()
 
-                elements = [garden, hud]
+                elements = [menu]
 
             elif mx >= 536 and mx <= 878 and my >= 642 and my <= 738:
                 View.crashed = True
@@ -83,7 +81,6 @@ def eventListener(event, elements):
 #Main
 
 menu = Menu()
-end = End()
 
 #view = View([end], update, eventListener)
 view = View([menu], update, eventListener)

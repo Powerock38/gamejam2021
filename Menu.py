@@ -26,7 +26,7 @@ class Menu:
         #Initilalisation of the music
         channel = pygame.mixer.Channel(0)
         channel.play(Menu.musicLoad,-1)
-        channel.set_volume(0.5)
+        channel.set_volume(0.25)
 
         self.__menu.blit(pygame.image.load("assets/ui/menu/menu.png"), (0, 0))
         self.__rules.blit(pygame.image.load("assets/ui/menu/rules_page.png"), (0, 0))
