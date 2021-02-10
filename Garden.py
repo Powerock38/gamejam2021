@@ -3,7 +3,7 @@ import random
 from Utils import Utils
 from Enemy import Enemy
 from Tower import Tower
-from random import randint
+from random import randint, choice
 
 class Garden:
     pygame.mixer.init()
@@ -249,7 +249,8 @@ class Garden:
                 pygame.draw.circle(screen, (255, 0, 0, 128), (x_32 + 16, y_32 + 16), self.holding[2], 1)
 
     def spawnEnemy(self):
-        self.enemies = [Enemy(Utils.ENEMIES['farmer'], [1, 0])] + self.enemies
+        enemy = choice(list(Utils.ENEMIES.values()))
+        self.enemies = [Enemy(enemy, [1, 0])] + self.enemies
 
     def hold(self, tower):
         img = pygame.image.load(Utils.TOWERS[tower]['path']).convert_alpha()
