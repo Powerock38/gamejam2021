@@ -363,7 +363,7 @@ class Garden:
         else:
             if self.HUD.get_water() > 0:
                 for tower in self.towers:
-                    if tower.energy <= tower.energyMax // 2:
+                    if not tower.path_mine and tower.energy <= tower.energyMax // 2:
                         x,y = tower.coordinates
                         if mx >= x and mx <= x + 32 and my >= y and my <= y + 32:
                             tower.energy = tower.energyMax
