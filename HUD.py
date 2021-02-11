@@ -39,10 +39,6 @@ class HUD:
 
         self.set_level(level)
         self.set_life(life)
-        self.set_water(water)
-
-
-    def display_sprites(self):
 
         # Container for tower text + tower sprites
         self.__tower_container = pygame.Surface((self.__surface.get_width(), 80*7+50)) # (128, 80 per sprite + 50 TOWER title)
@@ -127,20 +123,28 @@ class HUD:
             self.__towers_rect[id] = {
                 "pos": (x,y),
                 "rect":sprite_rect, 
+                "price": tower["price"],
                 "hover":hover
             }
 
-            if tower["price"] > self.get_water():
-                gray_filter = self.__gray_filer
-                sprite_surface.blit(gray_filter, (0,0))
-
-            # Adding sprite surface to tower container
             self.__tower_container.blit(sprite_surface, (x,y))
-        
+
             nb += 1
             aGauche = not aGauche
 
-        self.__surface.blit(self.__tower_container, (0,50))
+        self.set_water(water)
+
+    def display_sprites(self):
+
+        surface = pygame.Surface((self.__surface.get_width(), 610))
+        surface.blit(self.__tower_container, (0,0))
+
+        for id, tower in self.__towers_rect.items():
+            if tower["price"] > self.get_water():
+                gray_filter = self.__gray_filer
+                surface.blit(gray_filter, tower["pos"])
+
+        self.__surface.blit(surface, (0,50))
 
 
     def get_life(self):
@@ -201,9 +205,9 @@ class HUD:
         water_surface.blit(water_text, ((x-10) - dim[0] // 2, y - dim[1] // 2))
         water_surface.blit(self.__water_image, ((x-10) - dim[0] // 2 + dim[0], y - dim[1] // 2))
 
-        self.display_sprites()
-        
         self.__surface.blit(water_surface, (0,660))
+
+        self.display_sprites()
 
 
     def get_level(self):
