@@ -24,9 +24,9 @@ class Menu:
                           pygame.image.load("assets/ui/menu/back_hover.png")]
 
         #Initilalisation of the music
-        channel = pygame.mixer.Channel(0)
-        channel.play(Menu.musicLoad,-1)
-        channel.set_volume(0.25)
+        self.channel = pygame.mixer.Channel(0)
+        self.channel.play(Menu.musicLoad,-1)
+        self.channel.set_volume(0.25)
 
         self.__menu.blit(pygame.image.load("assets/ui/menu/menu.png"), (0, 0))
         self.__rules.blit(pygame.image.load("assets/ui/menu/rules_page.png"), (0, 0))
@@ -101,7 +101,7 @@ class Menu:
                 
             
         elif self.page == "Rules":
-            if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 608 and m_pos[1] <= 730:
+            if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 635 and m_pos[1] <= 730:
                 self.__rules.blit(self.__buttons[7], (341, 640))
             else:
                 self.__rules.blit(self.__buttons[3], (341, 640))
@@ -109,7 +109,7 @@ class Menu:
             screen.blit(self.__rules, (0, 0))
             
         elif self.page == "Credits":
-            if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 608 and m_pos[1] <= 730:
+            if m_pos[0] >= 295 and m_pos[0] <= 728 and m_pos[1] >= 635 and m_pos[1] <= 730:
                 self.__credits.blit(self.__buttons[7], (341, 640))
             else:
                 self.__credits.blit(self.__buttons[3], (341, 640))

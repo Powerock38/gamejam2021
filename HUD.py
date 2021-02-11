@@ -116,7 +116,7 @@ class HUD:
                     if ricochet:
                         hover.blit(self.__font.render("Ricochet", False, Utils.RED), (161, 179))
                     elif path_border:
-                        hover.blit(self.__font.render("Path border & slow", False, Utils.RED), (160, 179))
+                        hover.blit(self.__font.render("Slow", False, Utils.RED), (160, 179))
                     elif path_mine:
                         hover.blit(self.__font.render("Mine", False, Utils.RED), (160, 179))
                 else:

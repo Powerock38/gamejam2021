@@ -47,9 +47,9 @@ def eventListener(event, elements):
                     file = open("scoreboard", "a", encoding = "utf-8")
                     file.write((" " * (10 - len(elements[0].pseudo))) + elements[0].pseudo + " : " + str(elements[0].score) + "\n")
                     file.close()
+
                 #Start game
                 menu = Menu()
-
                 elements = [menu]
 
             elif mx >= 536 and mx <= 878 and my >= 642 and my <= 738:
@@ -58,6 +58,7 @@ def eventListener(event, elements):
                     file.write((" " * (10 - len(elements[0].pseudo))) + elements[0].pseudo + " : " + str(elements[0].score) + "\n")
                     file.close()
                 View.crashed = True
+
         elif event.type == pygame.KEYDOWN:
             if event.key == 8:
                 elements[0].pseudo = elements[0].pseudo[:-1]
@@ -70,7 +71,6 @@ def eventListener(event, elements):
             menu = elements[0]
             if menu.page == "Menu":
                 if mx >= 295 and mx <= 728 and my >= 350 and my <= 472:
-
                     #Start game
                     garden = Garden()
                     hud = HUD(garden, 10, 10)
