@@ -1,5 +1,5 @@
 import pygame
-
+import math
 
 class Utils:
 
@@ -351,7 +351,7 @@ class Utils:
         },
     }
 
-    WAVES = (
+    WAVES = [
         (5 * ('rat', 80)),#1
 
         (7 * ('rat', 70)),#2
@@ -516,12 +516,18 @@ class Utils:
          1 * ('dog', 10) +
          1 * ('eagle', 10) +
          1 * ('hyena', 10))
-    )
+    ]
 
-    for id, tw in TOWERS.items():
+    MIN_SCORE = 99999999
+
+    for tw in TOWERS.values():
         tw['sprite'] = pygame.image.load(tw['path'])
 
     for id, en in ENEMIES.items():
+        en['score'] = en['hp'] * en['speed']
+        if en['score'] < MIN_SCORE:
+            MIN_SCORE = en['score']
+
         spritesheet = pygame.image.load(en['path'])
         sprite_list = []
         for direction in range(4):

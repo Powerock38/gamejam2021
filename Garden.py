@@ -201,9 +201,26 @@ class Garden:
 
     def update(self):
         # waves
-        difficulty = self.HUD.get_level() // len(Utils.WAVES)
-        wave_nb = self.HUD.get_level() % len(Utils.WAVES)
-        wave = Utils.WAVES[wave_nb]
+        wave_nb = self.HUD.get_level()
+        
+        if self.HUD.get_level() > len(Utils.WAVES) - 1:
+            custom_wave = []
+
+            for id, en in Utils.ENEMIES.items():
+                how_many =  min(100 + wave_nb, max(1, int((Utils.MIN_SCORE * 100 * wave_nb) / math.log(en['score'], 1.02))))
+                for _ in range(how_many):
+                    custom_wave.append(id)
+            
+            random.shuffle(custom_wave)
+
+            custom_time = max(5, 120 - wave_nb - len(Utils.WAVES))
+
+            for i in range(1, len(custom_wave) * 2, 2):
+                custom_wave.insert(i, custom_time)
+
+            Utils.WAVES[wave_nb % len(Utils.WAVES)] = tuple(custom_wave)
+
+        wave = Utils.WAVES[wave_nb % len(Utils.WAVES)]
         
         if self.__wave_enemy_index == len(wave):
             self.__wave_enemy_index = 0
@@ -213,7 +230,7 @@ class Garden:
             if len(self.enemies) == 0:
                 time = max(120, self.__tick)
             else:
-                time = max(0, 2400 - 240 * difficulty)
+                time = max(0, 2400 - 120 * wave_nb)
         else:
             time = wave[self.__wave_enemy_index + 1]
         
