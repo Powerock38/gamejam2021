@@ -39,9 +39,9 @@ class Menu:
         font = pygame.font.Font('assets/font/comic_book.otf', size)
 
         f = open("scoreboard", "r", encoding = "utf-8")
-        scoreboard = f.read().split("\n")
+        scoreboard = f.read().split("\n")[:-1]
         f.close()
-
+        
         for i, x in enumerate(scoreboard):
             text = x.split(" : ")
             t1 = font.render(text[0], False, (255, 255, 255))
