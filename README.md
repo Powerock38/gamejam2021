@@ -37,7 +37,7 @@
 ### Règles :
 > Empercher les animaux d’atteindre le fermier, chaque animaux arriver à lui vous enlève une vie. Vous en avez 10 avant de perdre.
 > Achetez vos fruits et légumes dans la boutique sur la droite l’écran puis les placer sur le terrain à gauche.
-> Recharger les vos tours fatigués en les survolant et en cliquant sur l’arrosoir.
+> Recharger les tours fatigués en les survolant et en cliquant sur l’arrosoir.
 > Vendez une tour pour la moitié de son prix initial.
 
 ### Fruits et légumes :

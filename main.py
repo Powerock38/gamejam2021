@@ -34,6 +34,7 @@ def eventListener(event, elements):
                 garden.removeTower()
 
         if event.type == pygame.USEREVENT:
+            garden.channel.fadeout(2)
             end = End()
             end.score = hud.get_level() 
             elements.remove(garden)
@@ -43,9 +44,10 @@ def eventListener(event, elements):
     elif isinstance(elements[0], End):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if mx >= 120 and mx <= 462 and my >= 642 and my <= 738:
+                end.channel.fadeout(2)
+
                 #Start game
                 menu = Menu()
-
                 elements = [menu]
 
             elif mx >= 536 and mx <= 878 and my >= 642 and my <= 738:
@@ -54,6 +56,7 @@ def eventListener(event, elements):
                     file.write((" " * (10 - len(elements[0].pseudo))) + elements[0].pseudo + " : " + str(elements[0].score) + "\n")
                     file.close()
                 View.crashed = True
+
         elif event.type == pygame.KEYDOWN:
             if event.key == 8:
                 elements[0].pseudo = elements[0].pseudo[:-1]
@@ -66,6 +69,7 @@ def eventListener(event, elements):
             menu = elements[0]
             if menu.page == "Menu":
                 if mx >= 295 and mx <= 728 and my >= 350 and my <= 472:
+                    menu.channel.fadeout(2)
 
                     #Start game
                     garden = Garden()
@@ -93,6 +97,5 @@ def eventListener(event, elements):
 #Main
 
 menu = Menu()
-end = End()
 
-view = View([end], update, eventListener)
+view = View([menu], update, eventListener)
