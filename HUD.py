@@ -5,6 +5,9 @@ pygame.font.init()
 
 class HUD:
 
+    sound_water_refund = pygame.mixer.Sound("assets/musics/water_refund.ogg")
+    sound_water_buy = pygame.mixer.Sound("assets/musics/water_buy.ogg")
+
     def __init__(self, garden, life = 10, water = 10, level = 0):
         """
         Initialise HUD at the right of the screen\n
@@ -223,6 +226,10 @@ class HUD:
                     if self.get_water() >= tower['price']:
                         self.set_water(self.get_water() - tower['price'])
                         self.GARDEN.hold(tower)
+                        #water buy sound effect
+                        channel = pygame.mixer.Channel(1)
+                        channel.play(HUD.sound_water_buy)
+                        channel.set_volume(0.5)
                 else:
                     self.refund()
 
@@ -230,6 +237,10 @@ class HUD:
         if self.GARDEN.holding != None:
             self.set_water(self.get_water() + self.GARDEN.holding[0]['price'])
             self.GARDEN.holding = None
+            #water refund sound effect
+            channel = pygame.mixer.Channel(1)
+            channel.play(HUD.sound_water_refund)
+            channel.set_volume(0.5)
 
     # Draw the element
     def draw(self, screen):

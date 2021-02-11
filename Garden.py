@@ -402,3 +402,7 @@ class Garden:
                 channel = pygame.mixer.Channel(1)
                 channel.play(Garden.musicLoad_remove)
                 channel.set_volume(0.1)
+                #water refund sound effect
+                channel2 = pygame.mixer.Channel(2)
+                channel2.play(self.HUD.sound_water_refund)
+                channel2.set_volume(0.2)
