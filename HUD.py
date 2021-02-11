@@ -5,6 +5,9 @@ pygame.font.init()
 
 class HUD:
 
+    sound_water_refund = pygame.mixer.Sound("assets/musics/water_refund.ogg")
+    sound_water_buy = pygame.mixer.Sound("assets/musics/water_buy.ogg")
+
     def __init__(self, garden, life = 10, water = 10, level = 0):
         """
         Initialise HUD at the right of the screen\n
@@ -20,18 +23,27 @@ class HUD:
         self.__water = water
         self.__level = level
 
-        self.__surface = pygame.image.load("assets/ui/hud/hud_background.png")
-        
+        self.__surface = pygame.Surface((128, 768))
+        surface_background = pygame.image.load("assets/ui/hud/hud_background.png")
+        self.__surface.blit(surface_background, (0,0))
+
+        self.__sprites_background = pygame.image.load("assets/ui/hud/hud_sprites_background.png")
+        self.__water_background = pygame.image.load("assets/ui/hud/hud_water_background.png")
+        self.__level_background = pygame.image.load("assets/ui/hud/hud_level_background.png")
+        self.__life_background = pygame.image.load("assets/ui/hud/hud_life_background.png")
+
+        self.__gray_filer = pygame.image.load("assets/ui/hud/hud_gray_filter.png")
+
         self.__water_image = pygame.image.load("assets/ui/hud/waterdrop.png")
         self.__heart_image = pygame.image.load("assets/ui/hud/heart.png")
 
         self.set_level(level)
-        self.set_water(water)
         self.set_life(life)
 
         # Container for tower text + tower sprites
         self.__tower_container = pygame.Surface((self.__surface.get_width(), 80*7+50)) # (128, 80 per sprite + 50 TOWER title)
-        self.__tower_container.set_colorkey(Utils.BLACK)
+        tower_background = self.__sprites_background
+        self.__tower_container.blit(tower_background, (0,0))
         
         # Surface for TOWER text
         tower_title_surface = pygame.Surface((self.__surface.get_width(), 50))
@@ -48,13 +60,19 @@ class HUD:
         tower_title_surface.blit(tower_text, (x - dim[0] // 2, y - dim[1] // 2))
         self.__tower_container.blit(tower_title_surface, (0, 0))
 
-        self.__towers_rect = []
+        # Sprites display #
+        self.__towers_rect = {}
 
         aGauche = False
         nb = 0
         for id, tower in Utils.TOWERS.items():
 
             sprite_surface = pygame.Surface((self.__tower_container.get_width()//2, 80))
+            sprite_surface.set_colorkey(Utils.BLACK)
+
+            # Display item sprite in sprite surface
+            image = tower['sprite']
+            sprite_surface.blit(image, (32 - image.get_width()//2, 0))
 
             # Display name
             # Get the size wich will be occupated by the text
@@ -70,26 +88,14 @@ class HUD:
             
             x = 32-(dim[0]+24)//2 + 5
             sprite_surface.blit(price_text, (x, 40+y))
-
             dim = self.__font.size(str(tower["price"]))
 
             little_water = pygame.transform.scale(self.__water_image, (24,24))
 
             sprite_surface.blit(little_water, (x+dim[0], 40+y-4))
 
-            
-            # Display item sprite in sprite surface
-            image = pygame.image.load(tower['path'])
-            sprite_surface.blit(image, (32 - image.get_width()//2, 0))
-
             # Get sprite rectangle
             sprite_rect = sprite_surface.get_rect()
-
-            x = 64 if aGauche else 0
-            y = 50 + (80 * (nb//2))
-
-            sprite_rect.x = x
-            sprite_rect.y = y + 50
 
             # Create tower hover
             hover = pygame.image.load("assets/ui/hud/hover_board.png")
@@ -108,22 +114,38 @@ class HUD:
             hover.blit(self.__font.render(str(tower["sleeping_time"]) + " s", False, data_text_color), (149, 167))
 
 
-            self.__towers_rect.append(
-                {
-                    "id":id,
-                    "rect":sprite_rect, 
-                    "hover":hover
-                }
-            )
+            x = 64 if aGauche else 0
+            y = 50 + (80 * (nb//2))
 
-            # Adding sprite surface to tower container
+            sprite_rect.x = x
+            sprite_rect.y = y + 50
+
+            self.__towers_rect[id] = {
+                "pos": (x,y),
+                "rect":sprite_rect, 
+                "price": tower["price"],
+                "hover":hover
+            }
+
             self.__tower_container.blit(sprite_surface, (x,y))
-        
 
             nb += 1
             aGauche = not aGauche
 
-        self.__surface.blit(self.__tower_container, (0,50))
+        self.set_water(water)
+
+    def display_sprites(self):
+
+        surface = pygame.Surface((self.__surface.get_width(), 610))
+        surface.blit(self.__tower_container, (0,0))
+
+        for id, tower in self.__towers_rect.items():
+            if tower["price"] > self.get_water():
+                gray_filter = self.__gray_filer
+                surface.blit(gray_filter, tower["pos"])
+
+        self.__surface.blit(surface, (0,50))
+
 
     def get_life(self):
         return self.__life
@@ -134,7 +156,9 @@ class HUD:
         # Initialise font with the font available in assets/font
         self.__font = self.get_font(25)
 
-        life_surface = pygame.image.load("assets/ui/hud/hud_life_background.png")
+        life_surface = pygame.Surface((self.__surface.get_width(), 54))
+        life_background = self.__life_background
+        life_surface.blit(life_background, (0,0))
 
         # x, y cords
         x = life_surface.get_width() // 2
@@ -160,7 +184,9 @@ class HUD:
         # Initialise font with the font available in assets/font
         self.__font = self.get_font(25)
 
-        water_surface = pygame.image.load("assets/ui/hud/hud_water_background.png")
+        water_surface = pygame.Surface((self.__surface.get_width(), 54))
+        water_background = self.__water_background
+        water_surface.blit(water_background, (0,0))
 
         # x, y cords
         x = water_surface.get_width() // 2
@@ -181,6 +207,9 @@ class HUD:
 
         self.__surface.blit(water_surface, (0,660))
 
+        self.display_sprites()
+
+
     def get_level(self):
         return self.__level
 
@@ -190,8 +219,9 @@ class HUD:
         # Initialise font with the font available in assets/font
         self.__font = self.get_font(25)
 
-
-        level_surface = pygame.image.load("assets/ui/hud/hud_level_background.png")
+        level_surface = pygame.Surface((self.__surface.get_width(), 50))
+        level_background = self.__level_background
+        level_surface.blit(level_background, (0,0))
 
         # x, y cords
         x = level_surface.get_width() // 2
@@ -215,14 +245,18 @@ class HUD:
 
     def buy(self, x ,y):
         # Check for evry elem if mouse is in
-        for elem in self.__towers_rect:
+        for id, elem in self.__towers_rect.items():
             rect = elem["rect"]
             if rect.collidepoint(x-896,y):
-                tower = Utils.TOWERS[elem["id"]]
+                tower = Utils.TOWERS[id]
                 if self.GARDEN.holding == None:
                     if self.get_water() >= tower['price']:
                         self.set_water(self.get_water() - tower['price'])
                         self.GARDEN.hold(tower)
+                        #water buy sound effect
+                        channel = pygame.mixer.Channel(1)
+                        channel.play(HUD.sound_water_buy)
+                        channel.set_volume(0.5)
                 else:
                     self.refund()
 
@@ -230,14 +264,19 @@ class HUD:
         if self.GARDEN.holding != None:
             self.set_water(self.get_water() + self.GARDEN.holding[0]['price'])
             self.GARDEN.holding = None
+            #water refund sound effect
+            channel = pygame.mixer.Channel(1)
+            channel.play(HUD.sound_water_refund)
+            channel.set_volume(0.5)
 
     # Draw the element
     def draw(self, screen):
+        
         screen.blit(self.__surface, (896,0))
 
         mx, my = pygame.mouse.get_pos()
         if mx >= 896:
-            for tower in self.__towers_rect:
+            for id, tower in self.__towers_rect.items():
                 rect = tower["rect"]
                 if rect.collidepoint(mx-896,my):
 

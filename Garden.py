@@ -9,6 +9,8 @@ import math
 class Garden:
     pygame.mixer.init()
 
+    musicLoad_watering_can = pygame.mixer.Sound("assets/musics/watering_can.ogg")
+    musicLoad_invalid = pygame.mixer.Sound("assets/musics/invalid.ogg")
     musicLoad_ouch = pygame.mixer.Sound("assets/musics/ouch.ogg")
     musicLoad_put = pygame.mixer.Sound("assets/musics/putTower.ogg")
     musicLoad_remove = pygame.mixer.Sound("assets/musics/removeTower.ogg")
@@ -205,7 +207,6 @@ class Garden:
         
         if self.__wave_enemy_index == len(wave):
             self.__wave_enemy_index = 0
-            self.HUD.set_level(self.HUD.get_level() + 1)
             self.__interWave = True
 
         if self.__interWave:
@@ -217,7 +218,9 @@ class Garden:
             time = wave[self.__wave_enemy_index + 1]
         
         if self.__tick >= time:
-            self.__interWave = False
+            if self.__interWave:
+                self.HUD.set_level(self.HUD.get_level() + 1)
+                self.__interWave = False
             enemy = Utils.ENEMIES[wave[self.__wave_enemy_index]]
             self.enemies = [Enemy(enemy, [1, 0])] + self.enemies
             self.__tick = 0
@@ -358,18 +361,24 @@ class Garden:
                     if not pos_already_taken:
                         self.towers.append(Tower(self.holding[0], (x,y)))
                         self.holding = None
-                        #set the music when we put a tower
-                        channel = pygame.mixer.Channel(1)
-                        channel.play(Garden.musicLoad_put)
-                        channel.set_volume(0.1)
+  
+                if pos_already_taken or not allowed_tile:
+                    #invalid placement sound effect
+                    channel = pygame.mixer.Channel(1)
+                    channel.play(Garden.musicLoad_invalid)
+                    channel.set_volume(0.5)
         else:
             if self.HUD.get_water() > 0:
                 for tower in self.towers:
-                    if not tower.path_mine and tower.energy <= tower.energyMax // 2:
+                    if not tower.generator and tower.energy > 0 and tower.energy <= tower.energyMax // 2:
                         x,y = tower.coordinates
                         if mx >= x and mx <= x + 32 and my >= y and my <= y + 32:
                             tower.energy = tower.energyMax
                             self.HUD.set_water(self.HUD.get_water() - 1)
+                            #set the music when we water a tower
+                            channel = pygame.mixer.Channel(1)
+                            channel.play(Garden.musicLoad_watering_can)
+                            channel.set_volume(0.5)
 
 
     def removeTower(self):
@@ -393,3 +402,7 @@ class Garden:
                 channel = pygame.mixer.Channel(1)
                 channel.play(Garden.musicLoad_remove)
                 channel.set_volume(0.1)
+                #water refund sound effect
+                channel2 = pygame.mixer.Channel(2)
+                channel2.play(self.HUD.sound_water_refund)
+                channel2.set_volume(0.2)
