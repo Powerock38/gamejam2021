@@ -314,6 +314,13 @@ class Utils:
             'water': 1,
             'fly': False
         },
+        'eagle': {
+            'path': 'assets/sprites/eagle.png',
+            'hp': 75,
+            'speed': 2.5,
+            'water': 30,
+            'fly': True
+        },
     }
 
     WAVES = (
