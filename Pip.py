@@ -83,6 +83,6 @@ class Pip:
                 if self.poisonTime:
                     self.enemy.poisonedTime = self.poisonTime
                 if self.confusingTime:
-                    if True: #not random.randint(0, 25):
+                    if not random.randint(0, 5):
                         self.enemy.confusedTime = self.confusingTime
             return self.enemy

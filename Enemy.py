@@ -43,9 +43,17 @@ class Enemy:
 
         if self.hp != self.__hpMax:
             width = max(1, int((self.hp / self.__hpMax) * 28))
+
+            if self.poisonedTime > 0:
+                colorUp = (0,255,0)
+                colorDown = (200,200,0)
+            else:
+                colorUp = (237,28,36)
+                colorDown = (200,20,25)
+
             pygame.draw.rect(screen, (20,10,10), (x + 1, y - 9, 32, 6))
-            pygame.draw.rect(screen, (237,28,36), (x + 2, y - 8, width, 2))
-            pygame.draw.rect(screen, (200,20,25), (x + 2, y - 6, width, 2))
+            pygame.draw.rect(screen, colorUp, (x + 2, y - 8, width, 2))
+            pygame.draw.rect(screen, colorDown, (x + 2, y - 6, width, 2))
 
     def update(self, direction):
         if self.poisonedTime > 0:
