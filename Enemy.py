@@ -22,6 +22,7 @@ class Enemy:
         self.__direction = 2
         self.__animTick = 0
         self.fly = enemy['fly']
+        self.blocked = False
 
     def draw(self, screen):
         """
@@ -45,28 +46,31 @@ class Enemy:
             pygame.draw.rect(screen, (200,20,25), (x + 2, y - 6, width, 2))
 
     def move(self, direction):
-        self.__direction = direction
+        if self.blocked:
+            self.blocked = False
+        else:
+            self.__direction = direction
 
-        if direction == 0:
-            self.pos_in_tile[1] -= self.__speed
-            if self.pos_in_tile[1] <= -32:
-                self.pos[1] -= 1
-                self.pos_in_tile = [0, 0]
-        
-        elif direction == 1:
-            self.pos_in_tile[0] += self.__speed
-            if self.pos_in_tile[0] >= 32:
-                self.pos[0] += 1
-                self.pos_in_tile = [0, 0]
-        
-        elif direction == 2:
-            self.pos_in_tile[1] += self.__speed
-            if self.pos_in_tile[1] >= 32:
-                self.pos[1] += 1
-                self.pos_in_tile = [0, 0]
-        
-        elif direction == 3:
-            self.pos_in_tile[0] -= self.__speed
-            if self.pos_in_tile[0] <= -32:
-                self.pos[0] -= 1
-                self.pos_in_tile = [0, 0]
+            if direction == 0:
+                self.pos_in_tile[1] -= self.__speed
+                if self.pos_in_tile[1] <= -32:
+                    self.pos[1] -= 1
+                    self.pos_in_tile = [0, 0]
+            
+            elif direction == 1:
+                self.pos_in_tile[0] += self.__speed
+                if self.pos_in_tile[0] >= 32:
+                    self.pos[0] += 1
+                    self.pos_in_tile = [0, 0]
+            
+            elif direction == 2:
+                self.pos_in_tile[1] += self.__speed
+                if self.pos_in_tile[1] >= 32:
+                    self.pos[1] += 1
+                    self.pos_in_tile = [0, 0]
+            
+            elif direction == 3:
+                self.pos_in_tile[0] -= self.__speed
+                if self.pos_in_tile[0] <= -32:
+                    self.pos[0] -= 1
+                    self.pos_in_tile = [0, 0]
