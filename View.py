@@ -2,7 +2,6 @@ import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 import traceback
-import time
 
 #Set the default position of the pygame window
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (50, 50)
@@ -23,8 +22,8 @@ class View:
 
         try:
             while not self.crashed:
-                #t1 = time.time()
                 self.__clock.tick(60)
+                #print(self.__clock.get_fps())
 
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
@@ -38,9 +37,8 @@ class View:
                 
                 for element in self.__graphic_elements:
                     element.draw(self.__screen)
-                pygame.display.update()
 
-                #print(1/(time.time() - t1))
+                pygame.display.update()
 
             pygame.quit()
         except:

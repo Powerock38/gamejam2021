@@ -231,7 +231,8 @@ class Garden:
         #update towers
         for t in self.towers:
             pips, water = t.update(self.enemies)
-            self.HUD.set_water(self.HUD.get_water() + water)
+            if water:
+                self.HUD.set_water(self.HUD.get_water() + water)
             if pips:
                 for pip in pips:
                     self.pips.append(pip)
