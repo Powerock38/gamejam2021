@@ -18,7 +18,7 @@ class Pip:
     sprite = pygame.image.load('assets/particles/bullet.png').subsurface(((14, 14), (4, 4)))
     musicLoad = pygame.mixer.Sound("assets/musics/attack.ogg")
 
-    def __init__(self, coordinates, enemy, damage = 1, ricochet = False):
+    def __init__(self, coordinates, enemy, damage = 1, ricochet = False, poisonTime = 0):
         """
         Constructor of the pips\n
         Arguments :\n
@@ -37,6 +37,7 @@ class Pip:
         self.enemy = enemy
         self.damage = damage
         self.ricochet = ricochet
+        self.poisonTime = poisonTime
     
     def move(self):
         """
@@ -77,4 +78,6 @@ class Pip:
         else:
             if self.enemy:
                 self.enemy.hp -= self.damage
+                if self.poisonTime:
+                    self.enemy.poisonedTime = self.poisonTime
             return self.enemy

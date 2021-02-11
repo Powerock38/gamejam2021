@@ -117,7 +117,7 @@ class Tower:
                                 self.energy -= self.energy_consumption
 
                             elif not self.path_border and not self.path_mine:
-                                pips.append(Pip(self.coordinates, enemy, self.damage, self.ricochet))
+                                pips.append(Pip(self.coordinates, enemy, self.damage, self.ricochet, self.poison))
                                 self.energy -= self.energy_consumption
                             
                             if self.energy <= 0:
