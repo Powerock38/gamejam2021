@@ -18,9 +18,9 @@ class End:
         self.__background = pygame.image.load("assets/ui/end/game_over.png")
 
         #Initilalisation of the music
-        channel = pygame.mixer.Channel(0)
-        channel.play(End.musicLoad)
-        channel.set_volume(0.25)
+        self.channel = pygame.mixer.Channel(0)
+        self.channel.play(End.musicLoad)
+        self.channel.set_volume(0.25)
 
         #Setput the text area of wave that you achive
         self.__text_surface = pygame.Surface((200, 50))

@@ -17,9 +17,9 @@ class Garden:
 
     def __init__(self, tiles=[]):
         #Initilalisation of the music of the Garden
-        channel = pygame.mixer.Channel(0)
-        channel.play(Garden.musicLoad, -1)
-        pygame.mixer.music.set_volume(0.4)
+        self.channel = pygame.mixer.Channel(0)
+        self.channel.play(Garden.musicLoad, -1)
+        self.channel.set_volume(0.4)
 
         self.HUD = None
         self.__tick = 0
