@@ -97,6 +97,5 @@ def eventListener(event, elements):
 #Main
 
 menu = Menu()
-end = End()
 
-view = View([end], update, eventListener)
+view = View([menu], update, eventListener)
