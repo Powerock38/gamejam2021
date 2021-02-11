@@ -64,8 +64,6 @@ class Menu:
 
             if len(top_ten) > 10:
                 top_ten = top_ten[:-1]
-                
-            print(top_ten, "\n")
         
         for i, x in enumerate(top_ten):
             pseudo, score = x

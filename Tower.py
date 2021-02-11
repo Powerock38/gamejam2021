@@ -52,6 +52,7 @@ class Tower:
         self.path_mine = tower['path_mine']
         self.path_border = tower['path_border']
         self.generator = tower['generator']
+        self.poison = tower['poison']
 
     def draw(self, screen):
         """
