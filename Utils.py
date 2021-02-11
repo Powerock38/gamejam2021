@@ -27,7 +27,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         },
         'potato': {
             'path': 'assets/fruits-veggies/potato.png',
@@ -45,7 +45,7 @@ class Utils:
             'path_mine': True,
             'generator': False,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         },
 
         'pear': {
@@ -64,7 +64,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         },
         'pepper': {
             'path': 'assets/fruits-veggies/pepper_green.png',
@@ -82,7 +82,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         },
 
         'banana': {
@@ -101,7 +101,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         },
         'lettuce': {
             'path': 'assets/fruits-veggies/lettuce.png',
@@ -119,7 +119,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         },
 
         'tomato': {
@@ -138,7 +138,7 @@ class Utils:
             'path_mine': False,
             'generator': True,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         },
         'carrot': {
             'path': 'assets/fruits-veggies/carrot.png',
@@ -156,7 +156,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         },
 
         'peach': {
@@ -175,7 +175,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 0,
-            'confusing': True
+            'confusing': 300
         },
         'squash': {
             'path': 'assets/fruits-veggies/squash.png',
@@ -193,7 +193,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 600,
-            'confusing': False
+            'confusing': 0
         },
 
         'orange': {
@@ -212,7 +212,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         },
         'aubergine': {
             'path': 'assets/fruits-veggies/aubergine.png',
@@ -230,7 +230,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         },
 
         'cherry': {
@@ -249,7 +249,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         },
         'broccoli': {
             'path': 'assets/fruits-veggies/broccoli.png',
@@ -267,7 +267,7 @@ class Utils:
             'path_mine': False,
             'generator': False,
             'poison': 0,
-            'confusing': False
+            'confusing': 0
         }
     }
 

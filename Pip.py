@@ -1,5 +1,6 @@
 import pygame
 import math
+import random
 
 
 class Pip:
@@ -18,7 +19,7 @@ class Pip:
     sprite = pygame.image.load('assets/particles/bullet.png').subsurface(((14, 14), (4, 4)))
     musicLoad = pygame.mixer.Sound("assets/musics/attack.ogg")
 
-    def __init__(self, coordinates, enemy, damage = 1, ricochet = False, poisonTime = 0):
+    def __init__(self, coordinates, enemy, damage = 1, ricochet = False, poisonTime = 0, confusingTime = 0):
         """
         Constructor of the pips\n
         Arguments :\n
@@ -38,6 +39,7 @@ class Pip:
         self.damage = damage
         self.ricochet = ricochet
         self.poisonTime = poisonTime
+        self.confusingTime = confusingTime
     
     def move(self):
         """
@@ -80,4 +82,7 @@ class Pip:
                 self.enemy.hp -= self.damage
                 if self.poisonTime:
                     self.enemy.poisonedTime = self.poisonTime
+                if self.confusingTime:
+                    if True: #not random.randint(0, 25):
+                        self.enemy.confusedTime = self.confusingTime
             return self.enemy

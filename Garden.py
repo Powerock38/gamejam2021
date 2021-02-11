@@ -89,6 +89,7 @@ class Garden:
                     pos[0] += direction[0]
                     pos[1] += direction[1]
                             
+        self.lastTile = count
         self.tiles = tiles
         self.enemies = []
         self.towers = []
@@ -272,32 +273,51 @@ class Garden:
                 y = en.pos[1]
                 onTile = self.tiles[y][x]
 
-                possibleMoves = []
-
-                if y > 0 and self.tiles[y - 1][x] > onTile:
-                    possibleMoves.append(0)
-
-                if x + 1 < len(self.tiles[y]) and self.tiles[y][x + 1] > onTile:
-                    possibleMoves.append(1)
-
-                if y + 1 < len(self.tiles) and self.tiles[y + 1][x] > onTile:
-                    possibleMoves.append(2)
-
-                if x > 0 and self.tiles[y][x - 1] > onTile:
-                    possibleMoves.append(3)
-
-                if len(possibleMoves):
-                    en.move(random.choice(possibleMoves))
-                else:
-                    #Initilalisation of the music of the Garden
+                if onTile == self.lastTile:
+                    #ouch.ogg
                     channel = pygame.mixer.Channel(2)
                     channel.play(Garden.musicLoad_ouch)
                     channel.set_volume(0.25)
 
+                    self.enemies.remove(en)
                     self.HUD.set_life(self.HUD.get_life() - 1)
                     if self.HUD.get_life() <= 0:
                         pygame.event.post(pygame.event.Event(pygame.USEREVENT))
-                    self.enemies.remove(en)
+                else:
+                    possibleMoves = []
+
+                    if en.confusedTime > 0:
+                        if y > 0 and self.tiles[y - 1][x] not in (0, -1) and self.tiles[y - 1][x] < onTile:
+                            possibleMoves.append(0)
+
+                        if x + 1 < len(self.tiles[y]) and self.tiles[y][x + 1] not in (0, -1) and self.tiles[y][x + 1] < onTile:
+                            possibleMoves.append(1)
+
+                        if y + 1 < len(self.tiles) and self.tiles[y + 1][x] not in (0, -1) and self.tiles[y + 1][x] < onTile:
+                            possibleMoves.append(2)
+
+                        if x > 0 and self.tiles[y][x - 1] not in (0, -1) and self.tiles[y][x - 1] < onTile:
+                            possibleMoves.append(3)
+                    else:
+                        if y > 0 and self.tiles[y - 1][x] > onTile:
+                            possibleMoves.append(0)
+
+                        if x + 1 < len(self.tiles[y]) and self.tiles[y][x + 1] > onTile:
+                            possibleMoves.append(1)
+
+                        if y + 1 < len(self.tiles) and self.tiles[y + 1][x] > onTile:
+                            possibleMoves.append(2)
+
+                        if x > 0 and self.tiles[y][x - 1] > onTile:
+                            possibleMoves.append(3)
+
+                    move = None
+
+                    if possibleMoves:
+                        move = random.choice(possibleMoves)
+                    
+                    en.update(move)
+                    
 
 
     def draw(self, screen):

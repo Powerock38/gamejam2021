@@ -53,6 +53,7 @@ class Tower:
         self.path_border = tower['path_border']
         self.generator = tower['generator']
         self.poison = tower['poison']
+        self.confusing = tower['confusing']
 
     def draw(self, screen):
         """
@@ -117,7 +118,7 @@ class Tower:
                                 self.energy -= self.energy_consumption
 
                             elif not self.path_border and not self.path_mine:
-                                pips.append(Pip(self.coordinates, enemy, self.damage, self.ricochet, self.poison))
+                                pips.append(Pip(self.coordinates, enemy, self.damage, self.ricochet, self.poison, self.confusing))
                                 self.energy -= self.energy_consumption
                             
                             if self.energy <= 0:
