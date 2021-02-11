@@ -24,7 +24,8 @@ class Utils:
             'sleeping_time': 5,
             'ricochet': False,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         },
         'potato': {
             'path': 'assets/fruits-veggies/potato.png',
@@ -39,7 +40,8 @@ class Utils:
             'sleeping_time': 10,
             'ricochet': False,
             'path_border': False,
-            'path_mine': True
+            'path_mine': True,
+            'generator': False
         },
 
         'pear': {
@@ -55,7 +57,8 @@ class Utils:
             'sleeping_time': 4,
             'ricochet': True,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         },
         'pepper': {
             'path': 'assets/fruits-veggies/pepper_green.png',
@@ -70,7 +73,8 @@ class Utils:
             'sleeping_time': 10,
             'ricochet': False,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         },
 
         'banana': {
@@ -86,7 +90,8 @@ class Utils:
             'sleeping_time': 4,
             'ricochet': False,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         },
         'lettuce': {
             'path': 'assets/fruits-veggies/lettuce.png',
@@ -101,23 +106,25 @@ class Utils:
             'sleeping_time': 10,
             'ricochet': False,
             'path_border': True,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         },
 
         'tomato': {
             'path': 'assets/fruits-veggies/tomato.png',
             'name': 'Tomato',
-            'price': 20,
+            'price': 500,
             'description': 'blablabla',
-            'fire_rate': 0.5,
-            'damage': 5,
-            'range': 100,
+            'fire_rate': 1,
+            'damage': 10,
+            'range': 0,
             'max_attack': 1,
-            'energy_consumption': 2,
-            'sleeping_time': 4,
+            'energy_consumption': 1,
+            'sleeping_time': 10,
             'ricochet': False,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': True
         },
         'carrot': {
             'path': 'assets/fruits-veggies/carrot.png',
@@ -132,7 +139,8 @@ class Utils:
             'sleeping_time': 4,
             'ricochet': False,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         },
 
         'peach': {
@@ -148,7 +156,8 @@ class Utils:
             'sleeping_time': 4,
             'ricochet': False,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         },
         'squash': {
             'path': 'assets/fruits-veggies/squash.png',
@@ -163,7 +172,8 @@ class Utils:
             'sleeping_time': 4,
             'ricochet': False,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         },
 
         'orange': {
@@ -179,7 +189,8 @@ class Utils:
             'sleeping_time': 4,
             'ricochet': False,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         },
         'aubergine': {
             'path': 'assets/fruits-veggies/aubergine.png',
@@ -194,7 +205,8 @@ class Utils:
             'sleeping_time': 4,
             'ricochet': False,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         },
 
         'cherry': {
@@ -210,7 +222,8 @@ class Utils:
             'sleeping_time': 4,
             'ricochet': False,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         },
         'broccoli': {
             'path': 'assets/fruits-veggies/broccoli.png',
@@ -225,7 +238,8 @@ class Utils:
             'sleeping_time': 4,
             'ricochet': False,
             'path_border': False,
-            'path_mine': False
+            'path_mine': False,
+            'generator': False
         }
     }
 
@@ -267,9 +281,9 @@ class Utils:
         },
         'frog': {
             'path': 'assets/sprites/frog.png',
-            'hp': 999,
-            'speed': 0.5,
-            'water': 1,
+            'hp': 10000,
+            'speed': 0.25,
+            'water': 200,
             'fly': False
         },
         'hyena': {
@@ -281,9 +295,9 @@ class Utils:
         },
         'monkey': {
             'path': 'assets/sprites/monkey.png',
-            'hp': 999,
-            'speed': 0.5,
-            'water': 1,
+            'hp': 200,
+            'speed': 1,
+            'water': 50,
             'fly': False
         },
         'rabbit': {
@@ -330,7 +344,23 @@ class Utils:
 
         (10 * ('cow', 480)),
 
-        (5 * ('bat', 600))
+        (5 * ('bat', 600)),
+
+        (10 * ('cow', 300) +
+         20 * ('chicken', 30) +
+         10 * ('bat', 120)),
+
+        (5 * ('monkey', 60)),
+
+        (1 * ('frog', 60)),
+
+        (1 * ('frog', 600) +
+         50 * ('rat', 10) +
+         10 * ('cow', 60) +
+         30 * ('chicken', 20) +
+         15 * ('rabbit', 30) +
+         10 * ('bat', 60) +
+         10 * ('cow', 60))
     )
 
     for id, tw in TOWERS.items():

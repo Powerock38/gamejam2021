@@ -51,6 +51,7 @@ class Tower:
         self.ricochet = tower['ricochet']
         self.path_mine = tower['path_mine']
         self.path_border = tower['path_border']
+        self.generator = tower['generator']
 
     def draw(self, screen):
         """
@@ -88,12 +89,20 @@ class Tower:
                 pygame.draw.rect(screen, Utils.BLUE, (x + w + n*(w + 1), y + 30, w, 3))
 
     def update(self, enemies):
+        pips = []
+        water = 0
         if self.energy > 0:
             self.tick += 1
             if self.tick >= 60 // self.rate:
                 self.tick = 0
                 attack = 0
-                pips = []
+                if self.generator:
+                    water += self.damage
+                    self.energy -= self.energy_consumption
+                    if self.energy <= 0:
+                        self.tick = 0
+                    attack += 1
+                    
                 pos1 = (self.coordinates[0] + 16, self.coordinates[1] + 16)
                 for enemy in enemies[::-1]:
                     if attack < self.max_attack:
@@ -114,11 +123,11 @@ class Tower:
                                 if self.energy <= 0:
                                     self.tick = 0
                                 attack += 1
-                                
-                return pips
         else:
             if self.tick >= 60 * self.sleeping_time:
                 self.tick = 0
                 self.energy = self.energyMax
 
             self.tick += 1
+            
+        return pips, water
