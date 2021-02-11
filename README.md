@@ -30,6 +30,18 @@
     - Solde de base : (a derterminer)
 ```
 
+#### Dercription :
+```console
+Des vagues d’animaux attaquent ton potager. C’est à toi de le protéger en installant des batteries de fruits et légumes le long de leur chemin.
+```
+
+### Règles :
+> Des vagues d’animaux arrivent et attaquent votre potager. Pour vous protéger, installer vos batteries de légumes tout le long de leur chemin afin de les empêcher de vous manger votre récolte.
+Chacun d’eux à des capacités spéciales qui vous permettrons de les contrer au mieux et défendre vos biens.
+> Si l’un de vos plantes a déjà consommer la moitié de son énergie, un arrosoir vous proposeras de la recharger pour une goutte d’eau.
+> Les tomates vous permettrons d’augmenter votre stock d’eau au rythme de 10 gouttes par seconde.
+> Les concombres vont empoisonner les animaux à sa porté.
+
 ### Fruits et légumes :
 ```console
     1 - Pomme & Patate
