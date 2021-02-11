@@ -31,16 +31,14 @@
 ```
 
 #### Dercription :
-```console
-Des vagues d’animaux attaquent ton potager. C’est à toi de le protéger en installant des batteries de fruits et légumes le long de leur chemin.
-```
+> Repoussez des vagues d’animaux essayant de dévorer vos récoltes. Pour cela, planter vos fruits et légumes surpuissants pour défendre votre jardin.
+> Mais prenez garde ! Ils ont parfois besoin de repos. Alors à vous d’établir la meilleure stratégie afin de les stopper en route.
 
 ### Règles :
-> Des vagues d’animaux arrivent et attaquent votre potager. Pour vous protéger, installer vos batteries de légumes tout le long de leur chemin afin de les empêcher de vous manger votre récolte.
-Chacun d’eux à des capacités spéciales qui vous permettrons de les contrer au mieux et défendre vos biens.
-> Si l’un de vos plantes a déjà consommer la moitié de son énergie, un arrosoir vous proposeras de la recharger pour une goutte d’eau.
-> Les tomates vous permettrons d’augmenter votre stock d’eau au rythme de 10 gouttes par seconde.
-> Les concombres vont empoisonner les animaux à sa porté.
+> Empercher les animaux d’atteindre le fermier, chaque animaux arriver à lui vous enlève une vie. Vous en avez 10 avant de perdre.
+> Achetez vos fruits et légumes dans la boutique sur la droite l’écran puis les placer sur le terrain à gauche.
+> Recharger les vos tours fatigués en les survolant et en cliquant sur l’arrosoir.
+> Vendez une tour pour la moitié de son prix initial.
 
 ### Fruits et légumes :
 ```console
