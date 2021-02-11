@@ -71,7 +71,7 @@ class Tower:
         mx, my = pygame.mouse.get_pos()
         if mx >= x and mx <= x + 32 and my >= y and my <= y + 32:
             pygame.draw.circle(screen, (255, 0, 0, 128), (x + 16, y + 16), self.towerRange, 1)
-            if not self.path_mine and self.energy <= self.energyMax // 2:
+            if not self.generator and self.energy > 0 and self.energy <= self.energyMax // 2:
                 screen.blit(Tower.wateringCan, (mx, my))
 
 
