@@ -21,6 +21,7 @@ class Enemy:
         self.pos_in_tile = [0, 0]
         self.__direction = 2
         self.__animTick = 0
+        self.fly = enemy['fly']
 
     def draw(self, screen):
         """

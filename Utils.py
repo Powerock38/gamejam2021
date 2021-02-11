@@ -29,10 +29,10 @@ class Utils:
         'potato': {
             'path': 'assets/fruits-veggies/potato.png',
             'name': 'Potato',
-            'price': 7,
+            'price': 10,
             'description': 'blablabla',
             'fire_rate': 10,
-            'damage': 4,
+            'damage': 10,
             'range': 16,
             'max_attack': 1,
             'energy_consumption': 100,
@@ -234,61 +234,71 @@ class Utils:
             'path': 'assets/sprites/cow.png',
             'hp': 150,
             'speed': 0.5,
-            'water': 20
+            'water': 20,
+            'fly': False
         },
         'chicken': {
             'path': 'assets/sprites/chicken.png',
             'hp': 10,
             'speed': 1,
-            'water': 3
+            'water': 3,
+            'fly': False
         },
         'bat': {
             'path': 'assets/sprites/bat.png',
-            'hp': 999,
-            'speed': 2.5,
-            'water': 1
+            'hp': 50,
+            'speed': 2,
+            'water': 25,
+            'fly': True
         },
         'dog': {
             'path': 'assets/sprites/dog.png',
             'hp': 999,
             'speed': 2,
-            'water': 1
+            'water': 1,
+            'fly': False
         },
         'fox': {
             'path': 'assets/sprites/fox.png',
             'hp': 999,
             'speed': 2,
-            'water': 1
+            'water': 1,
+            'fly': False
         },
         'frog': {
             'path': 'assets/sprites/frog.png',
             'hp': 999,
             'speed': 0.5,
-            'water': 1
+            'water': 1,
+            'fly': False
         },
         'hyena': {
             'path': 'assets/sprites/hyena.png',
             'hp': 999,
             'speed': 2,
-            'water': 1
+            'water': 1,
+            'fly': False
         },
         'monkey': {
             'path': 'assets/sprites/monkey.png',
             'hp': 999,
             'speed': 0.5,
-            'water': 1
+            'water': 1,
+            'fly': False
         },
         'rabbit': {
             'path': 'assets/sprites/rabbit.png',
             'hp': 30,
             'speed': 2,
-            'water': 10
+            'water': 10,
+            'fly': False
         },
         'rat': {
             'path': 'assets/sprites/rat.png',
             'hp': 5,
             'speed': 0.5,
-            'water': 1
+            'water': 1,
+            'fly': False
         },
     }
 
@@ -318,7 +328,9 @@ class Utils:
          10 * ('chicken', 120) +
          3 * ('rabbit', 240)),
 
-        (10 * ('cow', 480))
+        (10 * ('cow', 480)),
+
+        (5 * ('bat', 600))
     )
 
     for id, tw in TOWERS.items():
