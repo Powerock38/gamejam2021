@@ -51,6 +51,7 @@ class Tower:
         self.ricochet = tower['ricochet']
         self.path_mine = tower['path_mine']
         self.path_border = tower['path_border']
+        self.generator = tower['generator']
 
     def draw(self, screen):
         """
@@ -66,11 +67,11 @@ class Tower:
         
         x,y = self.coordinates
 
-        #hover
+        #watering can hover
         mx, my = pygame.mouse.get_pos()
         if mx >= x and mx <= x + 32 and my >= y and my <= y + 32:
             pygame.draw.circle(screen, (255, 0, 0, 128), (x + 16, y + 16), self.towerRange, 1)
-            if self.energy <= self.energyMax // 2:
+            if not self.path_mine and self.energy <= self.energyMax // 2:
                 screen.blit(Tower.wateringCan, (mx, my))
 
 
@@ -83,17 +84,25 @@ class Tower:
             self.animTick += 1
 
         else: # energy bars
-            for n in range(1, max(2, int((self.energy/self.energyMax) * 7))):
+            for n in range(max(2, int((self.energy/self.energyMax) * 5))):
                 w = 4
-                pygame.draw.rect(screen, Utils.BLUE, (x + (n - 1)*(w + 1), y + 30, w, 4))
+                pygame.draw.rect(screen, Utils.BLUE, (x + w + n*(w + 1), y + 30, w, 3))
 
     def update(self, enemies):
+        pips = []
+        water = 0
         if self.energy > 0:
             self.tick += 1
             if self.tick >= 60 // self.rate:
                 self.tick = 0
                 attack = 0
-                pips = []
+                if self.generator:
+                    water += self.damage
+                    self.energy -= self.energy_consumption
+                    if self.energy <= 0:
+                        self.tick = 0
+                    attack += 1
+                    
                 pos1 = (self.coordinates[0] + 16, self.coordinates[1] + 16)
                 for enemy in enemies[::-1]:
                     if attack < self.max_attack:
@@ -114,11 +123,11 @@ class Tower:
                                 if self.energy <= 0:
                                     self.tick = 0
                                 attack += 1
-                                
-                return pips
         else:
             if self.tick >= 60 * self.sleeping_time:
                 self.tick = 0
                 self.energy = self.energyMax
 
             self.tick += 1
+            
+        return pips, water
