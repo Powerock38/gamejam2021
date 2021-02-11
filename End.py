@@ -28,7 +28,7 @@ class End:
         self.__font_size = 40
         self.__font = pygame.font.Font('assets/font/comic_book.otf', self.__font_size)
         self.pseudo = ""
-        self.__pseudo_surface = pygame.Surface((250, 50))
+        self.__pseudo_surface = pygame.Surface((300, 50))
         self.__pseudo_surface.set_colorkey((0, 0, 0))
 
     def draw(self, screen):
@@ -49,11 +49,11 @@ class End:
             self.__end.blit(self.__buttons[2], (536, 642))
 
         text = self.__font.render(str(self.score), False, (255, 255, 255))
-        text2 = self.__font.render(self.pseudo, False, (255, 255, 255))
+        text2 = self.__font.render(self.pseudo + "_", False, (255, 255, 255))
         self.__text_surface.blit(text, (0, 0))
         self.__pseudo_surface.fill((0, 0, 0))
         self.__pseudo_surface.blit(text2, (0, 0))
         self.__end.blit(self.__text_surface, (499 - len(str(self.score)) * self.__font_size / 4, 440))
-        self.__end.blit(self.__pseudo_surface, (499 - len(self.pseudo) * self.__font_size / 4, 530))
+        self.__end.blit(self.__pseudo_surface, (499 - (len(self.pseudo) + 1) * self.__font_size / 4, 530))
 
         screen.blit(self.__end, (0, 0))
