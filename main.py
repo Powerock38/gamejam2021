@@ -43,6 +43,10 @@ def eventListener(event, elements):
     elif isinstance(elements[0], End):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if mx >= 120 and mx <= 462 and my >= 642 and my <= 738:
+                if len(elements[0].pseudo):
+                    file = open("scoreboard", "a", encoding = "utf-8")
+                    file.write((" " * (10 - len(elements[0].pseudo))) + elements[0].pseudo + " : " + str(elements[0].score) + "\n")
+                    file.close()
                 #Start game
                 menu = Menu()
 

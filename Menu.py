@@ -41,11 +41,36 @@ class Menu:
         f = open("scoreboard", "r", encoding = "utf-8")
         scoreboard = f.read().split("\n")[:-1]
         f.close()
+
+        top_ten = []
         
-        for i, x in enumerate(scoreboard):
-            text = x.split(" : ")
-            t1 = font.render(text[0], False, (255, 255, 255))
-            t2 = font.render(": " + text[1], False, (255, 255, 255))
+        for i in scoreboard:
+            pseudo, score = i.split(" : ")
+            score = int(score)
+            
+            if len(top_ten):
+                added = False
+                for i in range(len(top_ten)):
+                    
+                    if int(top_ten[i][1]) < score:
+                        top_ten = top_ten[:i] + [[pseudo, score]] + top_ten[i:]
+                        added = True
+                        break
+                
+                if len(top_ten) < 10 and not added:
+                    top_ten.append([pseudo, score])
+            else:
+                top_ten.append([pseudo, score])
+
+            if len(top_ten) > 10:
+                top_ten = top_ten[:-1]
+                
+            print(top_ten, "\n")
+        
+        for i, x in enumerate(top_ten):
+            pseudo, score = x
+            t1 = font.render(pseudo, False, (255, 255, 255))
+            t2 = font.render(": " + str(score), False, (255, 255, 255))
             self.__scoreboard.blit(t1, (0, i * (size + 2)))
             self.__scoreboard.blit(t2, (130, i * (size + 2)))
 
