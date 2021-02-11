@@ -38,6 +38,7 @@ class View:
                 
                 for element in self.__graphic_elements:
                     element.draw(self.__screen)
+
                 pygame.display.update()
 
                 #print(1/(time.time() - t1))

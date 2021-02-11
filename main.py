@@ -34,9 +34,11 @@ def eventListener(event, elements):
                 garden.removeTower()
 
         if event.type == pygame.USEREVENT:
+            end = End()
+            end.score = hud.get_level() 
             elements.remove(garden)
             elements.remove(hud)
-            elements.append(End())
+            elements.append(end)
 
     elif isinstance(elements[0], End):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
