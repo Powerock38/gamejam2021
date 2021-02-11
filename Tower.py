@@ -50,6 +50,7 @@ class Tower:
         self.price = tower['price']
         self.ricochet = tower['ricochet']
         self.path_mine = tower['path_mine']
+        self.path_border = tower['path_border']
 
     def draw(self, screen):
         """
@@ -100,7 +101,7 @@ class Tower:
                         distance = math.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
 
                         if distance < self.towerRange:
-                            if not self.path_mine or not enemy.fly:
+                            if (not self.path_mine and not self.path_border) or not enemy.fly:
                                 pips.append(Pip(self.coordinates, enemy, self.damage, self.ricochet))
                                 self.energy -= self.energy_consumption
                                 if self.energy <= 0:
