@@ -35,10 +35,12 @@
 > Mais prenez garde ! Ils ont parfois besoin de repos. Alors à vous d’établir la meilleure stratégie afin de les stopper en route.
 
 ### Règles :
-> Empercher les animaux d’atteindre le fermier, chaque animaux arriver à lui vous enlève une vie. Vous en avez 10 avant de perdre.
-> Achetez vos fruits et légumes dans la boutique sur la droite l’écran puis les placer sur le terrain à gauche.
-> Recharger les tours fatigués en les survolant et en cliquant sur l’arrosoir.
-> Vendez une tour pour la moitié de son prix initial.
+>Des vagues d’animaux arrivent et attaquent votre potager. Pour vous protéger, installer vos batteries de légumes tout le long de leur chemin afin de les >empêcher de manger vos récolte.
+>Chacun d’eux à des capacités spéciales qui vous permettrons de contrer les animaux et défendre vos biens.
+>Si l’une de vos plantes a déjà consommée la moitié de son énergie, un arrosoir vous proposeras de la recharger pour une goutte d’eau.
+>Les tomates vous permettrons d’augmenter votre stock d’eau au rythme de 10 gouttes par seconde.
+>Les concombres vont empoisonner les animaux à sa porté.
+>Découvrer d'autre pouvoir en jeu.
 
 ### Fruits et légumes :
 ```console

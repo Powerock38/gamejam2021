@@ -1,10 +1,9 @@
 import pygame
 import random
+import math
 from Utils import Utils
 from Enemy import Enemy
 from Tower import Tower
-from random import randint, choice
-import math
 
 class Garden:
     pygame.mixer.init()
@@ -70,7 +69,7 @@ class Garden:
                 if pos[1] == 26:
                     allowed_dirs = [[0, -1]]
 
-                r  = randint(0, len(allowed_dirs) - 1)
+                r  = random.randint(0, len(allowed_dirs) - 1)
                 direction = allowed_dirs[r]
                 oldr = directions.index(direction)
                 
@@ -182,7 +181,7 @@ class Garden:
                         self.__background.blit(tile14, (32 * j, 32 * i))
                     else:
                         tmp_row.append(0)
-                        r = randint(0, 99)
+                        r = random.randint(0, 99)
                         if not r:
                             self.__background.blit(tile15, (32 * j, 32 * i))
                         elif not r - 1:
