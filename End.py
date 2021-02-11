@@ -19,7 +19,7 @@ class End:
 
         #Initilalisation of the music
         self.channel = pygame.mixer.Channel(0)
-        self.channel.play(End.musicLoad)
+        self.channel.play(End.musicLoad,-1)
         self.channel.set_volume(0.25)
 
         #Setput the text area of wave that you achive
