@@ -57,7 +57,7 @@ def eventListener(event, elements):
 
                     #Start game
                     garden = Garden()
-                    hud = HUD(garden, 10, 10)
+                    hud = HUD(garden, 10, 10000)
                     garden.HUD = hud
 
                     elements = [garden, hud]
