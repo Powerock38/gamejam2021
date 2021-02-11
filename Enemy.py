@@ -23,6 +23,7 @@ class Enemy:
         self.__animTick = 0
         self.fly = enemy['fly']
         self.blocked = False
+        self.poisonedTime = 0
 
     def draw(self, screen):
         """
@@ -46,6 +47,10 @@ class Enemy:
             pygame.draw.rect(screen, (200,20,25), (x + 2, y - 6, width, 2))
 
     def move(self, direction):
+        if self.poisonedTime > 0:
+            self.hp -= self.hp * 0.001
+            self.poisonedTime -= 1
+
         if self.blocked:
             self.blocked = False
         else:
