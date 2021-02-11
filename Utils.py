@@ -32,7 +32,7 @@ class Utils:
             'price': 7,
             'description': 'blablabla',
             'fire_rate': 10,
-            'damage': 100,
+            'damage': 4,
             'range': 16,
             'max_attack': 1,
             'energy_consumption': 100,
@@ -232,9 +232,9 @@ class Utils:
     ENEMIES = {
         'cow': {
             'path': 'assets/sprites/cow.png',
-            'hp': 100,
+            'hp': 150,
             'speed': 0.5,
-            'water': 1
+            'water': 20
         },
         'chicken': {
             'path': 'assets/sprites/chicken.png',
@@ -244,37 +244,37 @@ class Utils:
         },
         'bat': {
             'path': 'assets/sprites/bat.png',
-            'hp': 10,
+            'hp': 999,
             'speed': 2.5,
             'water': 1
         },
         'dog': {
             'path': 'assets/sprites/dog.png',
-            'hp': 50,
+            'hp': 999,
             'speed': 2,
             'water': 1
         },
         'fox': {
             'path': 'assets/sprites/fox.png',
-            'hp': 40,
+            'hp': 999,
             'speed': 2,
             'water': 1
         },
         'frog': {
             'path': 'assets/sprites/frog.png',
-            'hp': 100,
+            'hp': 999,
             'speed': 0.5,
             'water': 1
         },
         'hyena': {
             'path': 'assets/sprites/hyena.png',
-            'hp': 100,
+            'hp': 999,
             'speed': 2,
             'water': 1
         },
         'monkey': {
             'path': 'assets/sprites/monkey.png',
-            'hp': 100,
+            'hp': 999,
             'speed': 0.5,
             'water': 1
         },
@@ -310,7 +310,15 @@ class Utils:
 
         (40 * ('rat', 40) +
          10 * ('chicken', 60) +
-         1 * ('rabbit', 240))
+         1 * ('rabbit', 240)),
+         
+        (2 * ('cow', 600)),
+
+        (3 * ('cow', 540) +
+         10 * ('chicken', 120) +
+         3 * ('rabbit', 240)),
+
+        (10 * ('cow', 480))
     )
 
     for id, tw in TOWERS.items():
