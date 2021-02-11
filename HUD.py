@@ -98,20 +98,48 @@ class HUD:
             sprite_rect = sprite_surface.get_rect()
 
             # Create tower hover
-            hover = pygame.image.load("assets/ui/hud/hover_board.png")
-            self.__font = self.get_font(24)
-            
-            dim = self.__font.size(tower["name"])
-            hover.blit(self.__font.render(tower["name"], False, Utils.WHITE), (150 - dim[0]//2, 55))
+            ricochet = tower["ricochet"]
+            path_border = tower["path_border"]
+            path_mine = tower["path_mine"]
+            generator = tower["generator"]
+
 
             self.__font = self.get_font(14)
             data_text_color = Utils.GREEN
-            hover.blit(self.__font.render(str(tower["fire_rate"]) + " shot/s", False, data_text_color), (120, 84))
-            hover.blit(self.__font.render(str(tower["damage"]) + "/shot", False, data_text_color), (110, 101))
-            hover.blit(self.__font.render(str(tower["range"]) + " px", False, data_text_color), (99, 117))
-            hover.blit(self.__font.render(str(tower["max_attack"]) + " enemies/shot", False, data_text_color), (139, 133))
-            hover.blit(self.__font.render(str(tower["energy_consumption"]) + "/shot", False, data_text_color), (194, 151))
-            hover.blit(self.__font.render(str(tower["sleeping_time"]) + " s", False, data_text_color), (149, 167))
+
+            if generator:
+                    hover = pygame.image.load("assets/ui/hud/tomato_hover_board.png")
+                    hover.blit(self.__font.render("water generation", False, Utils.BLUE), (159, 144))
+            else:
+                if ricochet or path_border or path_mine:
+                    hover = pygame.image.load("assets/ui/hud/special_power_hover_board.png")
+                    if ricochet:
+                        hover.blit(self.__font.render("Ricochet", False, Utils.RED), (161, 179))
+                    elif path_border:
+                        hover.blit(self.__font.render("Path border & slow", False, Utils.RED), (160, 179))
+                    elif path_mine:
+                        hover.blit(self.__font.render("Mine", False, Utils.RED), (160, 179))
+                else:
+                    hover = pygame.image.load("assets/ui/hud/hover_board.png")
+
+                hover.blit(self.__font.render(str(tower["fire_rate"]) + " shot/s", False, data_text_color), (126, 80))
+                hover.blit(self.__font.render(str(tower["damage"]) + "/shot", False, data_text_color), (116, 97))
+                hover.blit(self.__font.render(str(tower["range"]) + " px", False, data_text_color), (105, 113))
+                hover.blit(self.__font.render(str(tower["max_attack"]) + " enemies/shot", False, data_text_color), (145, 129))
+
+            if generator:
+                hover.blit(self.__font.render(str(tower["fire_rate"]) + " generation/s", False, data_text_color), (175, 77))
+                hover.blit(self.__font.render(str(tower["damage"]) + "/generation", False, data_text_color), (140, 95))
+                hover.blit(self.__font.render(str(tower["energy_consumption"]) + "/generation", False, data_text_color), (200, 113))
+                hover.blit(self.__font.render(str(tower["sleeping_time"]) + " s", False, data_text_color), (155, 129))
+            else:
+                hover.blit(self.__font.render(str(tower["energy_consumption"]) + "/shot", False, data_text_color), (200, 147))
+                hover.blit(self.__font.render(str(tower["sleeping_time"]) + " s", False, data_text_color), (155, 163))
+
+            self.__font = self.get_font(24)
+            
+            dim = self.__font.size(tower["name"])
+            hover.blit(self.__font.render(tower["name"], False, Utils.WHITE), ((hover.get_width()//2) - dim[0]//2, 50))
 
 
             x = 64 if aGauche else 0
@@ -280,7 +308,7 @@ class HUD:
                 rect = tower["rect"]
                 if rect.collidepoint(mx-896,my):
 
-                    display_x = mx-310
+                    display_x = mx-360
                     display_y = my-125 if my-125 >= 0 else 0
 
                     screen.blit(tower["hover"], (display_x,display_y))
