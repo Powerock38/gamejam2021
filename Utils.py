@@ -344,7 +344,7 @@ class Utils:
         },
         'eagle': {
             'path': 'assets/sprites/eagle.png',
-            'hp': 2500,
+            'hp': 500,
             'speed': 2.5,
             'water': 2000,
             'fly': True
@@ -410,15 +410,15 @@ class Utils:
          10 * ('monkey', 60)),
 
         (1 * ('dog', 60) +#20
-         600 * ('rat', 2) +
-         60 * ('cow', 5) +
+         600 * ('rat', 3) +
+         30 * ('cow', 5) +
          45 * ('bat', 10)),
 
         (3 * ('dog', 60) +#21
-         50 * ('rat', 1) +
+         50 * ('rat', 3) +
          60 * ('bat', 10)),
 
-        (5 * ('eagle', 10)),#22
+        (2 * ('eagle', 600)),#22
 
         (100 * ('rat', 30) +#23
          90 * ('chicken', 30) +
