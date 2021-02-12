@@ -35,7 +35,7 @@ def eventListener(event, elements):
 
         if event.type == pygame.USEREVENT:
             end = End()
-            end.score = hud.get_level() 
+            end.score = hud.get_level() + 1
             elements.remove(garden)
             elements.remove(hud)
             elements.append(end)
