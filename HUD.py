@@ -102,6 +102,8 @@ class HUD:
             path_border = tower["path_border"]
             path_mine = tower["path_mine"]
             generator = tower["generator"]
+            confused = tower["confusing"]
+            poison = tower["poison"]
 
 
             self.__font = self.get_font(14)
@@ -111,7 +113,7 @@ class HUD:
                     hover = pygame.image.load("assets/ui/hud/tomato_hover_board.png")
                     hover.blit(self.__font.render("water generation", False, Utils.BLUE), (159, 144))
             else:
-                if ricochet or path_border or path_mine:
+                if ricochet or path_border or path_mine or confused or poison:
                     hover = pygame.image.load("assets/ui/hud/special_power_hover_board.png")
                     if ricochet:
                         hover.blit(self.__font.render("Ricochet", False, Utils.RED), (161, 179))
@@ -119,6 +121,10 @@ class HUD:
                         hover.blit(self.__font.render("Slow", False, Utils.RED), (160, 179))
                     elif path_mine:
                         hover.blit(self.__font.render("Mine", False, Utils.RED), (160, 179))
+                    elif confused:
+                        hover.blit(self.__font.render("Apply confuse", False, Utils.RED), (160, 179))
+                    elif poison:
+                        hover.blit(self.__font.render("Apply poison", False, Utils.RED), (160, 179))
                 else:
                     hover = pygame.image.load("assets/ui/hud/hover_board.png")
 
