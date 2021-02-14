@@ -1,15 +1,5 @@
 # GameJam 2021
 > Jeu écrit en python
-
-## Rendu :
-> Avant vendredi 8h upload jeu sur site web
-
-> 9h ou 10h30 Présentation ouvert
-
-> 14h finale
-
-> 7 poules
-
 > http://gamejam.iut2.univ-grenoble-alpes.fr
 
 ## Thème :
@@ -27,7 +17,7 @@
 ### Le jeu :
 ```console
     - Type de jeu : solo
-    - Solde de base : (a derterminer)
+    - Solde de base : 10
 ```
 
 #### Dercription :
@@ -56,10 +46,5 @@
 ### Monnaie :
 ```console
     - Gagne des sous lorsqu'on tue les attaquants  
-    - Gain passif lorsque la tour dort et n'est pas réveillée par le joueur.
-```
-
-### Bonus :
-```console
-    - Pluie redonne energie
+    - La tomate permet de gagné de l'eau (monaie)
 ```
